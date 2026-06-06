@@ -1,0 +1,51 @@
+Meeting ID: M-014
+
+Date: 2026-04-09
+
+Meeting Title: Mask Release and Foundry Handoff
+
+Participants:
+- Elena Park
+- Luis Ortega
+- Nina Volkov
+- Sara McConnell
+
+Agenda:
+- Authorize mask release.
+- Review mask set logistics and fab slot timing.
+- Confirm pilot lot objectives.
+
+Detailed Discussion:
+The tapeout package was released to the foundry and mask house. Nina aligned the lot split plan
+so overlay data could later be tied back to D-005 and the Lithography Alignment concern.
+
+Sara asked that Yield Loss observability be included from the start rather than bolted on after
+fabrication. Elena agreed and linked the production data plan to future readiness reviews.
+
+The team considered the design frozen for first silicon, with remaining uncertainty now shifting
+from design into execution and learning cycles.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-002: Lithography Alignment sensitivity near capacitor array edge owned by Luis Ortega with current status mitigated and severity high.
+- R-003: Yield Loss from via chain opens at SAR logic boundary owned by Sara McConnell with current status monitoring and severity medium.
+
+Action Items:
+- AI-011: Secure fab slot and mask house release package. Originated in M-014.
+
+Owners:
+- AI-011: Elena Park
+
+Deadlines:
+- AI-011: 2026-05-05
+
+References to Previous Meetings:
+- M-013
+- M-012
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

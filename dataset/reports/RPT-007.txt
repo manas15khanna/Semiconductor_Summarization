@@ -1,0 +1,30 @@
+Report ID: RPT-007
+
+Date: 2026-06-11
+
+Title: Fabrication Progress and Wafer Sort Summary
+
+Type: Fabrication
+
+Owner: Nina Volkov
+
+Executive Summary:
+Tracked lot movement, parametric wafer data, and early Yield Loss signatures. Overlay monitors
+showed a non-uniform Lithography Alignment trend that was later connected to edge-array
+mismatch.
+The report preserves traceability to meetings, decisions, and risk items so the repository can
+be used to test summarization and decision-traceability workflows across the semiconductor
+lifecycle.
+Key recurring themes include ADC Reference Voltage control, Yield Loss containment, Lithography
+Alignment sensitivity, Radiation Hardening margin, Packaging Revision transitions, Burn-In
+Testing, and Reliability Qualification closure.
+
+Key Findings:
+- RPT-007 was issued to support the Radiation-Hardened Satellite ADC Development Program.
+- Cross-references were intentionally maintained to keep the synthetic repository densely linked.
+- The technical narrative remains consistent with an eight-month development timeline.
+
+References:
+- M-018
+- AI-016
+- R-003

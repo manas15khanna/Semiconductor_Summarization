@@ -1,0 +1,51 @@
+Meeting ID: M-010
+
+Date: 2026-03-12
+
+Meeting Title: Verification Readiness Meeting
+
+Participants:
+- Jonas Richter
+- Priya Sethi
+- Luis Ortega
+- Kenji Watanabe
+
+Agenda:
+- Review regression status and convergence issues.
+- Assess remaining blockers before tapeout readiness.
+- Track dependency on reference architecture closure.
+
+Detailed Discussion:
+Priya reported strong functional coverage but one persistent mixed-signal convergence issue in
+the reference settling environment. The problem was not a logic bug, but it reduced confidence
+in the ADC Reference Voltage corner results.
+
+Maya noted that the open item intersected directly with R-001. The board agreed that tapeout
+could not proceed until either the regression was closed or the reference architecture was
+simplified.
+
+Action AI-008 was opened to force closure ahead of the dedicated Radiation Hardening review.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift under radiation and hot corner owned by Maya Chen with current status mitigated and severity high.
+
+Action Items:
+- AI-008: Close mixed-signal convergence issue in reference settling regression. Originated in M-010.
+
+Owners:
+- AI-008: Priya Sethi
+
+Deadlines:
+- AI-008: 2026-04-16
+
+References to Previous Meetings:
+- M-009
+- M-008
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

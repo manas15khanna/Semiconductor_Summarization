@@ -1,0 +1,53 @@
+Meeting ID: M-022
+
+Date: 2026-06-04
+
+Meeting Title: Failure Analysis Findings Review
+
+Participants:
+- Elena Park
+- Jonas Richter
+- Victor Alvarez
+- Sara McConnell
+- Kenji Watanabe
+
+Agenda:
+- Review failure analysis conclusions on low-yield die.
+- Assess whether via chain opens threaten release plans.
+- Decide residual risk posture.
+
+Detailed Discussion:
+Victor concluded that the via chain opens were real but spatially bounded, making them a
+manageable Yield Loss contributor rather than a release blocker. Sara proposed screening and
+binning controls to prevent escape while longer-term layout learnings were folded into future
+spins.
+
+Jonas raised a secondary concern that high scan compression limited at-speed diagnosis quality.
+Elena asked that the production test team quantify the impact before the readiness gate.
+
+AI-019 was opened to summarize Reliability Qualification status while diagnosis depth remained
+under review.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-003: Yield Loss from via chain opens at SAR logic boundary owned by Sara McConnell with current status monitoring and severity medium.
+
+Action Items:
+- AI-019: Release interim Reliability Qualification summary for management review. Originated in M-022.
+
+Owners:
+- AI-019: Grace Lin
+
+Deadlines:
+- AI-019: 2026-07-24
+
+References to Previous Meetings:
+- M-021
+- M-020
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

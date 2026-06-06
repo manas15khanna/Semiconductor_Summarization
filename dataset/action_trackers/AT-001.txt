@@ -1,0 +1,10 @@
+Action Tracker ID: AT-001
+As Of Date: 2026-01-31
+Program: Radiation-Hardened Satellite ADC Development Program
+
+AI-001 | open | owner=Ravi Narayanan | origin=M-002 | due=2026-01-29 | Publish requirement baseline with customer errata incorporated.
+AI-002 | open | owner=Priya Sethi | origin=M-002 | due=2026-02-02 | Map verification plan to TID and single-event upset recovery requirements.
+
+Tracker status reflects whether actions tied to ADC Reference Voltage, Yield Loss, Lithography
+Alignment, Packaging Revision, Burn-In Testing, and Reliability Qualification have been
+completed, delayed, or remain open.

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_name or "SCL Traceability System" }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="top-strip">
+        <div class="container top-strip-inner">
+            <span>Government-style UX shell for offline engineering traceability</span>
+            <span>Model: {{ ollama_model }}</span>
+        </div>
+    </div>
+    <header class="site-header">
+        <div class="container brand-row">
+            <div>
+                <div class="eyebrow">Semiconductor Product Development Lifecycle</div>
+                <h1>SCL Traceability System</h1>
+                <p class="subtle">Summaries, decisions, actions, risks, and project timelines on a local-first stack.</p>
+            </div>
+        </div>
+        <nav class="site-nav">
+            <div class="container nav-row">
+                <a class="{% if request.url.path == '/' %}active{% endif %}" href="/">Dashboard</a>
+                <a class="{% if request.url.path.startswith('/projects') and '/documents/' not in request.url.path %}active{% endif %}" href="/projects">Projects</a>
+                <a class="{% if request.url.path == '/search' %}active{% endif %}" href="/search">Search</a>
+            </div>
+        </nav>
+    </header>
+    <main id="main-content" class="container page-shell">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <strong>SCL Traceability System</strong>
+                <p>Offline FastAPI, SQLite, Jinja, vanilla JavaScript, and Ollama processing.</p>
+            </div>
+            <div>
+                <strong>Core Pages</strong>
+                <p><a href="/">Dashboard</a> <a href="/projects">Projects</a> <a href="/search">Search</a></p>
+            </div>
+            <div>
+                <strong>Phase</strong>
+                <p>Phase 1: ingestion, summarization, decisions, actions, risks, timeline, and search.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="processing-overlay" class="overlay hidden" aria-live="polite">
+        <div class="overlay-panel">
+            <div class="overlay-header">
+                <h2>Processing Documents</h2>
+                <button type="button" id="overlay-close" class="ghost-button">Hide</button>
+            </div>
+            <div id="overlay-jobs" class="overlay-jobs"></div>
+        </div>
+    </div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+Decision ID: D-006
+
+Date: 2026-04-16
+
+Decision Title: Replace buffered 1.0 V reference with trimmed 0.9 V reference path
+
+Status: active
+
+Approved In Meeting: M-012
+
+Decision Summary:
+Revised D-003 after radiation drift simulations and hot-corner headroom analysis showed the
+buffered 1.0 V ADC Reference Voltage path would not hold settling margin after total dose.
+
+Decision Impact:
+- Analog team inserted trim range expansion and removed one gain stage from the reference buffer.
+- Verification updated mixed-signal regressions for new trim tables.
+
+Supersedes:
+- D-003
+
+References:
+- RPT-003
+- RPT-006
+- M-011
+
+Traceability Note: This log is part of the connected knowledge graph for the program and should
+be read together with meeting minutes, action trackers, risk registers, and reports.

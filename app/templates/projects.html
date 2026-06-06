@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-block">
+    <div>
+        <div class="eyebrow">Projects</div>
+        <h2>Create and manage engineering projects</h2>
+        <p>Use the local repository and dataset context to organize documents and analysis outputs.</p>
+    </div>
+</section>
+
+<section class="content-grid two-col">
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Create Project</h3>
+        </div>
+        <form id="project-form">
+            <label for="name">Project name</label>
+            <input id="name" name="name" required>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+            <button type="submit">Create project</button>
+        </form>
+    </article>
+
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Dataset Reference</h3>
+        </div>
+        <div class="meta-stack">
+            <div><strong>Project:</strong> {{ overview.dataset_summary.project_name }}</div>
+            <div><strong>Repository root:</strong> {{ overview.dataset_summary.repository_root }}</div>
+            <div><strong>Timeline:</strong> {{ overview.dataset_summary.timeline_start }} to {{ overview.dataset_summary.timeline_end }}</div>
+        </div>
+    </article>
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h3>Projects</h3>
+    </div>
+    {% if overview.projects %}
+        <ul class="data-list">
+            {% for project in overview.projects %}
+                <li>
+                    <span><a href="/projects/{{ project.id }}">{{ project.name }}</a></span>
+                    <span>
+                        <a href="/projects/{{ project.id }}/upload">Upload</a> |
+                        <a href="/projects/{{ project.id }}/timeline">Timeline</a>
+                    </span>
+                    <p>{{ project.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state">No projects created yet.</p>
+    {% endif %}
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h3>Reference Timeline from Dataset</h3>
+    </div>
+    <ul class="timeline-list compact">
+        {% for event in overview.reference_timeline %}
+            <li>
+                <strong>{{ event.date }}</strong>
+                <span>{{ event.id }} - {{ event.title }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

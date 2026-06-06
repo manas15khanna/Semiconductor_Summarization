@@ -1,0 +1,218 @@
+[
+  {
+    "id": "AI-001",
+    "origin_meeting": "M-002",
+    "owner": "Ravi Narayanan",
+    "description": "Publish requirement baseline with customer errata incorporated.",
+    "due": "2026-01-29",
+    "status": "completed",
+    "closed_in": "M-003"
+  },
+  {
+    "id": "AI-002",
+    "origin_meeting": "M-002",
+    "owner": "Priya Sethi",
+    "description": "Map verification plan to TID and single-event upset recovery requirements.",
+    "due": "2026-02-02",
+    "status": "completed",
+    "closed_in": "M-004"
+  },
+  {
+    "id": "AI-003",
+    "origin_meeting": "M-004",
+    "owner": "Maya Chen",
+    "description": "Run capacitor DAC mismatch sweep including Radiation Hardening corners.",
+    "due": "2026-02-18",
+    "status": "completed",
+    "closed_in": "M-005"
+  },
+  {
+    "id": "AI-004",
+    "origin_meeting": "M-005",
+    "owner": "Kenji Watanabe",
+    "description": "Define trim observability for ADC Reference Voltage monitor path.",
+    "due": "2026-02-26",
+    "status": "completed",
+    "closed_in": "M-007"
+  },
+  {
+    "id": "AI-005",
+    "origin_meeting": "M-006",
+    "owner": "Luis Ortega",
+    "description": "Review capacitor array floorplan for Lithography Alignment sensitivity.",
+    "due": "2026-03-04",
+    "status": "completed",
+    "closed_in": "M-008"
+  },
+  {
+    "id": "AI-006",
+    "origin_meeting": "M-007",
+    "owner": "Omar Haddad",
+    "description": "Release Packaging Revision B mechanical stack-up to assembly vendor.",
+    "due": "2026-03-18",
+    "status": "completed",
+    "closed_in": "M-009"
+  },
+  {
+    "id": "AI-007",
+    "origin_meeting": "M-009",
+    "owner": "Nina Volkov",
+    "description": "Add overlay monitor split to evaluate reduced density fill impact.",
+    "due": "2026-04-09",
+    "status": "completed",
+    "closed_in": "M-012"
+  },
+  {
+    "id": "AI-008",
+    "origin_meeting": "M-010",
+    "owner": "Priya Sethi",
+    "description": "Close mixed-signal convergence issue in reference settling regression.",
+    "due": "2026-04-16",
+    "status": "completed",
+    "closed_in": "M-012"
+  },
+  {
+    "id": "AI-009",
+    "origin_meeting": "M-012",
+    "owner": "Maya Chen",
+    "description": "Implement trimmed 0.9 V reference updates from D-006.",
+    "due": "2026-04-28",
+    "status": "completed",
+    "closed_in": "M-013"
+  },
+  {
+    "id": "AI-010",
+    "origin_meeting": "M-013",
+    "owner": "Luis Ortega",
+    "description": "Re-run signoff with updated reference routing and EM constraints.",
+    "due": "2026-04-30",
+    "status": "completed",
+    "closed_in": "M-014"
+  },
+  {
+    "id": "AI-011",
+    "origin_meeting": "M-014",
+    "owner": "Elena Park",
+    "description": "Secure fab slot and mask house release package.",
+    "due": "2026-05-05",
+    "status": "completed",
+    "closed_in": "M-015"
+  },
+  {
+    "id": "AI-012",
+    "origin_meeting": "M-016",
+    "owner": "Victor Alvarez",
+    "description": "Cross-section package samples showing delamination signatures.",
+    "due": "2026-05-27",
+    "status": "completed",
+    "closed_in": "M-017"
+  },
+  {
+    "id": "AI-013",
+    "origin_meeting": "M-017",
+    "owner": "Omar Haddad",
+    "description": "Spin Packaging Revision C with alternate lid attach compound.",
+    "due": "2026-06-18",
+    "status": "completed",
+    "closed_in": "M-019"
+  },
+  {
+    "id": "AI-014",
+    "origin_meeting": "M-017",
+    "owner": "Grace Lin",
+    "description": "Update Reliability Qualification matrix for revised package plan.",
+    "due": "2026-06-16",
+    "status": "completed",
+    "closed_in": "M-018"
+  },
+  {
+    "id": "AI-015",
+    "origin_meeting": "M-018",
+    "owner": "Kenji Watanabe",
+    "description": "Rebalance Burn-In Testing board capacity for longer screen duration.",
+    "due": "2026-06-26",
+    "status": "completed",
+    "closed_in": "M-020"
+  },
+  {
+    "id": "AI-016",
+    "origin_meeting": "M-019",
+    "owner": "Sara McConnell",
+    "description": "Correlate wafer sort Yield Loss bins against overlay monitor data.",
+    "due": "2026-07-02",
+    "status": "completed",
+    "closed_in": "M-021"
+  },
+  {
+    "id": "AI-017",
+    "origin_meeting": "M-020",
+    "owner": "Victor Alvarez",
+    "description": "Complete FA on via chain opens from low-yield corner die.",
+    "due": "2026-07-09",
+    "status": "completed",
+    "closed_in": "M-022"
+  },
+  {
+    "id": "AI-018",
+    "origin_meeting": "M-021",
+    "owner": "Luis Ortega",
+    "description": "Document revised fill rules introduced by D-009.",
+    "due": "2026-07-15",
+    "status": "completed",
+    "closed_in": "M-023"
+  },
+  {
+    "id": "AI-019",
+    "origin_meeting": "M-022",
+    "owner": "Grace Lin",
+    "description": "Release interim Reliability Qualification summary for management review.",
+    "due": "2026-07-24",
+    "status": "completed",
+    "closed_in": "M-024"
+  },
+  {
+    "id": "AI-020",
+    "origin_meeting": "M-024",
+    "owner": "Jonas Richter",
+    "description": "Reduce scan compression and regenerate diagnosis-friendly ATPG set.",
+    "due": "2026-08-05",
+    "status": "completed",
+    "closed_in": "M-025"
+  },
+  {
+    "id": "AI-021",
+    "origin_meeting": "M-024",
+    "owner": "Elena Park",
+    "description": "Update production readiness checklist with revised test escape criteria.",
+    "due": "2026-08-14",
+    "status": "completed",
+    "closed_in": "M-025"
+  },
+  {
+    "id": "AI-022",
+    "origin_meeting": "M-025",
+    "owner": "Grace Lin",
+    "description": "Issue final Reliability Qualification signoff package.",
+    "due": "2026-08-21",
+    "status": "completed",
+    "closed_in": "M-025"
+  },
+  {
+    "id": "AI-023",
+    "origin_meeting": "M-017",
+    "owner": "Sara McConnell",
+    "description": "Track Yield Loss exposure for customer lot disposition planning.",
+    "due": "2026-06-20",
+    "status": "delayed",
+    "closed_in": "M-020"
+  },
+  {
+    "id": "AI-024",
+    "origin_meeting": "M-023",
+    "owner": "Kenji Watanabe",
+    "description": "Tune burn-in data parser for package revision comparison dashboard.",
+    "due": "2026-07-31",
+    "status": "completed",
+    "closed_in": "M-024"
+  }
+]

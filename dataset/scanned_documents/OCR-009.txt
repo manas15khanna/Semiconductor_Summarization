@@ -1,0 +1,52 @@
+OCR Simulation ID: OCR-009
+Source Document: RPT-004
+Simulated OCR Output:
+report ID: RPT-004
+
+Date: 2026-03-18
+
+Title: Digital Integration andDFT
+Rev1ew
+
+Type: Digital Design
+
+Owner: Jonas Richter
+
+Executive Summary:
+Covered SAR controller sequencing, SEU
+recovery logic, scan insertion, andon-chip
+telemetry.
+The document highlighted th e trade-off between high
+scan compression anddiagnostic depth that
+would later resurface during Reliabi1ity
+Qualification.
+The report preserves traceability to
+meetings, decisions, andrisk items so
+th e repository can
+be used to test summarization anddecision-
+traceability workflows across th e
+semiconductor
+lifecycle.
+Key recurring themes include A D C Refer ence
+Voltage control, Yie1d Loss containment, Lithography
+A1ignment sensitivity, Radiation
+Hardening margin, Packag1ng Revision
+transitions, Burn ln
+testing, andReliability Qualification
+closure.
+
+Key Findings:
+- RPT-004 was issued to support th e
+Radiation-Hardened Satellite AdC Development
+Program.
+- Cross-references were intentionally
+maintained to keep th e synthetic
+repository densely linked.
+- The technical narrative remains
+consistent with an eight-month
+development timeline.
+
+References:
+- M-007
+- M-008
+- AI-006

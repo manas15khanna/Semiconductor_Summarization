@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-block">
+    <div>
+        <div class="eyebrow">Upload Documents</div>
+        <h2>{{ project.name if project else "Project" }}</h2>
+        <p>Upload PDF, DOCX, TXT, and MD files. Processing continues in the background after upload completes.</p>
+    </div>
+    <div class="hero-actions">
+        {% if project %}
+            <a class="button-link secondary" href="/projects/{{ project.id }}">Back to project</a>
+        {% endif %}
+    </div>
+</section>
+
+{% if project %}
+<section class="panel upload-panel" data-project-id="{{ project.id }}">
+    <div class="dropzone" data-project-id="{{ project.id }}">
+        <input type="file" class="file-input" multiple accept=".pdf,.docx,.txt,.md">
+        <div class="dropzone-copy">
+            <strong>Drag and drop files here</strong>
+            <span>or click to select files from your local machine</span>
+        </div>
+    </div>
+    <div class="selected-files"></div>
+    <div class="upload-actions">
+        <button type="button" class="upload-trigger">Start upload</button>
+        <span class="status"></span>
+    </div>
+</section>
+{% else %}
+<section class="panel"><p class="empty-state">Project not found.</p></section>
+{% endif %}
+
+<section class="panel">
+    <div class="panel-header">
+        <h3>Recent Jobs</h3>
+    </div>
+    {% if jobs %}
+        <ul class="data-list">
+            {% for job in jobs %}
+                <li>
+                    <span>{{ job.filename }}</span>
+                    <span>{{ job.stage }} | {{ job.progress }}% | {{ job.status }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state">No background jobs yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

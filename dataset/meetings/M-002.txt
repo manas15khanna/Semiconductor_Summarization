@@ -1,0 +1,55 @@
+Meeting ID: M-002
+
+Date: 2026-01-15
+
+Meeting Title: Requirements Baseline Review
+
+Participants:
+- Elena Park
+- Ravi Narayanan
+- Maya Chen
+- Priya Sethi
+- Grace Lin
+
+Agenda:
+- Approve top-level converter requirements.
+- Confirm verification traceability approach.
+- Review initial schedule through architecture selection.
+
+Detailed Discussion:
+Requirements were reviewed against the customer electrical interface control document. The
+12-bit, 5 MSPS requirement and the single-event upset recovery target were accepted without open
+objections.
+
+Priya described how the verification plan would trace coverage bins back to D-001 once the
+decision was approved. Repeated search terms such as ADC Reference Voltage and Radiation
+Hardening were intentionally preserved in the controlled vocabulary for search testing.
+
+Elena emphasized that any future change to Packaging Revision, Burn-In Testing, or Reliability
+Qualification had to explicitly reference this baseline to maintain audit continuity.
+
+Decisions Made:
+- D-001: Freeze mission-level ADC requirements (active). Approved the baseline requirement set for a 12-bit, 5 MSPS radiation-hardened SAR ADC with guaranteed operation through 100 krad total ionizing dose and single-event upset recovery within two conversion cycles. Logged in decision log D-001 and referenced by RPT-001.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift under radiation and hot corner owned by Maya Chen with current status mitigated and severity high.
+
+Action Items:
+- AI-001: Publish requirement baseline with customer errata incorporated. Originated in M-002.
+- AI-002: Map verification plan to TID and single-event upset recovery requirements. Originated in M-002.
+
+Owners:
+- AI-001: Ravi Narayanan
+- AI-002: Priya Sethi
+
+Deadlines:
+- AI-001: 2026-01-29
+- AI-002: 2026-02-02
+
+References to Previous Meetings:
+- M-001
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

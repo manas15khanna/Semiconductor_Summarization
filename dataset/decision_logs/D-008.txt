@@ -1,0 +1,28 @@
+Decision ID: D-008
+
+Date: 2026-06-19
+
+Decision Title: Extend Burn-In Testing from 48 hours to 96 hours at 135C
+
+Status: active
+
+Approved In Meeting: M-019
+
+Decision Summary:
+Replaced the pilot screen assumption from D-004 with a longer stress screen after latent package
+and reference settling drifts were only visible beyond 60 hours.
+
+Decision Impact:
+- ATE capacity was rebalanced to keep sample throughput acceptable.
+- Reliability Qualification exit criteria updated for the production readiness review.
+
+Supersedes:
+- D-004
+
+References:
+- RPT-009
+- M-018
+- R-005
+
+Traceability Note: This log is part of the connected knowledge graph for the program and should
+be read together with meeting minutes, action trackers, risk registers, and reports.

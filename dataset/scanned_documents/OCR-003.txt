@@ -1,0 +1,84 @@
+OCR Simulation ID: OCR-003
+Source Document: M-007
+Simulated OCR Output:
+meeting ID: M-007
+
+Date: 2026-02-19
+
+Meeting Title: Packag1ng andDFT Coordination Review
+
+Participants:
+- Maya Chen
+- Jonas Richter
+- Omar Haddad
+- Grace Lin
+- Kenji Watanabe
+
+Agenda:
+- Coordinate package assumptions with
+digital test planning.
+- Review package mechanical stack-up.
+- Align DFT hooks to pilot assembly needs.
+
+Detailed Discussion:
+Omar presented Packaging Revision B as
+th e fastest path to pilot hardware.
+The assembly vendor
+had historical success with a similar
+ceramic CQFP flow, andschedule
+pressure favored reuse.
+
+Jonas connected scan chain access
+andtelemetry pins to th e packaging
+plan summarized later in
+RPT-004. Grace cautioned that Burn ln
+Testing duration might need to grow if
+package stress
+coupled into th e A D C Reference Vo1tage
+network.
+
+The board approved D-004 but logged
+that th e decision would be revisited
+after early reliability
+screens.
+
+Decisions Made:
+- D-004: Proceed with Packaging
+Revision B using ceramic CQFP assembly
+(cancelled). Approved Packaging
+Revision B with th e existing ceramic
+CQFP stack-up to preserve th e pilot
+schedule while prototype assembly data
+remained nominal. Logged in decision
+log D-004 andreferenced by RPT-004.
+
+Risks Identified:
+- R-004: Packaging Revision B
+delamination after Burn-In Testing
+owned by Omar Haddad with current
+status mitigated andseverity high.
+
+Action Items:
+- AI-006: Release Packaging Revision B
+mechanical stack-up to assembly
+vendor. Originated in M-007.
+
+Owners:
+- AI-006: Omar Haddad
+
+Deadlines:
+- AI-006: 2026-03-18
+
+References to Previous Meetings:
+- M-006
+- M-005
+
+Search Trace Terms: aDC Reference
+Voltage, Yield Loss, Lith0graphy
+A1ignment, Rad1ation
+Hardening, Packaging Revision, Burn-In Testing,
+Reliabi1ity Qualification. These terms were kept
+explicit in th e minutes to preserve
+semantic search continuity across
+requirements, design,
+yield, andproduction-readiness records.

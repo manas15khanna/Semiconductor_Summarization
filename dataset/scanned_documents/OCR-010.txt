@@ -1,0 +1,48 @@
+OCR Simulation ID: OCR-010
+Source Document: RPT-005
+Simulated OCR Output:
+report ID: RPT-005
+
+Date: 2026-04-08
+
+Title: Verification andLayout Signoff
+Report
+
+Type: Verification
+
+Owner: Priya Sethi
+
+Executive Summary:
+Summarized mixed-signal coverage closure, CDC
+signoff, andpost-layout analog regressions. The
+report accepted temporary concessions around
+metal density while explicitly tracking
+Lith0graphy
+A1ignment andYie1d Loss exposure.
+The report preserves traceability to
+meetings, decisions, andrisk items so
+th e repository can
+be used to test summarization anddecision-
+traceability workflows across th e semiconductor
+lifecycle.
+Key recurring themes include A D C Refer
+ence Vo1tage control, Yield Loss
+containment, Lithography
+Alignment sensitivity, rad1ation Hardening margin,
+Packag1ng Revision transitions, Burn ln
+Testing, andReliabi1ity Qualification
+closure.
+
+Key Findings:
+- RPT-005 was issued to support th e Radiation-
+Hardened Satellite ADC Development Program.
+- Cross-references were intentionally maintained to
+keep th e synthetic repository densely linked.
+- The technical narrative remains
+consistent with an eight-month
+development timeline.
+
+References:
+- D-005
+- R-002
+- M-010

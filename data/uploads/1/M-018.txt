@@ -1,0 +1,53 @@
+Meeting ID: M-018
+
+Date: 2026-05-07
+
+Meeting Title: Wafer Sort and Reliability Qualification Review
+
+Participants:
+- Elena Park
+- Nina Volkov
+- Grace Lin
+- Sara McConnell
+- Kenji Watanabe
+
+Agenda:
+- Review wafer sort data and qualification schedule impact.
+- Track package recovery progress.
+- Decide if screening assumptions must change.
+
+Detailed Discussion:
+Wafer sort data from RPT-007 showed acceptable gross functionality, but Yield Loss clusters
+appeared in one die corner population. In parallel, the package recovery timeline consumed
+schedule margin reserved for Reliability Qualification.
+
+Grace warned that the original 48-hour Burn-In Testing plan might be too short to expose the
+newly observed package and reference drifts. The board agreed to prepare a formal change package
+for M-019.
+
+AI-015 was opened to evaluate ATE capacity for a possible longer stress screen.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-003: Yield Loss from via chain opens at SAR logic boundary owned by Sara McConnell with current status monitoring and severity medium.
+- R-005: Reliability Qualification schedule slip due to extended stress screening owned by Grace Lin with current status mitigated and severity medium.
+
+Action Items:
+- AI-015: Rebalance Burn-In Testing board capacity for longer screen duration. Originated in M-018.
+
+Owners:
+- AI-015: Kenji Watanabe
+
+Deadlines:
+- AI-015: 2026-06-26
+
+References to Previous Meetings:
+- M-017
+- M-016
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

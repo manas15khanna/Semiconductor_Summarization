@@ -1,0 +1,7 @@
+HN-019
+mtg scraps
+package stress concern
+R-004 delam signs after burn in
+pkg rev? B no good -> D-007
+ADC Reference Voltage tails looked off, possbly package stress not only analog
+Reliab Qualification schd slip but manageable

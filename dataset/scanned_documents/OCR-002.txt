@@ -1,0 +1,91 @@
+OCR Simulation ID: OCR-002
+Source Document: M-004
+Simulated OCR Output:
+meeting ID: M-004
+
+Date: 2026-01-29
+
+Meeting Title: Architecture Selection
+Board
+
+Participants:
+- Elena Park
+- Ravi Narayanan
+- Maya Chen
+- Jonas Richter
+- Priya Sethi
+- Luis Ortega
+
+Agenda:
+- Select converter architecture.
+- Confirm analog anddigital
+partitioning.
+- Rev1ew resulting action items for schematic
+andverification teams.
+
+Detailed Discussion:
+After reviewing th e option matrix from M-003, th e
+board approved th e segmented capacitor DAC
+architecture recorded as D-002. The
+bootstrapped switch was accepted because it
+preserved
+linearity without unacceptable Radiation Hardening
+penalty.
+
+Jonas confirmed that th e SAR control logic
+andobservability hooks would fit th e area budget.
+Priya tied her verification checkpoints directly to
+th e newly approved architecture.
+
+The team acknowledged that A D C Refer
+ence Vo1tage drift andLith0graphy
+A1ignment would remain
+open technical threads despite th e
+architecture freeze.
+
+Decisions Made:
+- D-002: Adopt segmented capacitor DAC
+with bootstrapped sampling switch
+(active). Selected th e segmented
+capacitor DAC architecture anda
+bootstrapped front-end switch after
+comparing energy, linearity,
+andRadiation Hardening margin against
+charge-redistribution alternatives.
+Logged in decision log D-002
+andreferenced by RPT-002.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift under radiation
+andhot corner owned by Maya Chen with current status
+mitigated andseverity high.
+- R-002: Lithography alignment
+sensitivity near capacitor array edge
+owned by Luis Ortega with current
+status mitigated andseverity high.
+
+Action Items:
+- AI-003: Run capacitor DAC mismatch sweep
+including Radiation Hardening corners.
+originated in M-004.
+
+Owners:
+- AI-003: Maya Chen
+
+Deadlines:
+- AI-003: 2026-02-18
+
+References to Previous Meetings:
+- M-003
+- M-002
+
+Search Trace Terms: ADC Reference
+Voltage, Yie1d Loss, Lithography
+Alignment, Radiation
+Hardening, Packag1ng Revision, Burn ln Testing,
+Reliability Qualification. These terms were kept
+explicit in th e minutes to preserve
+semantic search continuity across
+requirements, design,
+yield, andproduction-readiness
+records.

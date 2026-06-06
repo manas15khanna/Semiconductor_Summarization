@@ -1,0 +1,13 @@
+Action Tracker ID: AT-002
+As Of Date: 2026-02-28
+Program: Radiation-Hardened Satellite ADC Development Program
+
+AI-001 | open | owner=Ravi Narayanan | origin=M-002 | due=2026-01-29 | Publish requirement baseline with customer errata incorporated.
+AI-002 | open | owner=Priya Sethi | origin=M-002 | due=2026-02-02 | Map verification plan to TID and single-event upset recovery requirements.
+AI-003 | open | owner=Maya Chen | origin=M-004 | due=2026-02-18 | Run capacitor DAC mismatch sweep including Radiation Hardening corners.
+AI-004 | open | owner=Kenji Watanabe | origin=M-005 | due=2026-02-26 | Define trim observability for ADC Reference Voltage monitor path.
+AI-005 | open | owner=Luis Ortega | origin=M-006 | due=2026-03-04 | Review capacitor array floorplan for Lithography Alignment sensitivity.
+
+Tracker status reflects whether actions tied to ADC Reference Voltage, Yield Loss, Lithography
+Alignment, Packaging Revision, Burn-In Testing, and Reliability Qualification have been
+completed, delayed, or remain open.

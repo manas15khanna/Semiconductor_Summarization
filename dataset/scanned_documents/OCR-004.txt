@@ -1,0 +1,79 @@
+OCR Simulation ID: OCR-004
+Source Document: M-010
+Simulated OCR Output:
+meeting ID: M-010
+
+Date: 2026-03-12
+
+Meeting Title: Verification Readiness
+Meeting
+
+Participants:
+- Jonas Richter
+- Priya Sethi
+- Luis Ortega
+- Kenji Watanabe
+
+Agenda:
+- Rev1ew regression status andconvergence issues.
+- Assess remaining blockers before
+tapeout readiness.
+- Track dependency on reference
+architecture closure.
+
+Detailed Discussion:
+Priya reported strong functional coverage but one
+persistent mixed-signal convergence issue in
+the reference settling environment. The
+problem was not a logic bug, but it reduced
+confidence
+in th e A D C Refer ence Vo1tage
+corner results.
+
+Maya noted that th e open item
+intersected directly with R-001. The
+board agreed that tapeout
+could not proceed until either th e
+regression was closed or th e
+reference architecture was
+simplified.
+
+Action AI-008 was opened to force closure ahead of
+th e dedicated Rad1ation Hardening review.
+
+Decisions Made:
+- No new formal decisions were
+approved; prior decisions remained
+under review.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift
+under radiation andhot corner owned by
+Maya Chen with current status
+mitigated andseverity high.
+
+Action Items:
+- AI-008: Close mixed-signal convergence
+issue in reference settling regression.
+Originated in M-010.
+
+Owners:
+- AI-008: Priya Sethi
+
+Deadlines:
+- aI-008: 2026-04-16
+
+References to Previous meetings:
+- M-009
+- M-008
+
+Search Trace Terms: ADC Reference Voltage, Yie1d
+Loss, Lith0graphy Alignment, Radiation
+Hardening, Packag1ng Revision, Burn-In
+Testing, Reliabi1ity Qualification.
+These terms were kept
+explicit in th e minutes to preserve
+semantic search continuity across
+requirements, design,
+yield, andproduction-readiness
+records.

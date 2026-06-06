@@ -1,0 +1,52 @@
+Meeting ID: M-011
+
+Date: 2026-03-19
+
+Meeting Title: Radiation Hardening Tradeoff Review
+
+Participants:
+- Ravi Narayanan
+- Maya Chen
+- Priya Sethi
+- Grace Lin
+
+Agenda:
+- Review late radiation simulation data.
+- Decide whether the reference path remains acceptable.
+- Escalate issues that threaten tapeout.
+
+Detailed Discussion:
+The new total-dose sweeps showed the buffered 1.0 V ADC Reference Voltage path losing settling
+margin after aging and hot-corner stress. Maya concluded that D-003 was no longer defensible for
+a space-bound product.
+
+Ravi stated that a controlled reversal before tapeout was preferable to carrying hidden
+Reliability Qualification risk. The group prepared the evidence used one week later in D-006.
+
+Elena documented that this meeting was the formal precursor to the first major decision reversal
+in the program.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift under radiation and hot corner owned by Maya Chen with current status mitigated and severity high.
+- R-005: Reliability Qualification schedule slip due to extended stress screening owned by Grace Lin with current status mitigated and severity medium.
+
+Action Items:
+- No new action items were opened in this meeting.
+
+Owners:
+- None
+
+Deadlines:
+- None
+
+References to Previous Meetings:
+- M-010
+- M-009
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

@@ -1,0 +1,50 @@
+OCR Simulation ID: OCR-006
+Source Document: RPT-001
+Simulated OCR Output:
+report ID: RPT-001
+
+Date: 2026-01-29
+
+Title: System Requirements Baseline Report
+
+Type: Requirements
+
+Owner: Ravi Narayanan
+
+Executive Summary:
+Captured th e customer mission profile,
+performance targets, andRad1ation Hardening
+obligations.
+The report established th e baseline
+transfer function, A D C Refer ence Vo1tage
+operating envelope,
+Reliabi1ity Qualification goals,
+andtraceability to th e space bus power
+budget.
+The report preserves traceability to
+meetings, decisions, andrisk items so
+th e repository can
+be used to test summarization
+anddecision-traceability workflows
+across th e semiconductor
+lifecycle.
+Key recurring themes include ADC Reference Voltage
+control, Yie1d Loss containment, Lith0graphy
+Alignment sensitivity, Radiation Hardening margin,
+Packag1ng revision transitions, Burn ln
+Testing, andreliability Qualification
+closure.
+
+Key Findings:
+- RPT-001 was issued to support th e radiation-
+Hardened Satellite ADC Development Program.
+- Cross-references were intentionally
+maintained to keep th e synthetic
+repository densely linked.
+- The technical narrative remains consistent with an
+eight-month development timeline.
+
+References:
+- D-001
+- M-002
+- M-003

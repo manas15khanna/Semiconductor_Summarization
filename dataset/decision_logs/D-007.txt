@@ -1,0 +1,29 @@
+Decision ID: D-007
+
+Date: 2026-06-04
+
+Decision Title: Cancel Packaging Revision B and move to Packaging Revision C
+
+Status: active
+
+Approved In Meeting: M-017
+
+Decision Summary:
+Cancelled D-004 after reliability failures showed lid attach delamination and bond sweep during
+Burn-In Testing. Packaging Revision C adds an alternate attach compound and tighter wire loop
+rule.
+
+Decision Impact:
+- Pilot assembly repeated with revised package materials.
+- Production readiness gate shifted to depend on fresh Reliability Qualification data.
+
+Supersedes:
+- D-004
+
+References:
+- RPT-009
+- M-016
+- R-004
+
+Traceability Note: This log is part of the connected knowledge graph for the program and should
+be read together with meeting minutes, action trackers, risk registers, and reports.

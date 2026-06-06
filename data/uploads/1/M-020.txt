@@ -1,0 +1,53 @@
+Meeting ID: M-020
+
+Date: 2026-05-21
+
+Meeting Title: Yield Review and Failure Analysis Triage
+
+Participants:
+- Elena Park
+- Luis Ortega
+- Victor Alvarez
+- Sara McConnell
+- Kenji Watanabe
+
+Agenda:
+- Review Yield Loss signatures and FA queue.
+- Correlate wafer, package, and test data.
+- Set priorities for corrective action.
+
+Detailed Discussion:
+Sara summarized the first integrated Yield Loss dashboard. One component tracked the package
+fallout already being addressed through Packaging Revision C, while another pointed to die-level
+issues associated with Lithography Alignment and possible via weaknesses.
+
+Victor requested more failing die before committing to a root-cause statement, but the board
+agreed that AI-017 had to move quickly so production readiness would not rely on guesswork.
+
+The meeting explicitly referenced the forthcoming Yield Analysis Report RPT-008 and Failure
+Analysis Report content embedded within it.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-002: Lithography Alignment sensitivity near capacitor array edge owned by Luis Ortega with current status mitigated and severity high.
+- R-003: Yield Loss from via chain opens at SAR logic boundary owned by Sara McConnell with current status monitoring and severity medium.
+
+Action Items:
+- AI-017: Complete FA on via chain opens from low-yield corner die. Originated in M-020.
+
+Owners:
+- AI-017: Victor Alvarez
+
+Deadlines:
+- AI-017: 2026-07-09
+
+References to Previous Meetings:
+- M-019
+- M-018
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

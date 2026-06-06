@@ -1,0 +1,53 @@
+Meeting ID: M-012
+
+Date: 2026-03-26
+
+Meeting Title: Reference Architecture Revision Board
+
+Participants:
+- Elena Park
+- Ravi Narayanan
+- Maya Chen
+- Priya Sethi
+- Luis Ortega
+
+Agenda:
+- Approve reference architecture revision.
+- Review schedule impact of late analog change.
+- Update traceability links for verification and tapeout.
+
+Detailed Discussion:
+The board approved D-006, explicitly superseding D-003. The trimmed 0.9 V reference path reduced
+headroom dependence and improved Radiation Hardening margin, even though it introduced fresh
+trim table work.
+
+Priya and Luis confirmed that the revised netlist and routes could still make tapeout with
+focused effort. Grace noted that the decision materially reduced the chance of Reliability
+Qualification drift escapes.
+
+Action items AI-009 and AI-010 were opened to lock the change into implementation and signoff
+evidence.
+
+Decisions Made:
+- D-006: Replace buffered 1.0 V reference with trimmed 0.9 V reference path (active). Revised D-003 after radiation drift simulations and hot-corner headroom analysis showed the buffered 1.0 V ADC Reference Voltage path would not hold settling margin after total dose. Supersedes D-003. Logged in decision log D-006 and referenced by RPT-003.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift under radiation and hot corner owned by Maya Chen with current status mitigated and severity high.
+
+Action Items:
+- AI-009: Implement trimmed 0.9 V reference updates from D-006. Originated in M-012.
+
+Owners:
+- AI-009: Maya Chen
+
+Deadlines:
+- AI-009: 2026-04-28
+
+References to Previous Meetings:
+- M-011
+- M-010
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

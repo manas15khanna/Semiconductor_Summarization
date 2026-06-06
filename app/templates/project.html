@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-block">
+    <div>
+        <div class="eyebrow">Project Dashboard</div>
+        <h2>{{ dashboard.project.name }}</h2>
+        <p>{{ dashboard.project.description }}</p>
+    </div>
+    <div class="hero-actions">
+        <a class="button-link" href="/projects/{{ dashboard.project.id }}/upload">Upload documents</a>
+        <a class="button-link secondary" href="/projects/{{ dashboard.project.id }}/timeline">View timeline</a>
+    </div>
+</section>
+
+<section class="card-grid five-up">
+    <article class="metric-card"><span>Projects</span><strong>1</strong></article>
+    <article class="metric-card"><span>Documents</span><strong>{{ dashboard.total_documents }}</strong></article>
+    <article class="metric-card"><span>Decisions</span><strong>{{ dashboard.total_decisions }}</strong></article>
+    <article class="metric-card"><span>Open Actions</span><strong>{{ dashboard.open_actions }}</strong></article>
+    <article class="metric-card"><span>Risks</span><strong>{{ dashboard.total_risks }}</strong></article>
+</section>
+
+<section class="panel upload-panel" data-project-id="{{ dashboard.project.id }}">
+    <div class="panel-header">
+        <h3>Upload Documents</h3>
+    </div>
+    <div class="dropzone" data-project-id="{{ dashboard.project.id }}">
+        <input type="file" class="file-input" multiple accept=".pdf,.docx,.txt,.md">
+        <div class="dropzone-copy">
+            <strong>Drag and drop files here</strong>
+            <span>or click to select PDF, DOCX, TXT, MD files</span>
+        </div>
+    </div>
+    <div class="selected-files"></div>
+    <div class="upload-actions">
+        <button type="button" class="upload-trigger">Start upload</button>
+        <span class="status"></span>
+    </div>
+</section>
+
+<section class="content-grid two-col">
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Recent Uploads</h3>
+        </div>
+        {% if dashboard.recent_uploads %}
+            <ul class="data-list">
+                {% for document in dashboard.recent_uploads %}
+                    <li>
+                        <a href="/documents/{{ document.id }}">{{ document.filename }}</a>
+                        <span>{{ document.upload_date.strftime("%Y-%m-%d %H:%M") }} | {{ document.processing_status }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No documents uploaded.</p>
+        {% endif %}
+    </article>
+
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Recent Activity</h3>
+        </div>
+        {% if dashboard.recent_activity %}
+            <ul class="timeline-list compact">
+                {% for event in dashboard.recent_activity %}
+                    <li>
+                        <strong>{{ event.event_date }}</strong>
+                        <span>{{ event.title }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No activity recorded yet.</p>
+        {% endif %}
+    </article>
+</section>
+
+<section class="content-grid two-col">
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Documents</h3>
+        </div>
+        {% if documents %}
+            <ul class="data-list">
+                {% for document in documents %}
+                    <li>
+                        <a href="/documents/{{ document.id }}">{{ document.filename }}</a>
+                        <span>{{ document.file_type|upper }} | {{ document.processing_status }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No project documents yet.</p>
+        {% endif %}
+    </article>
+
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Most Recent Summary</h3>
+        </div>
+        <pre>{{ dashboard.recent_summary or "No summary generated yet." }}</pre>
+    </article>
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h3>Risk Register</h3>
+    </div>
+    <ul class="data-list">
+        {% for risk in dashboard.risk_register %}
+            <li>
+                <span>{{ risk.severity_emoji }} {{ risk.title }}</span>
+                <span>{{ risk.severity|title }} | {{ risk.status }} | {{ risk.owner }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

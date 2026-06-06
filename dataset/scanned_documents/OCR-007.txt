@@ -1,0 +1,50 @@
+OCR Simulation ID: OCR-007
+Source Document: RPT-002
+Simulated OCR Output:
+report ID: RPT-002
+
+Date: 2026-02-10
+
+Title: Architecture Trade Study andSelection Memo
+
+Type: Architecture
+
+Owner: Ravi Narayanan
+
+Executive Summary:
+Compared pipeline, cyclic, andSAR
+approaches. The selected SAR path
+provided th e best radiation
+resilience andtest observability. A D
+C Refer ence Vo1tage stability,
+capacitor matching, and
+Lithography Alignment risk were identified as first-
+order follow-up items.
+The report preserves traceability to meetings,
+decisions, andrisk items so th e repository can
+be used to test summarization
+anddecision-traceability workflows
+across th e semiconductor
+lifecycle.
+Key recurring themes include ADc Reference
+Voltage control, Yie1d Loss containment,
+Lithography
+Alignment sensitivity, Rad1ation Hardening margin,
+Packaging Revision transitions, Burn ln
+Testing, andReliabi1ity Qualification
+closure.
+
+Key Findings:
+- RPT-002 was issued to support th e
+Radiation-Hardened Satellite ADC Development
+Program.
+- Cross-references were intentionally
+maintained to keep th e synthetic
+repository densely linked.
+- The technical narrative remains consistent with an
+eight-month development timeline.
+
+References:
+- D-002
+- M-004
+- RPT-001

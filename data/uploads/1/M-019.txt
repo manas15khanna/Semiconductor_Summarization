@@ -1,0 +1,52 @@
+Meeting ID: M-019
+
+Date: 2026-05-14
+
+Meeting Title: Burn-In Testing Strategy Update
+
+Participants:
+- Elena Park
+- Omar Haddad
+- Grace Lin
+- Sara McConnell
+- Kenji Watanabe
+
+Agenda:
+- Approve revised burn-in strategy.
+- Review reliability screen duration versus throughput.
+- Confirm production readiness implications.
+
+Detailed Discussion:
+The team approved D-008, extending Burn-In Testing to 96 hours at 135C. Grace showed that latent
+package-induced drift and slow-settling ADC Reference Voltage behavior only became obvious after
+the original screen duration.
+
+Kenji presented the capacity recovery plan. Elena accepted the schedule impact because the
+alternative was entering Reliability Qualification with known blind spots.
+
+The change was logged as another explicit decision reversal tied back to D-004 and the earlier
+pilot assumptions.
+
+Decisions Made:
+- D-008: Extend Burn-In Testing from 48 hours to 96 hours at 135C (active). Replaced the pilot screen assumption from D-004 with a longer stress screen after latent package and reference settling drifts were only visible beyond 60 hours. Supersedes D-004. Logged in decision log D-008 and referenced by RPT-009.
+
+Risks Identified:
+- R-005: Reliability Qualification schedule slip due to extended stress screening owned by Grace Lin with current status mitigated and severity medium.
+
+Action Items:
+- AI-016: Correlate wafer sort Yield Loss bins against overlay monitor data. Originated in M-019.
+
+Owners:
+- AI-016: Sara McConnell
+
+Deadlines:
+- AI-016: 2026-07-02
+
+References to Previous Meetings:
+- M-018
+- M-017
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Elena Park",
+    "role": "Program Manager",
+    "team": "Program Office",
+    "expertise": [
+      "schedule management",
+      "customer coordination",
+      "production readiness"
+    ]
+  },
+  {
+    "name": "Ravi Narayanan",
+    "role": "Chief Architect",
+    "team": "Systems",
+    "expertise": [
+      "converter architecture",
+      "requirements decomposition",
+      "trade studies"
+    ]
+  },
+  {
+    "name": "Maya Chen",
+    "role": "Analog Lead",
+    "team": "Analog Design",
+    "expertise": [
+      "ADC Reference Voltage",
+      "bandgap design",
+      "radiation-tolerant analog circuits"
+    ]
+  },
+  {
+    "name": "Jonas Richter",
+    "role": "Digital Lead",
+    "team": "Digital Design",
+    "expertise": [
+      "SAR control logic",
+      "scan architecture",
+      "DFT"
+    ]
+  },
+  {
+    "name": "Priya Sethi",
+    "role": "Verification Lead",
+    "team": "Verification",
+    "expertise": [
+      "UVM",
+      "mixed-signal regressions",
+      "coverage closure"
+    ]
+  },
+  {
+    "name": "Luis Ortega",
+    "role": "Physical Design Lead",
+    "team": "Implementation",
+    "expertise": [
+      "floorplanning",
+      "Lithography Alignment",
+      "tapeout signoff"
+    ]
+  },
+  {
+    "name": "Nina Volkov",
+    "role": "Process Integration Engineer",
+    "team": "Fab Interface",
+    "expertise": [
+      "mask review",
+      "wafer split management",
+      "yield excursion response"
+    ]
+  },
+  {
+    "name": "Omar Haddad",
+    "role": "Packaging Engineer",
+    "team": "Package Development",
+    "expertise": [
+      "Packaging Revision",
+      "lid attach",
+      "wirebond reliability"
+    ]
+  },
+  {
+    "name": "Grace Lin",
+    "role": "Reliability Engineer",
+    "team": "Quality and Reliability",
+    "expertise": [
+      "Burn-In Testing",
+      "Reliability Qualification",
+      "HTOL"
+    ]
+  },
+  {
+    "name": "Victor Alvarez",
+    "role": "Failure Analysis Engineer",
+    "team": "Quality and Reliability",
+    "expertise": [
+      "cross-sectioning",
+      "SEM review",
+      "latent defect diagnosis"
+    ]
+  },
+  {
+    "name": "Sara McConnell",
+    "role": "Product Engineer",
+    "team": "Product Engineering",
+    "expertise": [
+      "Yield Loss",
+      "test limits",
+      "ramp monitoring"
+    ]
+  },
+  {
+    "name": "Kenji Watanabe",
+    "role": "Test Engineer",
+    "team": "ATE Development",
+    "expertise": [
+      "production test",
+      "burn-in boards",
+      "data logging"
+    ]
+  }
+]

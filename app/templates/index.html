@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-block">
+    <div>
+        <div class="eyebrow">Dashboard</div>
+        <h2>Program overview</h2>
+        <p>Track documents, decisions, actions, risks, and timeline updates across local engineering projects.</p>
+    </div>
+    <div class="hero-actions">
+        <a class="button-link" href="/projects">Open projects</a>
+    </div>
+</section>
+
+<section class="card-grid five-up">
+    <article class="metric-card"><span>Projects</span><strong>{{ dashboard.counts.projects }}</strong></article>
+    <article class="metric-card"><span>Documents</span><strong>{{ dashboard.counts.documents }}</strong></article>
+    <article class="metric-card"><span>Decisions</span><strong>{{ dashboard.counts.decisions }}</strong></article>
+    <article class="metric-card"><span>Open Actions</span><strong>{{ dashboard.counts.open_actions }}</strong></article>
+    <article class="metric-card"><span>Risks</span><strong>{{ dashboard.counts.risks }}</strong></article>
+</section>
+
+<section class="content-grid two-col">
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Recent Uploads</h3>
+        </div>
+        {% if dashboard.recent_uploads %}
+            <ul class="data-list">
+                {% for document in dashboard.recent_uploads %}
+                    <li>
+                        <a href="/documents/{{ document.id }}">{{ document.filename }}</a>
+                        <span>{{ document.file_type|upper }} | {{ document.processing_status }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No uploads yet.</p>
+        {% endif %}
+    </article>
+
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Recent Project Activity</h3>
+        </div>
+        {% if dashboard.recent_activity %}
+            <ul class="timeline-list compact">
+                {% for event in dashboard.recent_activity %}
+                    <li>
+                        <strong>{{ event.event_date or event.date }}</strong>
+                        <span>{{ event.title }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No activity yet.</p>
+        {% endif %}
+    </article>
+</section>
+
+<section class="content-grid two-col">
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Most Recent Generated Summary</h3>
+        </div>
+        <pre>{% if dashboard.recent_summary %}{{ dashboard.recent_summary.summary_text if dashboard.recent_summary.summary_text is defined else dashboard.recent_summary }}{% else %}No summary generated yet.{% endif %}</pre>
+    </article>
+
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Processing Jobs</h3>
+        </div>
+        {% if dashboard.jobs %}
+            <ul class="data-list">
+                {% for job in dashboard.jobs %}
+                    <li>
+                        <span>{{ job.filename }}</span>
+                        <span>{{ job.stage }} | {{ job.progress }}%</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No jobs yet.</p>
+        {% endif %}
+    </article>
+</section>
+
+<section class="content-grid two-col">
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Risk Register</h3>
+        </div>
+        <ul class="data-list">
+            {% for risk in dashboard.risk_register %}
+                <li>
+                    <span>{{ risk.severity_emoji }} {{ risk.title }}</span>
+                    <span>{{ risk.severity|title }} | {{ risk.status }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </article>
+
+    <article class="panel">
+        <div class="panel-header">
+            <h3>Dataset Snapshot</h3>
+        </div>
+        <div class="meta-stack">
+            <div><strong>Program:</strong> {{ dashboard.dataset_summary.project_name }}</div>
+            <div><strong>Timeline:</strong> {{ dashboard.dataset_summary.timeline_start }} to {{ dashboard.dataset_summary.timeline_end }}</div>
+            <div><strong>Search terms:</strong> {{ dashboard.dataset_summary.repeated_search_terms|join(", ") }}</div>
+        </div>
+    </article>
+</section>
+{% endblock %}

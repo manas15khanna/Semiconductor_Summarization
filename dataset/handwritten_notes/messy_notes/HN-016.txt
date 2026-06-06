@@ -1,0 +1,6 @@
+HN-016
+rand notes
+- M-020 -> AI-017 origin
+- FAR-ish info went into RPT-008
+- ADC Ref Voltage, burnin, reliab qual all linked
+- some spellng messy on purpos

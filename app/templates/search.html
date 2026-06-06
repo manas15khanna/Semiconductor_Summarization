@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-block">
+    <div>
+        <div class="eyebrow">Search</div>
+        <h2>Search across documents and extracted knowledge</h2>
+        <p>Filter by result type and inspect highlighted matches.</p>
+    </div>
+</section>
+
+<section class="panel">
+    <form id="search-form" class="search-form">
+        <input id="query" name="query" value="{{ query }}" placeholder="Search document contents, summaries, decisions, actions, risks" required>
+        <div class="filter-row">
+            <label><input type="radio" name="filter_type" value="all" checked> All</label>
+            <label><input type="radio" name="filter_type" value="documents"> Documents</label>
+            <label><input type="radio" name="filter_type" value="decisions"> Decisions</label>
+            <label><input type="radio" name="filter_type" value="actions"> Actions</label>
+            <label><input type="radio" name="filter_type" value="risks"> Risks</label>
+        </div>
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<section class="panel">
+    <div class="panel-header">
+        <h3>Results</h3>
+    </div>
+    <div id="search-results">
+        <p class="empty-state">Run a search to view results.</p>
+    </div>
+</section>
+{% endblock %}

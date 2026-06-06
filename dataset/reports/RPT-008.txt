@@ -1,0 +1,32 @@
+Report ID: RPT-008
+
+Date: 2026-07-02
+
+Title: Yield Analysis and Failure Correlation Report
+
+Type: Yield Analysis
+
+Owner: Sara McConnell
+
+Executive Summary:
+Combined wafer sort maps, package screen fallout, and physical analysis to isolate Yield Loss
+contributors. The report tied DNL spread to Lithography Alignment near the capacitor array and
+flagged via chain opens at the SAR logic boundary.
+The report preserves traceability to meetings, decisions, and risk items so the repository can
+be used to test summarization and decision-traceability workflows across the semiconductor
+lifecycle.
+Key recurring themes include ADC Reference Voltage control, Yield Loss containment, Lithography
+Alignment sensitivity, Radiation Hardening margin, Packaging Revision transitions, Burn-In
+Testing, and Reliability Qualification closure.
+
+Key Findings:
+- RPT-008 was issued to support the Radiation-Hardened Satellite ADC Development Program.
+- Cross-references were intentionally maintained to keep the synthetic repository densely linked.
+- The technical narrative remains consistent with an eight-month development timeline.
+
+References:
+- D-009
+- M-020
+- AI-017
+- R-002
+- R-003

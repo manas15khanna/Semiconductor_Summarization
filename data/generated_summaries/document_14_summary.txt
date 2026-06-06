@@ -1,0 +1,13 @@
+Here’s a concise summary of the document:
+
+**Project Context:** A decision was made to reduce scan compression ratio to enhance diagnostic visibility during at-speed testing.
+
+**Key Findings:** Pilot lot data lacked sufficient isolation of digital control faults.
+
+**Decisions:**  The high-compression test plan was replaced with a new plan utilizing sufficient data.
+
+**Risks:** Increased pattern count, improved diagnosis and failure triage.
+
+**Action Items:** Update production test documentation.
+
+**Next Steps:** Continue monitoring and validating the new diagnostic visibility.

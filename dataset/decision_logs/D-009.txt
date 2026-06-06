@@ -1,0 +1,29 @@
+Decision ID: D-009
+
+Date: 2026-07-03
+
+Decision Title: Tighten lithography-aware capacitor matching rules and restore density fill
+
+Status: active
+
+Approved In Meeting: M-021
+
+Decision Summary:
+Revised D-005 after first silicon Yield Loss analysis linked DNL excursions to overlay drift
+near the array edge. Additional dummy fill and stricter Lithography Alignment checks were
+mandated.
+
+Decision Impact:
+- Metal fill cookbook updated for the metal-spin contingency.
+- Future rad-hard derivative projects will inherit the new matching rule deck.
+
+Supersedes:
+- D-005
+
+References:
+- RPT-007
+- RPT-008
+- M-020
+
+Traceability Note: This log is part of the connected knowledge graph for the program and should
+be read together with meeting minutes, action trackers, risk registers, and reports.

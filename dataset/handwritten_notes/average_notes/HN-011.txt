@@ -1,0 +1,6 @@
+HN-011
+Topic rad hard action list
+- reviewed R-003
+- Radiation Hardening sims now agree w/ D-006
+- Burn-In Testing longer than plan but Reliability Qualification risk coming down
+- check Packaging Revision C lot next week

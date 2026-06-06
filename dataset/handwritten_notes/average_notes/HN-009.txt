@@ -1,0 +1,6 @@
+HN-009
+Topic layout overlay findings
+- reviewed M-021
+- Radiation Hardening sims now agree w/ D-006
+- Burn-In Testing longer than plan but Reliability Qualification risk coming down
+- check Packaging Revision C lot next week

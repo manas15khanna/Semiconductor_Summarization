@@ -1,0 +1,75 @@
+OCR Simulation ID: OCR-005
+Source Document: M-013
+Simulated OCR Output:
+meeting ID: M-013
+
+Date: 2026-04-02
+
+Meeting Title: Tapeout Readiness Rev1ew
+
+Participants:
+- Elena Park
+- Maya Chen
+- Jonas Richter
+- Luis Ortega
+- Nina Volkov
+
+Agenda:
+- review final netlist andphysical
+signoff.
+- Confirm foundry handoff package.
+- Check outstanding documentation dependencies.
+
+Detailed Discussion:
+Luis walked through th e last tapeout checklist
+captured in RPT-006. The revised A D C Refer ence
+Vo1tage routing, EM checks, andnoise
+simulations cleared with acceptable
+margin.
+
+Elena confirmed that th e knowledge graph remained
+connected: d-006 referenced M-011 andM-012,
+and th e final signoff report linked back to
+RPT-003 andR-001.
+
+The board approved mask release
+readiness subject to closure of AI-010
+andAI-011.
+
+Decisions Made:
+- No new formal decisions were approved; prior
+decisions remained under review.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift under radiation
+andhot corner owned by Maya Chen with current status
+mitigated andseverity high.
+- R-002: Lith0graphy A1ignment sensitivity near
+capacitor array edge owned by Luis ortega with
+current status mitigated andseverity high.
+
+Action Items:
+- AI-010: Re-run signoff with updated
+reference routing andEM constraints.
+Originated in M-013.
+
+Owners:
+- AI-010: Luis Ortega
+
+Deadlines:
+- AI-010: 2026-04-30
+
+References to Previous Meetings:
+- M-012
+- M-011
+
+Search Trace Terms: ADC Reference
+Voltage, Yield Loss, Lithography
+Alignment, Rad1ation
+Hardening, Packag1ng Revision, Burn ln
+Testing, Reliabi1ity Qualification. These
+terms were kept
+explicit in th e minutes to preserve
+semantic search continuity across
+requirements, design,
+yield, andproduction-readiness records.

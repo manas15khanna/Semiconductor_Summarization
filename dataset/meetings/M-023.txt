@@ -1,0 +1,53 @@
+Meeting ID: M-023
+
+Date: 2026-06-11
+
+Meeting Title: Packaging Revision C Qualification Review
+
+Participants:
+- Elena Park
+- Omar Haddad
+- Grace Lin
+- Sara McConnell
+- Kenji Watanabe
+
+Agenda:
+- Review Packaging Revision C stress results.
+- Assess interim Reliability Qualification evidence.
+- Confirm readiness of data infrastructure and dashboards.
+
+Detailed Discussion:
+Packaging Revision C cleared the repeat screens with materially better delamination margin.
+Grace stated that Reliability Qualification was trending pass, provided the extended Burn-In
+Testing data remained clean through completion.
+
+Kenji demonstrated the updated dashboard comparing package revisions and highlighting ADC
+Reference Voltage drift tails across stress duration. The board recorded that the package
+reversal from D-007 now had objective closure evidence.
+
+AI-024 was recognized as complete, and the team prepared for the production test gate review.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-004: Packaging Revision B delamination after Burn-In Testing owned by Omar Haddad with current status mitigated and severity high.
+- R-005: Reliability Qualification schedule slip due to extended stress screening owned by Grace Lin with current status mitigated and severity medium.
+
+Action Items:
+- AI-024: Tune burn-in data parser for package revision comparison dashboard. Originated in M-023.
+
+Owners:
+- AI-024: Kenji Watanabe
+
+Deadlines:
+- AI-024: 2026-07-31
+
+References to Previous Meetings:
+- M-022
+- M-021
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

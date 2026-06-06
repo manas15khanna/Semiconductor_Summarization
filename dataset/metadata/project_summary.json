@@ -1,0 +1,47 @@
+{
+  "project_name": "Radiation-Hardened Satellite ADC Development Program",
+  "repository_root": "project_repository",
+  "timeline_start": "2026-01-08",
+  "timeline_end": "2026-06-25",
+  "document_counts": {
+    "meetings": 25,
+    "reports": 10,
+    "risk_registers": 5,
+    "decision_logs": 10,
+    "action_trackers": 8,
+    "handwritten_notes": 20,
+    "ocr_documents": 10,
+    "metadata_files": 6
+  },
+  "repeated_search_terms": [
+    "ADC Reference Voltage",
+    "Yield Loss",
+    "Lithography Alignment",
+    "Radiation Hardening",
+    "Packaging Revision",
+    "Burn-In Testing",
+    "Reliability Qualification"
+  ],
+  "decision_reversal_examples": [
+    {
+      "new_decision": "D-006",
+      "replaces": "D-003"
+    },
+    {
+      "new_decision": "D-007",
+      "replaces": "D-004"
+    },
+    {
+      "new_decision": "D-008",
+      "replaces": "D-004 pilot screening assumptions"
+    },
+    {
+      "new_decision": "D-009",
+      "replaces": "D-005"
+    },
+    {
+      "new_decision": "D-010",
+      "replaces": "original high-compression ATPG strategy from RPT-004"
+    }
+  ]
+}

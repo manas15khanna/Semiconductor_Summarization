@@ -1,0 +1,184 @@
+[
+  {
+    "id": "D-001",
+    "date": "2026-01-22",
+    "title": "Freeze mission-level ADC requirements",
+    "status": "active",
+    "meeting_id": "M-002",
+    "summary": "Approved the baseline requirement set for a 12-bit, 5 MSPS radiation-hardened SAR ADC with guaranteed operation through 100 krad total ionizing dose and single-event upset recovery within two conversion cycles.",
+    "impact": [
+      "Requirements document locked for architecture trade study.",
+      "Verification team aligned coverage model to the 12-bit transfer function and SEE recovery goals."
+    ],
+    "supersedes": [],
+    "references": [
+      "RPT-001",
+      "M-001"
+    ]
+  },
+  {
+    "id": "D-002",
+    "date": "2026-02-05",
+    "title": "Adopt segmented capacitor DAC with bootstrapped sampling switch",
+    "status": "active",
+    "meeting_id": "M-004",
+    "summary": "Selected the segmented capacitor DAC architecture and a bootstrapped front-end switch after comparing energy, linearity, and Radiation Hardening margin against charge-redistribution alternatives.",
+    "impact": [
+      "Analog schematic freeze targeted for March.",
+      "Physical design reserved centroid-aware placement area for the capacitor array."
+    ],
+    "supersedes": [],
+    "references": [
+      "RPT-002",
+      "M-003"
+    ]
+  },
+  {
+    "id": "D-003",
+    "date": "2026-02-12",
+    "title": "Use buffered 1.0 V ADC Reference Voltage architecture",
+    "status": "revised",
+    "meeting_id": "M-005",
+    "summary": "Initial decision to use a buffered 1.0 V ADC Reference Voltage generator to maximize dynamic range during early analog bring-up.",
+    "impact": [
+      "Bandgap and buffer design entered detailed simulation.",
+      "ATE team started drafting trim hooks for the reference monitor path."
+    ],
+    "supersedes": [],
+    "references": [
+      "RPT-003",
+      "M-004"
+    ]
+  },
+  {
+    "id": "D-004",
+    "date": "2026-03-11",
+    "title": "Proceed with Packaging Revision B using ceramic CQFP assembly",
+    "status": "cancelled",
+    "meeting_id": "M-007",
+    "summary": "Approved Packaging Revision B with the existing ceramic CQFP stack-up to preserve the pilot schedule while prototype assembly data remained nominal.",
+    "impact": [
+      "Mechanical drawings released to the packaging house.",
+      "Reliability plan assumed 48-hour Burn-In Testing for the pilot lot."
+    ],
+    "supersedes": [],
+    "references": [
+      "RPT-004",
+      "M-006"
+    ]
+  },
+  {
+    "id": "D-005",
+    "date": "2026-03-26",
+    "title": "Accept reduced metal density fill near capacitor array",
+    "status": "revised",
+    "meeting_id": "M-009",
+    "summary": "Accepted a reduced local density fill strategy around the capacitor array to preserve matching, with explicit monitoring of Lithography Alignment sensitivity during signoff.",
+    "impact": [
+      "Tapeout checklist gained an added lithography hotspot review.",
+      "Yield team prepared a dedicated split for overlay monitor correlation."
+    ],
+    "supersedes": [],
+    "references": [
+      "RPT-005",
+      "M-008"
+    ]
+  },
+  {
+    "id": "D-006",
+    "date": "2026-04-16",
+    "title": "Replace buffered 1.0 V reference with trimmed 0.9 V reference path",
+    "status": "active",
+    "meeting_id": "M-012",
+    "summary": "Revised D-003 after radiation drift simulations and hot-corner headroom analysis showed the buffered 1.0 V ADC Reference Voltage path would not hold settling margin after total dose.",
+    "impact": [
+      "Analog team inserted trim range expansion and removed one gain stage from the reference buffer.",
+      "Verification updated mixed-signal regressions for new trim tables."
+    ],
+    "supersedes": [
+      "D-003"
+    ],
+    "references": [
+      "RPT-003",
+      "RPT-006",
+      "M-011"
+    ]
+  },
+  {
+    "id": "D-007",
+    "date": "2026-06-04",
+    "title": "Cancel Packaging Revision B and move to Packaging Revision C",
+    "status": "active",
+    "meeting_id": "M-017",
+    "summary": "Cancelled D-004 after reliability failures showed lid attach delamination and bond sweep during Burn-In Testing. Packaging Revision C adds an alternate attach compound and tighter wire loop rule.",
+    "impact": [
+      "Pilot assembly repeated with revised package materials.",
+      "Production readiness gate shifted to depend on fresh Reliability Qualification data."
+    ],
+    "supersedes": [
+      "D-004"
+    ],
+    "references": [
+      "RPT-009",
+      "M-016",
+      "R-004"
+    ]
+  },
+  {
+    "id": "D-008",
+    "date": "2026-06-19",
+    "title": "Extend Burn-In Testing from 48 hours to 96 hours at 135C",
+    "status": "active",
+    "meeting_id": "M-019",
+    "summary": "Replaced the pilot screen assumption from D-004 with a longer stress screen after latent package and reference settling drifts were only visible beyond 60 hours.",
+    "impact": [
+      "ATE capacity was rebalanced to keep sample throughput acceptable.",
+      "Reliability Qualification exit criteria updated for the production readiness review."
+    ],
+    "supersedes": [
+      "D-004"
+    ],
+    "references": [
+      "RPT-009",
+      "M-018",
+      "R-005"
+    ]
+  },
+  {
+    "id": "D-009",
+    "date": "2026-07-03",
+    "title": "Tighten lithography-aware capacitor matching rules and restore density fill",
+    "status": "active",
+    "meeting_id": "M-021",
+    "summary": "Revised D-005 after first silicon Yield Loss analysis linked DNL excursions to overlay drift near the array edge. Additional dummy fill and stricter Lithography Alignment checks were mandated.",
+    "impact": [
+      "Metal fill cookbook updated for the metal-spin contingency.",
+      "Future rad-hard derivative projects will inherit the new matching rule deck."
+    ],
+    "supersedes": [
+      "D-005"
+    ],
+    "references": [
+      "RPT-007",
+      "RPT-008",
+      "M-020"
+    ]
+  },
+  {
+    "id": "D-010",
+    "date": "2026-08-07",
+    "title": "Reduce scan compression ratio to improve at-speed diagnostic visibility",
+    "status": "active",
+    "meeting_id": "M-024",
+    "summary": "Replaced the earlier high-compression test plan after diagnosis data from the pilot lot proved insufficient to isolate intermittent digital control faults seen during Reliability Qualification.",
+    "impact": [
+      "Pattern count increased, but diagnosis and failure triage improved significantly.",
+      "Production test documentation updated before readiness signoff."
+    ],
+    "supersedes": [],
+    "references": [
+      "RPT-010",
+      "M-023"
+    ]
+  }
+]

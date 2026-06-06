@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-block">
+    <div>
+        <div class="eyebrow">Timeline</div>
+        <h2>{{ project.name if project else "Project Timeline" }}</h2>
+        <p>Chronological trace of major project events extracted from engineering documents.</p>
+    </div>
+</section>
+
+<section class="panel">
+    {% if timeline %}
+        <ul class="timeline-list">
+            {% for event in timeline %}
+                <li>
+                    <strong>{{ event.event_date or "Unknown date" }}</strong>
+                    <span>{{ event.title }}</span>
+                    <p>{{ event.description }}</p>
+                    <small>Source: {{ event.source_document }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state">No timeline events available.</p>
+    {% endif %}
+</section>
+{% endblock %}

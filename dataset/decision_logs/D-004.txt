@@ -1,0 +1,27 @@
+Decision ID: D-004
+
+Date: 2026-03-11
+
+Decision Title: Proceed with Packaging Revision B using ceramic CQFP assembly
+
+Status: cancelled
+
+Approved In Meeting: M-007
+
+Decision Summary:
+Approved Packaging Revision B with the existing ceramic CQFP stack-up to preserve the pilot
+schedule while prototype assembly data remained nominal.
+
+Decision Impact:
+- Mechanical drawings released to the packaging house.
+- Reliability plan assumed 48-hour Burn-In Testing for the pilot lot.
+
+Supersedes:
+- None
+
+References:
+- RPT-004
+- M-006
+
+Traceability Note: This log is part of the connected knowledge graph for the program and should
+be read together with meeting minutes, action trackers, risk registers, and reports.

@@ -1,0 +1,5 @@
+HN-014 / failure analysis snippets
+notes from desk check
+1. package issue was not only assembly, it also masked analog drift
+2. keep R-003 open for Yield Loss
+3. production team wants cleaner scan diagnosis after D-010

@@ -1,0 +1,27 @@
+Decision ID: D-003
+
+Date: 2026-02-12
+
+Decision Title: Use buffered 1.0 V ADC Reference Voltage architecture
+
+Status: revised
+
+Approved In Meeting: M-005
+
+Decision Summary:
+Initial decision to use a buffered 1.0 V ADC Reference Voltage generator to maximize dynamic
+range during early analog bring-up.
+
+Decision Impact:
+- Bandgap and buffer design entered detailed simulation.
+- ATE team started drafting trim hooks for the reference monitor path.
+
+Supersedes:
+- None
+
+References:
+- RPT-003
+- M-004
+
+Traceability Note: This log is part of the connected knowledge graph for the program and should
+be read together with meeting minutes, action trackers, risk registers, and reports.

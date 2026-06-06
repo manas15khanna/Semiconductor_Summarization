@@ -1,0 +1,52 @@
+Meeting ID: M-009
+
+Date: 2026-03-05
+
+Meeting Title: Pre-Verification Closure Review
+
+Participants:
+- Elena Park
+- Maya Chen
+- Priya Sethi
+- Luis Ortega
+
+Agenda:
+- Close layout concessions and verification risks.
+- Approve density fill strategy.
+- Review pre-signoff action list.
+
+Detailed Discussion:
+Following the technical debate from M-008, the team approved D-005 to accept reduced local fill
+near the capacitor array. The decision was treated as conditional on overlay monitoring and
+later yield review.
+
+Priya captured the assumption inside the verification signoff package. Nina committed to add
+wafer split data so the eventual Yield Loss analysis would be tied to concrete Lithography
+Alignment evidence.
+
+Elena recorded that D-005 was especially likely to require revision if silicon data contradicted
+the modeling assumptions.
+
+Decisions Made:
+- D-005: Accept reduced metal density fill near capacitor array (revised). Accepted a reduced local density fill strategy around the capacitor array to preserve matching, with explicit monitoring of Lithography Alignment sensitivity during signoff. Logged in decision log D-005 and referenced by RPT-005.
+
+Risks Identified:
+- R-002: Lithography Alignment sensitivity near capacitor array edge owned by Luis Ortega with current status mitigated and severity high.
+
+Action Items:
+- AI-007: Add overlay monitor split to evaluate reduced density fill impact. Originated in M-009.
+
+Owners:
+- AI-007: Nina Volkov
+
+Deadlines:
+- AI-007: 2026-04-09
+
+References to Previous Meetings:
+- M-008
+- M-007
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

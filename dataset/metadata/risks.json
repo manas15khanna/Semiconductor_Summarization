@@ -1,0 +1,154 @@
+[
+  {
+    "id": "R-001",
+    "title": "ADC Reference Voltage drift under radiation and hot corner",
+    "owner": "Maya Chen",
+    "opened": "2026-01-15",
+    "status": "mitigated",
+    "severity": "high",
+    "history": [
+      {
+        "date": "2026-01-15",
+        "state": "open",
+        "note": "Initial concern from requirements decomposition."
+      },
+      {
+        "date": "2026-03-05",
+        "state": "escalated",
+        "note": "SEE and TID simulations showed degraded settling."
+      },
+      {
+        "date": "2026-04-16",
+        "state": "mitigated",
+        "note": "D-006 approved trimmed 0.9 V architecture."
+      }
+    ],
+    "references": [
+      "D-003",
+      "D-006",
+      "RPT-003",
+      "RPT-006"
+    ]
+  },
+  {
+    "id": "R-002",
+    "title": "Lithography Alignment sensitivity near capacitor array edge",
+    "owner": "Luis Ortega",
+    "opened": "2026-02-26",
+    "status": "mitigated",
+    "severity": "high",
+    "history": [
+      {
+        "date": "2026-02-26",
+        "state": "open",
+        "note": "Density fill trade-off flagged during layout review."
+      },
+      {
+        "date": "2026-05-28",
+        "state": "escalated",
+        "note": "Overlay monitors correlated to capacitor edge mismatch."
+      },
+      {
+        "date": "2026-07-03",
+        "state": "mitigated",
+        "note": "D-009 added stricter fill and alignment rules."
+      }
+    ],
+    "references": [
+      "D-005",
+      "D-009",
+      "RPT-005",
+      "RPT-008"
+    ]
+  },
+  {
+    "id": "R-003",
+    "title": "Yield Loss from via chain opens at SAR logic boundary",
+    "owner": "Sara McConnell",
+    "opened": "2026-04-30",
+    "status": "monitoring",
+    "severity": "medium",
+    "history": [
+      {
+        "date": "2026-04-30",
+        "state": "open",
+        "note": "Potential weakness identified before tapeout signoff."
+      },
+      {
+        "date": "2026-06-25",
+        "state": "escalated",
+        "note": "Wafer sort maps confirmed Yield Loss in one corner cluster."
+      },
+      {
+        "date": "2026-07-24",
+        "state": "monitoring",
+        "note": "Screening and physical review contained customer exposure."
+      }
+    ],
+    "references": [
+      "RPT-007",
+      "RPT-008",
+      "M-020"
+    ]
+  },
+  {
+    "id": "R-004",
+    "title": "Packaging Revision B delamination after Burn-In Testing",
+    "owner": "Omar Haddad",
+    "opened": "2026-05-21",
+    "status": "mitigated",
+    "severity": "high",
+    "history": [
+      {
+        "date": "2026-05-21",
+        "state": "open",
+        "note": "Acoustic microscopy flagged lid attach anomalies."
+      },
+      {
+        "date": "2026-06-04",
+        "state": "escalated",
+        "note": "D-007 cancelled Packaging Revision B."
+      },
+      {
+        "date": "2026-07-17",
+        "state": "mitigated",
+        "note": "Packaging Revision C passed repeat stress screen."
+      }
+    ],
+    "references": [
+      "D-004",
+      "D-007",
+      "RPT-009"
+    ]
+  },
+  {
+    "id": "R-005",
+    "title": "Reliability Qualification schedule slip due to extended stress screening",
+    "owner": "Grace Lin",
+    "opened": "2026-06-12",
+    "status": "mitigated",
+    "severity": "medium",
+    "history": [
+      {
+        "date": "2026-06-12",
+        "state": "open",
+        "note": "Longer Burn-In Testing threatened production readiness date."
+      },
+      {
+        "date": "2026-06-19",
+        "state": "escalated",
+        "note": "D-008 formally increased screen duration."
+      },
+      {
+        "date": "2026-08-14",
+        "state": "mitigated",
+        "note": "Parallel lot handling recovered the readiness milestone."
+      }
+    ],
+    "references": [
+      "D-008",
+      "RPT-009",
+      "RPT-010"
+    ]
+  }
+]

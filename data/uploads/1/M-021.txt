@@ -1,0 +1,52 @@
+Meeting ID: M-021
+
+Date: 2026-05-28
+
+Meeting Title: Lithography Alignment Corrective Action Review
+
+Participants:
+- Elena Park
+- Luis Ortega
+- Nina Volkov
+- Sara McConnell
+
+Agenda:
+- Review overlay correlation and matching fallout.
+- Decide whether layout concessions remain acceptable.
+- Approve corrective action if needed.
+
+Detailed Discussion:
+Data from AI-016 and RPT-008 showed a measurable relation between edge-array DNL spread and
+Lithography Alignment behavior. The conditional assumptions of D-005 were therefore no longer
+adequate.
+
+The board approved D-009 to restore additional dummy fill and tighten the lithography-aware
+matching rule deck. Ravi emphasized that this was a design-choice replacement, not just a
+process tweak, and should be treated as a formal decision reversal.
+
+AI-018 was opened so future derivatives would inherit the corrected physical design rules.
+
+Decisions Made:
+- D-009: Tighten lithography-aware capacitor matching rules and restore density fill (active). Revised D-005 after first silicon Yield Loss analysis linked DNL excursions to overlay drift near the array edge. Additional dummy fill and stricter Lithography Alignment checks were mandated. Supersedes D-005. Logged in decision log D-009 and referenced by RPT-007.
+
+Risks Identified:
+- R-002: Lithography Alignment sensitivity near capacitor array edge owned by Luis Ortega with current status mitigated and severity high.
+- R-003: Yield Loss from via chain opens at SAR logic boundary owned by Sara McConnell with current status monitoring and severity medium.
+
+Action Items:
+- AI-018: Document revised fill rules introduced by D-009. Originated in M-021.
+
+Owners:
+- AI-018: Luis Ortega
+
+Deadlines:
+- AI-018: 2026-07-15
+
+References to Previous Meetings:
+- M-020
+- M-019
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

@@ -1,0 +1,53 @@
+Meeting ID: M-016
+
+Date: 2026-04-23
+
+Meeting Title: Early Reliability and Package Screen Review
+
+Participants:
+- Elena Park
+- Omar Haddad
+- Grace Lin
+- Victor Alvarez
+- Kenji Watanabe
+
+Agenda:
+- Review pilot package and burn-in screen results.
+- Examine package anomalies and fallout signatures.
+- Determine whether Packaging Revision B remains viable.
+
+Detailed Discussion:
+Grace presented early Burn-In Testing fallout showing intermittent parametric drift and package
+acoustic anomalies. Victor observed features consistent with lid attach delamination but needed
+destructive analysis to confirm the mechanism.
+
+Omar defended Packaging Revision B as still recoverable, but the data no longer supported blind
+confidence. The issue was registered as R-004 and explicitly tied to future Packaging Revision
+decisions.
+
+AI-012 was opened to complete cross-sections before the escalation board.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-004: Packaging Revision B delamination after Burn-In Testing owned by Omar Haddad with current status mitigated and severity high.
+- R-005: Reliability Qualification schedule slip due to extended stress screening owned by Grace Lin with current status mitigated and severity medium.
+
+Action Items:
+- AI-012: Cross-section package samples showing delamination signatures. Originated in M-016.
+
+Owners:
+- AI-012: Victor Alvarez
+
+Deadlines:
+- AI-012: 2026-05-27
+
+References to Previous Meetings:
+- M-015
+- M-014
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

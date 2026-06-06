@@ -1,0 +1,4 @@
+HN-001 package stress concern
+Date trace kept. Review of M-012, RPT-003.
+Main point: ADC Reference Voltage drift is lower after D-006. Radiation Hardening margin improved, but Burn-In Testing data still needed before Reliability Qualification closure.
+Follow-up: check Yield Loss dashboard and Packaging Revision notes.

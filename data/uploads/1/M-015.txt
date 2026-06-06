@@ -1,0 +1,51 @@
+Meeting ID: M-015
+
+Date: 2026-04-16
+
+Meeting Title: Fabrication Status Review
+
+Participants:
+- Elena Park
+- Nina Volkov
+- Sara McConnell
+- Kenji Watanabe
+
+Agenda:
+- Review foundry lot movement.
+- Confirm wafer sort readiness.
+- Track early process indicators related to Yield Loss.
+
+Detailed Discussion:
+Nina reported normal fab progress with one notable concern: overlay data showed a mild edge
+trend that might later connect to Lithography Alignment and capacitor matching.
+
+Kenji confirmed production test vectors were ready for first silicon. Sara requested that wafer
+sort dashboards call out Yield Loss bins associated with reference settling and SAR timing
+separately.
+
+The board kept R-003 in a watch state pending real silicon data.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-002: Lithography Alignment sensitivity near capacitor array edge owned by Luis Ortega with current status mitigated and severity high.
+- R-003: Yield Loss from via chain opens at SAR logic boundary owned by Sara McConnell with current status monitoring and severity medium.
+
+Action Items:
+- No new action items were opened in this meeting.
+
+Owners:
+- None
+
+Deadlines:
+- None
+
+References to Previous Meetings:
+- M-014
+- M-013
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

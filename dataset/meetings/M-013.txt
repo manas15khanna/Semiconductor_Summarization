@@ -1,0 +1,51 @@
+Meeting ID: M-013
+
+Date: 2026-04-02
+
+Meeting Title: Tapeout Readiness Review
+
+Participants:
+- Elena Park
+- Maya Chen
+- Jonas Richter
+- Luis Ortega
+- Nina Volkov
+
+Agenda:
+- Review final netlist and physical signoff.
+- Confirm foundry handoff package.
+- Check outstanding documentation dependencies.
+
+Detailed Discussion:
+Luis walked through the last tapeout checklist captured in RPT-006. The revised ADC Reference
+Voltage routing, EM checks, and noise simulations cleared with acceptable margin.
+
+Elena confirmed that the knowledge graph remained connected: D-006 referenced M-011 and M-012,
+and the final signoff report linked back to RPT-003 and R-001.
+
+The board approved mask release readiness subject to closure of AI-010 and AI-011.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift under radiation and hot corner owned by Maya Chen with current status mitigated and severity high.
+- R-002: Lithography Alignment sensitivity near capacitor array edge owned by Luis Ortega with current status mitigated and severity high.
+
+Action Items:
+- AI-010: Re-run signoff with updated reference routing and EM constraints. Originated in M-013.
+
+Owners:
+- AI-010: Luis Ortega
+
+Deadlines:
+- AI-010: 2026-04-30
+
+References to Previous Meetings:
+- M-012
+- M-011
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

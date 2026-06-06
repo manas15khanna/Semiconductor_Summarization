@@ -1,0 +1,56 @@
+Meeting ID: M-025
+
+Date: 2026-06-25
+
+Meeting Title: Final Production Readiness Board
+
+Participants:
+- Elena Park
+- Ravi Narayanan
+- Omar Haddad
+- Grace Lin
+- Sara McConnell
+- Kenji Watanabe
+
+Agenda:
+- Conduct final production readiness board.
+- Review remaining risks and action closures.
+- Authorize pilot production release conditions.
+
+Detailed Discussion:
+The board reviewed RPT-010, the latest action tracker, and final Reliability Qualification
+evidence. Packaging Revision C, extended Burn-In Testing, and the revised production test
+strategy were all reflected in the release conditions.
+
+Residual Yield Loss from via chain opens remained under monitoring, but Sara showed that
+screening and lot disposition rules contained customer exposure. Elena concluded that the
+repository now preserved a complete decision trace from requirements through production
+readiness.
+
+AI-022 was issued as a final documentation closure item, and the pilot production release was
+approved with ongoing monitoring of R-003.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-003: Yield Loss from via chain opens at SAR logic boundary owned by Sara McConnell with current status monitoring and severity medium.
+- R-005: Reliability Qualification schedule slip due to extended stress screening owned by Grace Lin with current status mitigated and severity medium.
+
+Action Items:
+- AI-022: Issue final Reliability Qualification signoff package. Originated in M-025.
+
+Owners:
+- AI-022: Grace Lin
+
+Deadlines:
+- AI-022: 2026-08-21
+
+References to Previous Meetings:
+- M-024
+- M-023
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

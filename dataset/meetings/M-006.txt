@@ -1,0 +1,51 @@
+Meeting ID: M-006
+
+Date: 2026-02-12
+
+Meeting Title: Analog Design Deep Dive
+
+Participants:
+- Ravi Narayanan
+- Maya Chen
+- Luis Ortega
+- Grace Lin
+
+Agenda:
+- Review analog front-end simulations.
+- Assess comparator, reference, and sampler margins.
+- Open risk items requiring verification or reliability support.
+
+Detailed Discussion:
+Results from RPT-003 showed nominal linearity margin, but the reference buffer settling spread
+widened after total-dose corners were applied. Grace noted that the behavior increased the
+chance that Reliability Qualification would expose drift not visible at room temperature.
+
+Luis requested that any future reference change be locked before route finalization to avoid
+late EM and noise surprises.
+
+The team kept R-001 open and agreed that RPT-003 should be treated as a watchpoint for later
+D-006 discussions.
+
+Decisions Made:
+- No new formal decisions were approved; prior decisions remained under review.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift under radiation and hot corner owned by Maya Chen with current status mitigated and severity high.
+
+Action Items:
+- AI-005: Review capacitor array floorplan for Lithography Alignment sensitivity. Originated in M-006.
+
+Owners:
+- AI-005: Luis Ortega
+
+Deadlines:
+- AI-005: 2026-03-04
+
+References to Previous Meetings:
+- M-005
+- M-004
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

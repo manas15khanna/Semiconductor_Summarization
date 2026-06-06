@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-block">
+    <div>
+        <div class="eyebrow">Document Viewer</div>
+        <h2>{{ document.filename }}</h2>
+        <p>Project: <a href="/projects/{{ document.project.id }}">{{ document.project.name }}</a></p>
+        <p class="subtle">Type: {{ document.file_type|upper }} | Uploaded: {{ document.upload_date }} | Status: {{ document.processing_status }}</p>
+    </div>
+    <div class="hero-actions">
+        <button type="button" class="button-link" data-resummarize-id="{{ document.id }}">Regenerate analysis</button>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="tab-row" data-tab-group="document-tabs">
+        <button type="button" class="tab-button active" data-tab-target="raw">Raw Document</button>
+        <button type="button" class="tab-button" data-tab-target="summary">Summary</button>
+        <button type="button" class="tab-button" data-tab-target="decisions">Decisions</button>
+        <button type="button" class="tab-button" data-tab-target="actions">Actions</button>
+        <button type="button" class="tab-button" data-tab-target="risks">Risks</button>
+        <button type="button" class="tab-button" data-tab-target="timeline">Timeline</button>
+    </div>
+
+    <div class="tab-panel active" data-tab-panel="raw">
+        <pre>{{ document.raw_text or "Raw text is not available yet." }}</pre>
+    </div>
+
+    <div class="tab-panel" data-tab-panel="summary">
+        <pre>{% if latest_summary %}{{ latest_summary.summary_text }}{% else %}No summary available yet.{% endif %}</pre>
+    </div>
+
+    <div class="tab-panel" data-tab-panel="decisions">
+        {% if document.decisions %}
+            <ul class="data-list">
+                {% for item in document.decisions %}
+                    <li>
+                        <span>{{ item.title or "Untitled decision" }}</span>
+                        <span>{{ item.status }} | {{ item.owner }} | {{ item.decision_date }}</span>
+                        <p>{{ item.description }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No decisions extracted.</p>
+        {% endif %}
+    </div>
+
+    <div class="tab-panel" data-tab-panel="actions">
+        {% if document.action_items %}
+            <ul class="data-list">
+                {% for item in document.action_items %}
+                    <li>
+                        <span>{{ item.description }}</span>
+                        <span>{{ item.owner }} | {{ item.due_date }} | {{ item.status }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No action items extracted.</p>
+        {% endif %}
+    </div>
+
+    <div class="tab-panel" data-tab-panel="risks">
+        {% if document.risks %}
+            <ul class="data-list">
+                {% for item in document.risks %}
+                    <li>
+                        <span>{{ item.severity_emoji }} {{ item.description }}</span>
+                        <span>{{ item.severity|title }} | {{ item.owner }}</span>
+                        <p>Impact: {{ item.impact }}</p>
+                        <p>Mitigation: {{ item.mitigation }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No risks extracted.</p>
+        {% endif %}
+    </div>
+
+    <div class="tab-panel" data-tab-panel="timeline">
+        {% if timeline %}
+            <ul class="timeline-list">
+                {% for item in timeline %}
+                    <li>
+                        <strong>{{ item.event_date or "Unknown date" }}</strong>
+                        <span>{{ item.title }}</span>
+                        <p>{{ item.description }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state">No timeline events extracted.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

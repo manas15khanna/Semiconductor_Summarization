@@ -1,0 +1,27 @@
+Decision ID: D-005
+
+Date: 2026-03-26
+
+Decision Title: Accept reduced metal density fill near capacitor array
+
+Status: revised
+
+Approved In Meeting: M-009
+
+Decision Summary:
+Accepted a reduced local density fill strategy around the capacitor array to preserve matching,
+with explicit monitoring of Lithography Alignment sensitivity during signoff.
+
+Decision Impact:
+- Tapeout checklist gained an added lithography hotspot review.
+- Yield team prepared a dedicated split for overlay monitor correlation.
+
+Supersedes:
+- None
+
+References:
+- RPT-005
+- M-008
+
+Traceability Note: This log is part of the connected knowledge graph for the program and should
+be read together with meeting minutes, action trackers, risk registers, and reports.

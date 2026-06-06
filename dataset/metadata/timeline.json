@@ -1,0 +1,554 @@
+[
+  {
+    "date": "2026-01-08",
+    "type": "meeting",
+    "id": "M-001",
+    "title": "Program Kickoff and Requirement Intake",
+    "references": [
+      "R-001"
+    ]
+  },
+  {
+    "date": "2026-01-15",
+    "type": "meeting",
+    "id": "M-002",
+    "title": "Requirements Baseline Review",
+    "references": [
+      "D-001",
+      "AI-001",
+      "AI-002",
+      "R-001",
+      "M-001"
+    ]
+  },
+  {
+    "date": "2026-01-22",
+    "type": "decision",
+    "id": "D-001",
+    "title": "Freeze mission-level ADC requirements",
+    "references": [
+      "M-002",
+      "RPT-001",
+      "M-001"
+    ]
+  },
+  {
+    "date": "2026-01-22",
+    "type": "meeting",
+    "id": "M-003",
+    "title": "Architecture Option Screening",
+    "references": [
+      "R-001",
+      "R-002",
+      "M-002",
+      "M-001"
+    ]
+  },
+  {
+    "date": "2026-01-29",
+    "type": "meeting",
+    "id": "M-004",
+    "title": "Architecture Selection Board",
+    "references": [
+      "D-002",
+      "AI-003",
+      "R-001",
+      "R-002",
+      "M-003",
+      "M-002"
+    ]
+  },
+  {
+    "date": "2026-01-29",
+    "type": "report",
+    "id": "RPT-001",
+    "title": "System Requirements Baseline Report",
+    "references": [
+      "D-001",
+      "M-002",
+      "M-003"
+    ]
+  },
+  {
+    "date": "2026-02-05",
+    "type": "decision",
+    "id": "D-002",
+    "title": "Adopt segmented capacitor DAC with bootstrapped sampling switch",
+    "references": [
+      "M-004",
+      "RPT-002",
+      "M-003"
+    ]
+  },
+  {
+    "date": "2026-02-05",
+    "type": "meeting",
+    "id": "M-005",
+    "title": "ADC Reference Voltage Strategy Review",
+    "references": [
+      "D-003",
+      "AI-004",
+      "R-001",
+      "M-004",
+      "M-003"
+    ]
+  },
+  {
+    "date": "2026-02-10",
+    "type": "report",
+    "id": "RPT-002",
+    "title": "Architecture Trade Study and Selection Memo",
+    "references": [
+      "D-002",
+      "M-004",
+      "RPT-001"
+    ]
+  },
+  {
+    "date": "2026-02-12",
+    "type": "decision",
+    "id": "D-003",
+    "title": "Use buffered 1.0 V ADC Reference Voltage architecture",
+    "references": [
+      "M-005",
+      "RPT-003",
+      "M-004"
+    ]
+  },
+  {
+    "date": "2026-02-12",
+    "type": "meeting",
+    "id": "M-006",
+    "title": "Analog Design Deep Dive",
+    "references": [
+      "AI-005",
+      "R-001",
+      "M-005",
+      "M-004"
+    ]
+  },
+  {
+    "date": "2026-02-19",
+    "type": "meeting",
+    "id": "M-007",
+    "title": "Packaging and DFT Coordination Review",
+    "references": [
+      "D-004",
+      "AI-006",
+      "R-004",
+      "M-006",
+      "M-005"
+    ]
+  },
+  {
+    "date": "2026-02-26",
+    "type": "meeting",
+    "id": "M-008",
+    "title": "Layout and Lithography Alignment Review",
+    "references": [
+      "R-002",
+      "M-007",
+      "M-006"
+    ]
+  },
+  {
+    "date": "2026-03-03",
+    "type": "report",
+    "id": "RPT-003",
+    "title": "Analog Front-End Design Review",
+    "references": [
+      "D-003",
+      "R-001",
+      "M-006"
+    ]
+  },
+  {
+    "date": "2026-03-05",
+    "type": "meeting",
+    "id": "M-009",
+    "title": "Pre-Verification Closure Review",
+    "references": [
+      "D-005",
+      "AI-007",
+      "R-002",
+      "M-008",
+      "M-007"
+    ]
+  },
+  {
+    "date": "2026-03-11",
+    "type": "decision",
+    "id": "D-004",
+    "title": "Proceed with Packaging Revision B using ceramic CQFP assembly",
+    "references": [
+      "M-007",
+      "RPT-004",
+      "M-006"
+    ]
+  },
+  {
+    "date": "2026-03-12",
+    "type": "meeting",
+    "id": "M-010",
+    "title": "Verification Readiness Meeting",
+    "references": [
+      "AI-008",
+      "R-001",
+      "M-009",
+      "M-008"
+    ]
+  },
+  {
+    "date": "2026-03-18",
+    "type": "report",
+    "id": "RPT-004",
+    "title": "Digital Integration and DFT Review",
+    "references": [
+      "M-007",
+      "M-008",
+      "AI-006"
+    ]
+  },
+  {
+    "date": "2026-03-19",
+    "type": "meeting",
+    "id": "M-011",
+    "title": "Radiation Hardening Tradeoff Review",
+    "references": [
+      "R-001",
+      "R-005",
+      "M-010",
+      "M-009"
+    ]
+  },
+  {
+    "date": "2026-03-26",
+    "type": "decision",
+    "id": "D-005",
+    "title": "Accept reduced metal density fill near capacitor array",
+    "references": [
+      "M-009",
+      "RPT-005",
+      "M-008"
+    ]
+  },
+  {
+    "date": "2026-03-26",
+    "type": "meeting",
+    "id": "M-012",
+    "title": "Reference Architecture Revision Board",
+    "references": [
+      "D-006",
+      "AI-009",
+      "R-001",
+      "M-011",
+      "M-010"
+    ]
+  },
+  {
+    "date": "2026-04-02",
+    "type": "meeting",
+    "id": "M-013",
+    "title": "Tapeout Readiness Review",
+    "references": [
+      "AI-010",
+      "R-001",
+      "R-002",
+      "M-012",
+      "M-011"
+    ]
+  },
+  {
+    "date": "2026-04-08",
+    "type": "report",
+    "id": "RPT-005",
+    "title": "Verification and Layout Signoff Report",
+    "references": [
+      "D-005",
+      "R-002",
+      "M-010"
+    ]
+  },
+  {
+    "date": "2026-04-09",
+    "type": "meeting",
+    "id": "M-014",
+    "title": "Mask Release and Foundry Handoff",
+    "references": [
+      "AI-011",
+      "R-002",
+      "R-003",
+      "M-013",
+      "M-012"
+    ]
+  },
+  {
+    "date": "2026-04-16",
+    "type": "decision",
+    "id": "D-006",
+    "title": "Replace buffered 1.0 V reference with trimmed 0.9 V reference path",
+    "references": [
+      "M-012",
+      "RPT-003",
+      "RPT-006",
+      "M-011",
+      "D-003"
+    ]
+  },
+  {
+    "date": "2026-04-16",
+    "type": "meeting",
+    "id": "M-015",
+    "title": "Fabrication Status Review",
+    "references": [
+      "R-002",
+      "R-003",
+      "M-014",
+      "M-013"
+    ]
+  },
+  {
+    "date": "2026-04-23",
+    "type": "meeting",
+    "id": "M-016",
+    "title": "Early Reliability and Package Screen Review",
+    "references": [
+      "AI-012",
+      "R-004",
+      "R-005",
+      "M-015",
+      "M-014"
+    ]
+  },
+  {
+    "date": "2026-04-24",
+    "type": "report",
+    "id": "RPT-006",
+    "title": "Tapeout Readiness and Final Design Update",
+    "references": [
+      "D-006",
+      "M-012",
+      "M-013"
+    ]
+  },
+  {
+    "date": "2026-04-30",
+    "type": "meeting",
+    "id": "M-017",
+    "title": "Packaging Revision Escalation Board",
+    "references": [
+      "D-007",
+      "AI-013",
+      "AI-014",
+      "AI-023",
+      "R-004",
+      "R-005",
+      "M-016",
+      "M-015"
+    ]
+  },
+  {
+    "date": "2026-05-07",
+    "type": "meeting",
+    "id": "M-018",
+    "title": "Wafer Sort and Reliability Qualification Review",
+    "references": [
+      "AI-015",
+      "R-003",
+      "R-005",
+      "M-017",
+      "M-016"
+    ]
+  },
+  {
+    "date": "2026-05-14",
+    "type": "meeting",
+    "id": "M-019",
+    "title": "Burn-In Testing Strategy Update",
+    "references": [
+      "D-008",
+      "AI-016",
+      "R-005",
+      "M-018",
+      "M-017"
+    ]
+  },
+  {
+    "date": "2026-05-21",
+    "type": "meeting",
+    "id": "M-020",
+    "title": "Yield Review and Failure Analysis Triage",
+    "references": [
+      "AI-017",
+      "R-002",
+      "R-003",
+      "M-019",
+      "M-018"
+    ]
+  },
+  {
+    "date": "2026-05-28",
+    "type": "meeting",
+    "id": "M-021",
+    "title": "Lithography Alignment Corrective Action Review",
+    "references": [
+      "D-009",
+      "AI-018",
+      "R-002",
+      "R-003",
+      "M-020",
+      "M-019"
+    ]
+  },
+  {
+    "date": "2026-06-04",
+    "type": "decision",
+    "id": "D-007",
+    "title": "Cancel Packaging Revision B and move to Packaging Revision C",
+    "references": [
+      "M-017",
+      "RPT-009",
+      "M-016",
+      "R-004",
+      "D-004"
+    ]
+  },
+  {
+    "date": "2026-06-04",
+    "type": "meeting",
+    "id": "M-022",
+    "title": "Failure Analysis Findings Review",
+    "references": [
+      "AI-019",
+      "R-003",
+      "M-021",
+      "M-020"
+    ]
+  },
+  {
+    "date": "2026-06-11",
+    "type": "meeting",
+    "id": "M-023",
+    "title": "Packaging Revision C Qualification Review",
+    "references": [
+      "AI-024",
+      "R-004",
+      "R-005",
+      "M-022",
+      "M-021"
+    ]
+  },
+  {
+    "date": "2026-06-11",
+    "type": "report",
+    "id": "RPT-007",
+    "title": "Fabrication Progress and Wafer Sort Summary",
+    "references": [
+      "M-018",
+      "AI-016",
+      "R-003"
+    ]
+  },
+  {
+    "date": "2026-06-18",
+    "type": "meeting",
+    "id": "M-024",
+    "title": "Production Test and Readiness Gate Review",
+    "references": [
+      "D-010",
+      "AI-020",
+      "AI-021",
+      "R-005",
+      "M-023",
+      "M-022"
+    ]
+  },
+  {
+    "date": "2026-06-19",
+    "type": "decision",
+    "id": "D-008",
+    "title": "Extend Burn-In Testing from 48 hours to 96 hours at 135C",
+    "references": [
+      "M-019",
+      "RPT-009",
+      "M-018",
+      "R-005",
+      "D-004"
+    ]
+  },
+  {
+    "date": "2026-06-25",
+    "type": "meeting",
+    "id": "M-025",
+    "title": "Final Production Readiness Board",
+    "references": [
+      "AI-022",
+      "R-003",
+      "R-005",
+      "M-024",
+      "M-023"
+    ]
+  },
+  {
+    "date": "2026-07-02",
+    "type": "report",
+    "id": "RPT-008",
+    "title": "Yield Analysis and Failure Correlation Report",
+    "references": [
+      "D-009",
+      "M-020",
+      "AI-017",
+      "R-002",
+      "R-003"
+    ]
+  },
+  {
+    "date": "2026-07-03",
+    "type": "decision",
+    "id": "D-009",
+    "title": "Tighten lithography-aware capacitor matching rules and restore density fill",
+    "references": [
+      "M-021",
+      "RPT-007",
+      "RPT-008",
+      "M-020",
+      "D-005"
+    ]
+  },
+  {
+    "date": "2026-07-16",
+    "type": "report",
+    "id": "RPT-009",
+    "title": "Packaging and Reliability Corrective Action Report",
+    "references": [
+      "D-007",
+      "D-008",
+      "R-004",
+      "R-005",
+      "M-023"
+    ]
+  },
+  {
+    "date": "2026-08-07",
+    "type": "decision",
+    "id": "D-010",
+    "title": "Reduce scan compression ratio to improve at-speed diagnostic visibility",
+    "references": [
+      "M-024",
+      "RPT-010",
+      "M-023"
+    ]
+  },
+  {
+    "date": "2026-08-13",
+    "type": "report",
+    "id": "RPT-010",
+    "title": "Production Readiness Review Report",
+    "references": [
+      "D-010",
+      "M-024",
+      "M-025",
+      "RPT-009"
+    ]
+  }
+]

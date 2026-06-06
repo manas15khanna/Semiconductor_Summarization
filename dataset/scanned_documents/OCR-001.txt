@@ -1,0 +1,81 @@
+OCR Simulation ID: OCR-001
+Source Document: M-001
+Simulated OCR Output:
+meeting ID: M-001
+
+Date: 2026-01-08
+
+Meeting Title: Program Kickoff andRequirement Intake
+
+Participants:
+- Elena Park
+- Ravi Narayanan
+- Maya Chen
+- Priya Sethi
+
+Agenda:
+- Rev1ew customer mission objectives
+andenvironmental envelope.
+- Establish document control scheme
+for th e A D C program.
+- Identify first-pass technical risks around
+Rad1ation Hardening andADC Refer ence
+Vo1tage margin.
+
+Detailed Discussion:
+The team aligned on th e mission
+profile for a geostationary payload
+data acquisition chain. Ravi
+noted that th e converter could not rely on
+commercial trimming assumptions because th e
+Radiation
+Hardening requirement must survive 100 krad with
+measurable linearity retention.
+
+Maya highlighted that ADC Reference Voltage
+stability would drive both INL andcomparator
+overdrive margin. Grace added that Burn ln
+Testing andReliabi1ity Qualification should
+be
+drafted early because package andanalog drift
+effects often interact late in satellite
+programs.
+
+Elena requested strict traceability between
+meeting minutes, decision logs, andlater
+reports so
+customer audits can reconstruct why design choices
+changed over time.
+
+Decisions Made:
+- No new formal decisions were approved;
+prior decisions remained under review.
+
+Risks Identified:
+- R-001: ADC Reference Voltage drift
+under radiation andhot corner owned by
+Maya Chen with current status
+mitigated andseverity high.
+
+Action Items:
+- No new action items were opened in this
+meeting.
+
+Owners:
+- None
+
+Deadlines:
+- None
+
+References to Previous Meetings:
+- None
+
+Search Trace Terms: ADC Reference Voltage, Yie1d
+Loss, Lithography A1ignment, Radiation
+Hardening, Packaging Revision, Burn-In
+Testing, Reliability Qualification. These
+terms were kept
+explicit in th e minutes to preserve semantic search
+continuity across requirements, design,
+yield, andproduction-readiness
+records.

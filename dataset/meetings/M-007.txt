@@ -1,0 +1,52 @@
+Meeting ID: M-007
+
+Date: 2026-02-19
+
+Meeting Title: Packaging and DFT Coordination Review
+
+Participants:
+- Maya Chen
+- Jonas Richter
+- Omar Haddad
+- Grace Lin
+- Kenji Watanabe
+
+Agenda:
+- Coordinate package assumptions with digital test planning.
+- Review package mechanical stack-up.
+- Align DFT hooks to pilot assembly needs.
+
+Detailed Discussion:
+Omar presented Packaging Revision B as the fastest path to pilot hardware. The assembly vendor
+had historical success with a similar ceramic CQFP flow, and schedule pressure favored reuse.
+
+Jonas connected scan chain access and telemetry pins to the packaging plan summarized later in
+RPT-004. Grace cautioned that Burn-In Testing duration might need to grow if package stress
+coupled into the ADC Reference Voltage network.
+
+The board approved D-004 but logged that the decision would be revisited after early reliability
+screens.
+
+Decisions Made:
+- D-004: Proceed with Packaging Revision B using ceramic CQFP assembly (cancelled). Approved Packaging Revision B with the existing ceramic CQFP stack-up to preserve the pilot schedule while prototype assembly data remained nominal. Logged in decision log D-004 and referenced by RPT-004.
+
+Risks Identified:
+- R-004: Packaging Revision B delamination after Burn-In Testing owned by Omar Haddad with current status mitigated and severity high.
+
+Action Items:
+- AI-006: Release Packaging Revision B mechanical stack-up to assembly vendor. Originated in M-007.
+
+Owners:
+- AI-006: Omar Haddad
+
+Deadlines:
+- AI-006: 2026-03-18
+
+References to Previous Meetings:
+- M-006
+- M-005
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

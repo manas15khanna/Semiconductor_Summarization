@@ -1,0 +1,61 @@
+Meeting ID: M-017
+
+Date: 2026-04-30
+
+Meeting Title: Packaging Revision Escalation Board
+
+Participants:
+- Elena Park
+- Omar Haddad
+- Grace Lin
+- Victor Alvarez
+- Sara McConnell
+
+Agenda:
+- Decide package corrective action.
+- Review failure analysis evidence from package samples.
+- Assess program impact and customer messaging.
+
+Detailed Discussion:
+Victor's cross-sections confirmed delamination signatures after Burn-In Testing, invalidating
+the assumptions behind D-004. The escalation board therefore approved D-007 and cancelled
+Packaging Revision B in favor of Packaging Revision C.
+
+Grace explained that Reliability Qualification could still hold if the revised package entered
+screening immediately and the stress matrix was refreshed. Elena requested explicit traceability
+in every future report using the phrase Packaging Revision so search tools could follow the
+reversal cleanly.
+
+AI-013 and AI-014 were opened, and AI-023 was logged to keep Yield Loss exposure visible during
+the package transition.
+
+Decisions Made:
+- D-007: Cancel Packaging Revision B and move to Packaging Revision C (active). Cancelled D-004 after reliability failures showed lid attach delamination and bond sweep during Burn-In Testing. Packaging Revision C adds an alternate attach compound and tighter wire loop rule. Supersedes D-004. Logged in decision log D-007 and referenced by RPT-009.
+
+Risks Identified:
+- R-004: Packaging Revision B delamination after Burn-In Testing owned by Omar Haddad with current status mitigated and severity high.
+- R-005: Reliability Qualification schedule slip due to extended stress screening owned by Grace Lin with current status mitigated and severity medium.
+
+Action Items:
+- AI-013: Spin Packaging Revision C with alternate lid attach compound. Originated in M-017.
+- AI-014: Update Reliability Qualification matrix for revised package plan. Originated in M-017.
+- AI-023: Track Yield Loss exposure for customer lot disposition planning. Originated in M-017.
+
+Owners:
+- AI-013: Omar Haddad
+- AI-014: Grace Lin
+- AI-023: Sara McConnell
+
+Deadlines:
+- AI-013: 2026-06-18
+- AI-014: 2026-06-16
+- AI-023: 2026-06-20
+
+References to Previous Meetings:
+- M-016
+- M-015
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.

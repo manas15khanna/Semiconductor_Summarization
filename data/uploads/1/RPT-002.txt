@@ -1,0 +1,30 @@
+Report ID: RPT-002
+
+Date: 2026-02-10
+
+Title: Architecture Trade Study and Selection Memo
+
+Type: Architecture
+
+Owner: Ravi Narayanan
+
+Executive Summary:
+Compared pipeline, cyclic, and SAR approaches. The selected SAR path provided the best radiation
+resilience and test observability. ADC Reference Voltage stability, capacitor matching, and
+Lithography Alignment risk were identified as first-order follow-up items.
+The report preserves traceability to meetings, decisions, and risk items so the repository can
+be used to test summarization and decision-traceability workflows across the semiconductor
+lifecycle.
+Key recurring themes include ADC Reference Voltage control, Yield Loss containment, Lithography
+Alignment sensitivity, Radiation Hardening margin, Packaging Revision transitions, Burn-In
+Testing, and Reliability Qualification closure.
+
+Key Findings:
+- RPT-002 was issued to support the Radiation-Hardened Satellite ADC Development Program.
+- Cross-references were intentionally maintained to keep the synthetic repository densely linked.
+- The technical narrative remains consistent with an eight-month development timeline.
+
+References:
+- D-002
+- M-004
+- RPT-001

@@ -1,0 +1,47 @@
+Risk Register ID: RR-001
+As Of Date: 2026-02-28
+Program: Radiation-Hardened Satellite ADC Development Program
+
+R-001 | ADC Reference Voltage drift under radiation and hot corner
+Owner: Maya Chen
+Severity: high
+Status: open
+Opened: 2026-01-15
+Latest Note: Initial concern from requirements decomposition.
+References: D-003, D-006, RPT-003, RPT-006
+
+R-002 | Lithography Alignment sensitivity near capacitor array edge
+Owner: Luis Ortega
+Severity: high
+Status: open
+Opened: 2026-02-26
+Latest Note: Density fill trade-off flagged during layout review.
+References: D-005, D-009, RPT-005, RPT-008
+
+R-003 | Yield Loss from via chain opens at SAR logic boundary
+Owner: Sara McConnell
+Severity: medium
+Status: not-yet-open
+Opened: 2026-04-30
+Latest Note: Risk not active in this reporting window.
+References: RPT-007, RPT-008, M-020
+
+R-004 | Packaging Revision B delamination after Burn-In Testing
+Owner: Omar Haddad
+Severity: high
+Status: not-yet-open
+Opened: 2026-05-21
+Latest Note: Risk not active in this reporting window.
+References: D-004, D-007, RPT-009
+
+R-005 | Reliability Qualification schedule slip due to extended stress screening
+Owner: Grace Lin
+Severity: medium
+Status: not-yet-open
+Opened: 2026-06-12
+Latest Note: Risk not active in this reporting window.
+References: D-008, RPT-009, RPT-010
+
+The register repeatedly uses ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, and Reliability Qualification to preserve search
+continuity.

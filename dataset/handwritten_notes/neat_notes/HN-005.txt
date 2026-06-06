@@ -1,0 +1,3 @@
+HN-005 ATE data notes
+Observed that semantic search should hit ADC Reference Voltage and Yield Loss together because engineers mention both when discussing trim fallout.
+Refs: R-003, M-012.

@@ -1,0 +1,55 @@
+Meeting ID: M-024
+
+Date: 2026-06-18
+
+Meeting Title: Production Test and Readiness Gate Review
+
+Participants:
+- Elena Park
+- Jonas Richter
+- Grace Lin
+- Sara McConnell
+- Kenji Watanabe
+
+Agenda:
+- Review production test escape diagnostics.
+- Decide whether ATPG strategy needs revision.
+- Update final readiness checklist.
+
+Detailed Discussion:
+Jonas showed that the original high scan compression strategy limited diagnosis of intermittent
+digital control faults seen during Reliability Qualification stress. The team agreed that faster
+diagnosis outweighed the extra pattern count.
+
+D-010 was approved to reduce scan compression and improve visibility. Although not a reversal of
+a named earlier decision log, it replaced the previous test strategy captured in RPT-004 and
+became the fifth major design-choice replacement in the repository narrative.
+
+AI-020 and AI-021 were opened to push the update into the final readiness package.
+
+Decisions Made:
+- D-010: Reduce scan compression ratio to improve at-speed diagnostic visibility (active). Replaced the earlier high-compression test plan after diagnosis data from the pilot lot proved insufficient to isolate intermittent digital control faults seen during Reliability Qualification. Logged in decision log D-010 and referenced by RPT-010.
+
+Risks Identified:
+- R-005: Reliability Qualification schedule slip due to extended stress screening owned by Grace Lin with current status mitigated and severity medium.
+
+Action Items:
+- AI-020: Reduce scan compression and regenerate diagnosis-friendly ATPG set. Originated in M-024.
+- AI-021: Update production readiness checklist with revised test escape criteria. Originated in M-024.
+
+Owners:
+- AI-020: Jonas Richter
+- AI-021: Elena Park
+
+Deadlines:
+- AI-020: 2026-08-05
+- AI-021: 2026-08-14
+
+References to Previous Meetings:
+- M-023
+- M-022
+
+Search Trace Terms: ADC Reference Voltage, Yield Loss, Lithography Alignment, Radiation
+Hardening, Packaging Revision, Burn-In Testing, Reliability Qualification. These terms were kept
+explicit in the minutes to preserve semantic search continuity across requirements, design,
+yield, and production-readiness records.
