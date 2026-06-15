@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5">
+  <!-- Header Card -->
+  <div class="bg-white border border-light rounded shadow-sm p-4 mb-4">
+    <span class="rounded-pill px-3 py-1 bg-warning text-dark text-uppercase fs-12 fw-bold">Execution</span>
+    <h2 class="text-dark font-weight-bold mt-2 mb-1">Action Items</h2>
+    <p class="text-muted mb-0">Track tasks, assignees, and deadlines generated from engineering meetings.</p>
+  </div>
+
+  <!-- Actions Table Card -->
+  <div class="card border-light shadow-sm">
+    <div class="card-body">
+      {% if actions %}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle border-light">
+            <thead>
+              <tr class="table-light">
+                <th scope="col" style="width: 45%;">Action Description</th>
+                <th scope="col" style="width: 15%;">Owner</th>
+                <th scope="col" style="width: 15%;">Due Date</th>
+                <th scope="col" style="width: 10%;">Status</th>
+                <th scope="col" style="width: 15%;">Project</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for action in actions %}
+                <tr>
+                  <td class="text-dark fw-semibold">
+                    <div class="d-flex align-items-center">
+                      <span class="material-symbols-outlined text-muted me-2">task</span>
+                      {{ action.description }}
+                    </div>
+                  </td>
+                  <td class="text-muted fs-14">{{ action.owner or "Unassigned" }}</td>
+                  <td class="text-muted fs-14">{{ action.due_date or "N/A" }}</td>
+                  <td>
+                    <span class="badge {% if action.status|lower == 'closed' or action.status|lower == 'done' or action.status|lower == 'completed' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                      {{ action.status|title or "Open" }}
+                    </span>
+                  </td>
+                  <td>
+                    {% if action.project %}
+                      <a href="/projects/{{ action.project_id }}" class="text-primary fw-semibold text-decoration-none">
+                        {{ action.project.name }}
+                      </a>
+                    {% else %}
+                      <span class="text-muted">N/A</span>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="text-center py-5">
+          <span class="material-symbols-outlined text-muted fs-48">folder_open</span>
+          <p class="text-muted mt-2 mb-0">No action items recorded yet.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

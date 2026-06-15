@@ -95,3 +95,29 @@ def timeline_page(project_id: int, request: Request, db: Session = Depends(get_d
         "timeline.html",
         {"request": request, "project": project, "timeline": timeline, "page_name": "Timeline"},
     )
+
+from app.models import Decision, Risk, ActionItem
+
+@router.get("/decisions", response_class=HTMLResponse)
+def decisions_page(request: Request, db: Session = Depends(get_db)):
+    decisions = db.query(Decision).order_by(Decision.id.desc()).all()
+    return templates.TemplateResponse(
+        "decisions.html",
+        {"request": request, "decisions": decisions, "page_name": "Decisions"},
+    )
+
+@router.get("/risks", response_class=HTMLResponse)
+def risks_page(request: Request, db: Session = Depends(get_db)):
+    risks = db.query(Risk).order_by(Risk.id.desc()).all()
+    return templates.TemplateResponse(
+        "risks.html",
+        {"request": request, "risks": risks, "page_name": "Risks"},
+    )
+
+@router.get("/actions", response_class=HTMLResponse)
+def actions_page(request: Request, db: Session = Depends(get_db)):
+    actions = db.query(ActionItem).order_by(ActionItem.id.desc()).all()
+    return templates.TemplateResponse(
+        "actions.html",
+        {"request": request, "actions": actions, "page_name": "Actions"},
+    )

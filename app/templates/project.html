@@ -1,119 +1,470 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero-block">
+<div class="container py-5">
+  <!-- Hero Section -->
+  <div class="bg-white border border-light rounded shadow-sm p-4 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
     <div>
-        <div class="eyebrow">Project Dashboard</div>
-        <h2>{{ dashboard.project.name }}</h2>
-        <p>{{ dashboard.project.description }}</p>
+      <span class="rounded-pill px-3 py-1 bg-primary text-white text-uppercase fs-12 fw-bold">Project Workspace</span>
+      <h2 class="text-dark font-weight-bold mt-2 mb-1">{{ dashboard.project.name }}</h2>
+      <p class="text-muted mb-0 fs-14">{{ dashboard.project.description or "No description provided." }}</p>
     </div>
-    <div class="hero-actions">
-        <a class="button-link" href="/projects/{{ dashboard.project.id }}/upload">Upload documents</a>
-        <a class="button-link secondary" href="/projects/{{ dashboard.project.id }}/timeline">View timeline</a>
+    <div class="d-flex gap-2">
+      <a class="btn btn-primary d-inline-flex align-items-center" href="/projects/{{ dashboard.project.id }}/upload">
+        <span class="material-symbols-outlined fs-18 me-1">upload_file</span> Upload Documents
+      </a>
+      <a class="btn btn-outline-secondary d-inline-flex align-items-center" href="/projects/{{ dashboard.project.id }}/timeline">
+        <span class="material-symbols-outlined fs-18 me-1">timeline</span> View Timeline
+      </a>
     </div>
-</section>
+  </div>
 
-<section class="card-grid five-up">
-    <article class="metric-card"><span>Projects</span><strong>1</strong></article>
-    <article class="metric-card"><span>Documents</span><strong>{{ dashboard.total_documents }}</strong></article>
-    <article class="metric-card"><span>Decisions</span><strong>{{ dashboard.total_decisions }}</strong></article>
-    <article class="metric-card"><span>Open Actions</span><strong>{{ dashboard.open_actions }}</strong></article>
-    <article class="metric-card"><span>Risks</span><strong>{{ dashboard.total_risks }}</strong></article>
-</section>
-
-<section class="panel upload-panel" data-project-id="{{ dashboard.project.id }}">
-    <div class="panel-header">
-        <h3>Upload Documents</h3>
+  <!-- Metric Overview Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-3 col-sm-6">
+      <div class="card border-light shadow-sm text-center py-3 bg-white">
+        <span class="text-muted fs-13 text-uppercase fw-bold">Documents</span>
+        <strong class="d-block text-dark fs-24 mt-1">{{ dashboard.total_documents }}</strong>
+      </div>
     </div>
-    <div class="dropzone" data-project-id="{{ dashboard.project.id }}">
-        <input type="file" class="file-input" multiple accept=".pdf,.docx,.txt,.md">
-        <div class="dropzone-copy">
-            <strong>Drag and drop files here</strong>
-            <span>or click to select PDF, DOCX, TXT, MD files</span>
+    <div class="col-md-3 col-sm-6">
+      <div class="card border-light shadow-sm text-center py-3 bg-white">
+        <span class="text-muted fs-13 text-uppercase fw-bold">Decisions</span>
+        <strong class="d-block text-dark fs-24 mt-1">{{ dashboard.total_decisions }}</strong>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="card border-light shadow-sm text-center py-3 bg-white">
+        <span class="text-muted fs-13 text-uppercase fw-bold">Open Actions</span>
+        <strong class="d-block text-dark fs-24 mt-1">{{ dashboard.open_actions }}</strong>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="card border-light shadow-sm text-center py-3 bg-white">
+        <span class="text-muted fs-13 text-uppercase fw-bold">Risks</span>
+        <strong class="d-block text-dark fs-24 mt-1">{{ dashboard.total_risks }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drag-and-drop Upload Zone -->
+  <div class="card border-light shadow-sm mb-4">
+    <div class="card-header bg-white border-bottom border-light py-3">
+      <h4 class="card-title mb-0 text-dark fw-bold">Quick Upload Documents</h4>
+    </div>
+    <div class="card-body">
+      <div class="dropzone p-5 text-center bg-light border border-2 border-dashed border-primary-subtle rounded" data-project-id="{{ dashboard.project.id }}" style="cursor: pointer;">
+        <input type="file" class="file-input d-none" multiple accept=".pdf,.docx,.txt,.md" id="quick-file-input">
+        <label for="quick-file-input" class="w-100 h-100 style-cursor" style="cursor: pointer;">
+          <span class="material-symbols-outlined fs-48 text-primary mb-2">cloud_upload</span>
+          <h5 class="text-dark fw-bold">Drag and drop files here</h5>
+          <span class="text-muted fs-14">or click to browse PDF, DOCX, TXT, or MD files</span>
+        </label>
+      </div>
+      <div class="selected-files mt-3"></div>
+      <div class="upload-actions mt-3 d-none">
+        <button type="button" class="btn btn-primary px-4 upload-trigger">Start Upload</button>
+        <span class="status ms-3 text-muted"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Documents Table -->
+  <div class="card border-light shadow-sm mb-4">
+    <div class="card-header bg-white border-bottom border-light py-3">
+      <h4 class="card-title mb-0 text-dark fw-bold">Documents in Project</h4>
+    </div>
+    <div class="card-body">
+      {% if documents %}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle border-light">
+            <thead>
+              <tr class="table-light">
+                <th scope="col">Filename</th>
+                <th scope="col" style="width: 15%;">Upload Date</th>
+                <th scope="col" style="width: 15%;">Type</th>
+                <th scope="col" style="width: 15%;">Status</th>
+                <th scope="col" style="width: 30%;" class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for document in documents %}
+                <tr>
+                  <td>
+                    <a href="/documents/{{ document.id }}" class="text-primary fw-bold text-decoration-none d-flex align-items-center">
+                      <span class="material-symbols-outlined text-muted me-2">description</span>
+                      {{ document.filename }}
+                    </a>
+                  </td>
+                  <td class="text-muted fs-14">{{ document.upload_date.strftime("%Y-%m-%d %H:%M") }}</td>
+                  <td class="text-muted fs-14"><span class="badge bg-secondary-subtle text-secondary">{{ document.file_type|upper }}</span></td>
+                  <td>
+                    <span class="badge {% if document.processing_status == 'processed' %}bg-success{% elif document.processing_status == 'failed' %}bg-danger{% else %}bg-warning text-dark{% endif %}">
+                      {{ document.processing_status }}
+                    </span>
+                  </td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm">
+                      <a href="/documents/{{ document.id }}" class="btn btn-outline-secondary d-inline-flex align-items-center" title="View details">
+                        <span class="material-symbols-outlined fs-16 me-1">visibility</span> View
+                      </a>
+                      {% if document.file_type in ["txt", "md"] %}
+                      <button onclick="openEditDocModal({{ document.id }})" class="btn btn-outline-primary d-inline-flex align-items-center" title="Edit content">
+                        <span class="material-symbols-outlined fs-16 me-1">edit</span> Edit
+                      </button>
+                      {% endif %}
+                      <button onclick="replaceDoc({{ document.id }})" class="btn btn-outline-warning d-inline-flex align-items-center" title="Replace file">
+                        <span class="material-symbols-outlined fs-16 me-1">autorenew</span> Replace
+                      </button>
+                      <button onclick="openMoveDocModal({{ document.id }})" class="btn btn-outline-secondary d-inline-flex align-items-center" title="Move to another project">
+                        <span class="material-symbols-outlined fs-16 me-1">drive_file_move</span> Move
+                      </button>
+                      <button onclick="deleteDoc({{ document.id }})" class="btn btn-outline-danger d-inline-flex align-items-center" title="Delete">
+                        <span class="material-symbols-outlined fs-16 me-1">delete</span> Delete
+                      </button>
+                      <a href="/api/documents/{{ document.id }}/download" class="btn btn-outline-success d-inline-flex align-items-center" title="Download raw file">
+                        <span class="material-symbols-outlined fs-16 me-1">download</span>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
+      {% else %}
+        <div class="text-center py-5">
+          <span class="material-symbols-outlined text-muted fs-48">folder_open</span>
+          <p class="text-muted mt-2 mb-0">No documents in this project. Use the upload zone above to ingest files.</p>
+        </div>
+      {% endif %}
     </div>
-    <div class="selected-files"></div>
-    <div class="upload-actions">
-        <button type="button" class="upload-trigger">Start upload</button>
-        <span class="status"></span>
+  </div>
+
+  <!-- Insights Split Section -->
+  <div class="row g-4 mb-4">
+    <!-- Recent Activity -->
+    <div class="col-lg-6">
+      <div class="card border-light shadow-sm h-100">
+        <div class="card-header bg-white border-bottom border-light py-3">
+          <h4 class="card-title mb-0 text-dark fw-bold">Recent Project Activity</h4>
+        </div>
+        <div class="card-body">
+          {% if dashboard.recent_activity %}
+            <div class="position-relative ps-3 border-start border-2 border-primary-subtle" style="margin-left: 10px;">
+              {% for event in dashboard.recent_activity %}
+                <div class="mb-3 position-relative">
+                  <div class="position-absolute bg-primary rounded-circle" style="width: 10px; height: 10px; left: -20px; top: 6px; border: 2px solid white;"></div>
+                  <div class="fw-bold text-primary fs-14">{{ event.event_date }}</div>
+                  <div class="text-dark fw-semibold mt-1">{{ event.title }}</div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p class="text-muted text-center my-3">No activity recorded yet.</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
-</section>
 
-<section class="content-grid two-col">
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Recent Uploads</h3>
+    <!-- Recent Summary -->
+    <div class="col-lg-6">
+      <div class="card border-light shadow-sm h-100">
+        <div class="card-header bg-white border-bottom border-light py-3">
+          <h4 class="card-title mb-0 text-dark fw-bold">Recent Generated Summary</h4>
         </div>
-        {% if dashboard.recent_uploads %}
-            <ul class="data-list">
-                {% for document in dashboard.recent_uploads %}
-                    <li>
-                        <a href="/documents/{{ document.id }}">{{ document.filename }}</a>
-                        <span>{{ document.upload_date.strftime("%Y-%m-%d %H:%M") }} | {{ document.processing_status }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="empty-state">No documents uploaded.</p>
-        {% endif %}
-    </article>
-
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Recent Activity</h3>
+        <div class="card-body">
+          {% if dashboard.recent_summary %}
+            <div class="p-3 bg-light rounded border border-light shadow-inner" style="max-height: 250px; overflow-y: auto;">
+              <pre class="mb-0 text-dark" style="white-space: pre-wrap; font-family: inherit; font-size: 14px; line-height: 1.5;">{{ dashboard.recent_summary }}</pre>
+            </div>
+          {% else %}
+            <p class="text-muted text-center my-3">No summary generated yet.</p>
+          {% endif %}
         </div>
-        {% if dashboard.recent_activity %}
-            <ul class="timeline-list compact">
-                {% for event in dashboard.recent_activity %}
-                    <li>
-                        <strong>{{ event.event_date }}</strong>
-                        <span>{{ event.title }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="empty-state">No activity recorded yet.</p>
-        {% endif %}
-    </article>
-</section>
-
-<section class="content-grid two-col">
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Documents</h3>
-        </div>
-        {% if documents %}
-            <ul class="data-list">
-                {% for document in documents %}
-                    <li>
-                        <a href="/documents/{{ document.id }}">{{ document.filename }}</a>
-                        <span>{{ document.file_type|upper }} | {{ document.processing_status }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="empty-state">No project documents yet.</p>
-        {% endif %}
-    </article>
-
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Most Recent Summary</h3>
-        </div>
-        <pre>{{ dashboard.recent_summary or "No summary generated yet." }}</pre>
-    </article>
-</section>
-
-<section class="panel">
-    <div class="panel-header">
-        <h3>Risk Register</h3>
+      </div>
     </div>
-    <ul class="data-list">
-        {% for risk in dashboard.risk_register %}
-            <li>
-                <span>{{ risk.severity_emoji }} {{ risk.title }}</span>
-                <span>{{ risk.severity|title }} | {{ risk.status }} | {{ risk.owner }}</span>
-            </li>
-        {% endfor %}
-    </ul>
-</section>
+  </div>
+
+  <!-- Risk Register -->
+  <div class="card border-light shadow-sm">
+    <div class="card-header bg-white border-bottom border-light py-3">
+      <h4 class="card-title mb-0 text-dark fw-bold">Risk Register</h4>
+    </div>
+    <div class="card-body">
+      {% if dashboard.risk_register %}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle border-light">
+            <thead>
+              <tr class="table-light">
+                <th scope="col" style="width: 10%;">Severity</th>
+                <th scope="col" style="width: 50%;">Risk Description</th>
+                <th scope="col" style="width: 20%;">Status</th>
+                <th scope="col" style="width: 20%;">Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for risk in dashboard.risk_register %}
+                <tr>
+                  <td><span class="fs-18 me-1">{{ risk.severity_emoji }}</span> <span class="badge bg-danger-subtle text-danger">{{ risk.severity|title }}</span></td>
+                  <td class="text-dark fw-semibold">{{ risk.title }}</td>
+                  <td><span class="badge bg-secondary-subtle text-secondary">{{ risk.status }}</span></td>
+                  <td class="text-muted fs-14">{{ risk.owner or "N/A" }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="text-muted text-center my-3">No risks identified for this project.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Edit Document Modal -->
+<div class="modal fade" id="editDocModal" tabindex="-1" aria-labelledby="editDocModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editDocModalLabel">Edit Document Content</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-doc-id">
+        <div class="mb-3">
+          <label for="edit-doc-filename" class="form-label text-dark fw-semibold">Filename</label>
+          <input type="text" class="form-control" id="edit-doc-filename" required>
+        </div>
+        <div class="mb-3">
+          <label for="edit-doc-content" class="form-label text-dark fw-semibold">Content</label>
+          <textarea class="form-control" id="edit-doc-content" rows="12" style="font-family: monospace; font-size: 14px;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="submitEditDoc()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Move Document Modal -->
+<div class="modal fade" id="moveDocModal" tabindex="-1" aria-labelledby="moveDocModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="moveDocModalLabel">Move Document</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="move-doc-id">
+        <div class="mb-3">
+          <label for="move-doc-project" class="form-label text-dark fw-semibold">Select Target Project</label>
+          <select class="form-select" id="move-doc-project" required>
+            <!-- Filled dynamically -->
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="submitMoveDoc()">Move Document</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+async function deleteDoc(id) {
+    if(confirm("Are you sure you want to delete this document and all its derived extractions?")) {
+        const response = await fetch('/api/documents/' + id, {method: 'DELETE'});
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            alert("Error deleting document.");
+        }
+    }
+}
+
+async function openEditDocModal(id) {
+    const response = await fetch('/api/documents/' + id);
+    if (!response.ok) {
+        alert("Failed to fetch document details.");
+        return;
+    }
+    const doc = await response.json();
+    document.getElementById('edit-doc-id').value = doc.id;
+    document.getElementById('edit-doc-filename').value = doc.filename;
+    document.getElementById('edit-doc-content').value = doc.raw_text || "";
+    
+    const editModal = new bootstrap.Modal(document.getElementById('editDocModal'));
+    editModal.show();
+}
+
+async function submitEditDoc() {
+    const id = document.getElementById('edit-doc-id').value;
+    const filename = document.getElementById('edit-doc-filename').value;
+    const content = document.getElementById('edit-doc-content').value;
+    
+    const response = await fetch('/api/documents/' + id, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({filename, content})
+    });
+    if (response.ok) {
+        window.location.reload();
+    } else {
+        alert("Error saving document content.");
+    }
+}
+
+async function openMoveDocModal(id) {
+    document.getElementById('move-doc-id').value = id;
+    
+    // Fetch projects dropdown content
+    const response = await fetch('/api/projects');
+    if (!response.ok) {
+        alert("Failed to fetch project list.");
+        return;
+    }
+    const projects = await response.json();
+    const select = document.getElementById('move-doc-project');
+    select.innerHTML = "";
+    projects.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = p.name;
+        select.appendChild(opt);
+    });
+    
+    const moveModal = new bootstrap.Modal(document.getElementById('moveDocModal'));
+    moveModal.show();
+}
+
+async function submitMoveDoc() {
+    const id = document.getElementById('move-doc-id').value;
+    const targetProjectId = parseInt(document.getElementById('move-doc-project').value);
+    
+    const response = await fetch('/api/documents/' + id + '/move', {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({target_project_id: targetProjectId})
+    });
+    if (response.ok) {
+        window.location.reload();
+    } else {
+        alert("Error moving document.");
+    }
+}
+
+function replaceDoc(id) {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.pdf,.docx,.txt,.md';
+    input.onchange = async e => {
+        const file = e.target.files[0];
+        if(!file) return;
+        const fd = new FormData();
+        fd.append('file', file);
+        const response = await fetch('/api/documents/' + id + '/replace', {
+            method: 'POST',
+            body: fd
+        });
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            alert("Error replacing document.");
+        }
+    };
+    input.click();
+}
+
+// Drag & Drop Quick Upload setup
+document.addEventListener("DOMContentLoaded", () => {
+    const dropzone = document.querySelector(".dropzone");
+    const fileInput = document.querySelector("#quick-file-input");
+    const selectedFilesDiv = document.querySelector(".selected-files");
+    const uploadActions = document.querySelector(".upload-actions");
+    const uploadTrigger = document.querySelector(".upload-trigger");
+    const statusSpan = document.querySelector(".status");
+    let filesList = [];
+
+    if (dropzone && fileInput) {
+        dropzone.addEventListener("click", () => {
+            fileInput.click();
+        });
+
+        dropzone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropzone.classList.add("bg-primary-subtle");
+        });
+
+        dropzone.addEventListener("dragleave", () => {
+            dropzone.classList.remove("bg-primary-subtle");
+        });
+
+        dropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropzone.classList.remove("bg-primary-subtle");
+            if (e.dataTransfer.files.length > 0) {
+                filesList = Array.from(e.dataTransfer.files);
+                updateSelectedFiles();
+            }
+        });
+
+        fileInput.addEventListener("change", (e) => {
+            if (e.target.files.length > 0) {
+                filesList = Array.from(e.target.files);
+                updateSelectedFiles();
+            }
+        });
+    }
+
+    function updateSelectedFiles() {
+        selectedFilesDiv.innerHTML = "";
+        if (filesList.length > 0) {
+            uploadActions.classList.remove("d-none");
+            filesList.forEach(file => {
+                const div = document.createElement("div");
+                div.className = "alert alert-secondary py-2 px-3 m-1 d-flex justify-content-between align-items-center";
+                div.innerHTML = `<span><strong>${file.name}</strong> (${(file.size / 1024).toFixed(1)} KB)</span>`;
+                selectedFilesDiv.appendChild(div);
+            });
+        } else {
+            uploadActions.classList.add("d-none");
+        }
+    }
+
+    if (uploadTrigger) {
+        uploadTrigger.addEventListener("click", async () => {
+            if (filesList.length === 0) return;
+            uploadTrigger.disabled = true;
+            statusSpan.textContent = "Uploading...";
+            const projectId = dropzone.dataset.projectId;
+            
+            const formData = new FormData();
+            filesList.forEach(file => {
+                formData.append("files", file);
+            });
+
+            try {
+                const response = await fetch(`/api/projects/${projectId}/documents`, {
+                    method: "POST",
+                    body: formData
+                });
+                if (response.ok) {
+                    statusSpan.textContent = "Upload completed! Reloading...";
+                    setTimeout(() => window.location.reload(), 1500);
+                } else {
+                    statusSpan.textContent = "Upload failed.";
+                    uploadTrigger.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                statusSpan.textContent = "Upload failed.";
+                uploadTrigger.disabled = false;
+            }
+        });
+    }
+});
+</script>
 {% endblock %}

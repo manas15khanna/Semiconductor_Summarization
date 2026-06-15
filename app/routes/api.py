@@ -1,4 +1,7 @@
 from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, HTTPException, UploadFile
+from fastapi.responses import FileResponse
+from pydantic import BaseModel
+import os
 from sqlalchemy.orm import Session
 
 from app.database.session import get_db
@@ -46,6 +49,28 @@ def get_project(project_id: int, db: Session = Depends(get_db)):
         "total_risks": dashboard["total_risks"],
         "recent_summary": dashboard["recent_summary"],
     }
+
+class EditProjectRequest(BaseModel):
+    name: str
+    description: str
+
+@router.put("/projects/{project_id}")
+def edit_project(project_id: int, request: EditProjectRequest, db: Session = Depends(get_db)):
+    project = project_service.edit_project(db, project_id, request.name, request.description)
+    return {"id": project.id, "name": project.name, "description": project.description}
+
+@router.delete("/projects/{project_id}")
+def delete_project(project_id: int, db: Session = Depends(get_db)):
+    project_service.delete_project(db, project_id)
+    return {"status": "deleted"}
+
+class MoveDocumentRequest(BaseModel):
+    target_project_id: int
+
+@router.put("/documents/{document_id}/move")
+def move_document(document_id: int, request: MoveDocumentRequest, db: Session = Depends(get_db)):
+    doc = project_service.move_document(db, document_id, request.target_project_id)
+    return {"status": "moved", "project_id": doc.project_id}
 
 
 @router.post("/projects/{project_id}/documents", status_code=202)
@@ -131,6 +156,37 @@ def get_document(document_id: int, db: Session = Depends(get_db)):
     }
 
 
+
+class EditDocumentRequest(BaseModel):
+    filename: str
+    content: str
+
+@router.delete("/documents/{document_id}")
+def delete_document(document_id: int, db: Session = Depends(get_db)):
+    project_service.delete_document(db, document_id)
+    return {"status": "deleted"}
+
+@router.put("/documents/{document_id}")
+def edit_document(document_id: int, request: EditDocumentRequest, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    result = project_service.edit_document(db, document_id, request.filename, request.content)
+    job = result["job"]
+    background_tasks.add_task(project_service.process_document_job, result["document"].id, job.id)
+    return {"status": "updated", "job_id": job.id}
+
+@router.post("/documents/{document_id}/replace")
+def replace_document(document_id: int, background_tasks: BackgroundTasks, file: UploadFile = File(...), db: Session = Depends(get_db)):
+    result = project_service.replace_document(db, document_id, file)
+    job = result["job"]
+    background_tasks.add_task(project_service.process_document_job, result["document"].id, job.id)
+    return {"status": "replaced", "job_id": job.id}
+
+@router.get("/documents/{document_id}/download")
+def download_document(document_id: int, db: Session = Depends(get_db)):
+    document = db.query(Document).filter(Document.id == document_id).first()
+    if not document or not document.storage_path or not os.path.exists(document.storage_path):
+        raise HTTPException(status_code=404, detail="File not found")
+    return FileResponse(path=document.storage_path, filename=document.filename)
+
 @router.post("/documents/{document_id}/summarize")
 def summarize_document(document_id: int, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     document = db.query(Document).filter(Document.id == document_id).first()
@@ -139,7 +195,6 @@ def summarize_document(document_id: int, background_tasks: BackgroundTasks, db: 
     job = job_service.create_job(db, document.project_id, document.id, document.filename)
     background_tasks.add_task(project_service.process_document_job, document.id, job.id)
     return {"status": "queued", "document_id": document.id, "job_id": job.id}
-
 
 @router.get("/projects/{project_id}/timeline")
 def get_timeline(project_id: int, db: Session = Depends(get_db)):

@@ -22,3 +22,10 @@ app.include_router(api.router, prefix="/api")
 @app.on_event("startup")
 def on_startup() -> None:
     init_database()
+    from app.database.session import SessionLocal
+    from app.services.project_service import ProjectService
+    db = SessionLocal()
+    try:
+        ProjectService().sync_meetings_folder(db)
+    finally:
+        db.close()

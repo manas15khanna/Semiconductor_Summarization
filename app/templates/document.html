@@ -1,97 +1,199 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero-block">
+<div class="container py-5">
+  <!-- Document Header -->
+  <div class="bg-white border border-light rounded shadow-sm p-4 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
     <div>
-        <div class="eyebrow">Document Viewer</div>
-        <h2>{{ document.filename }}</h2>
-        <p>Project: <a href="/projects/{{ document.project.id }}">{{ document.project.name }}</a></p>
-        <p class="subtle">Type: {{ document.file_type|upper }} | Uploaded: {{ document.upload_date }} | Status: {{ document.processing_status }}</p>
+      <span class="rounded-pill px-3 py-1 bg-secondary-subtle text-secondary text-uppercase fs-12 fw-bold">Document Details</span>
+      <h2 class="text-dark font-weight-bold mt-2 mb-1">{{ document.filename }}</h2>
+      <p class="text-muted mb-0 fs-14">
+        Project: <a href="/projects/{{ document.project.id }}" class="text-primary fw-semibold text-decoration-none">{{ document.project.name }}</a> | 
+        Type: <span class="badge bg-secondary-subtle text-secondary">{{ document.file_type|upper }}</span> | 
+        Status: <span class="badge {% if document.processing_status == 'processed' %}bg-success{% elif document.processing_status == 'failed' %}bg-danger{% else %}bg-warning text-dark{% endif %}">{{ document.processing_status }}</span>
+      </p>
     </div>
-    <div class="hero-actions">
-        <button type="button" class="button-link" data-resummarize-id="{{ document.id }}">Regenerate analysis</button>
+    <div>
+      <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-resummarize-id="{{ document.id }}">
+        <span class="material-symbols-outlined fs-18 me-1">auto_stories</span> Regenerate Analysis
+      </button>
+      <a href="/api/documents/{{ document.id }}/download" class="btn btn-outline-success d-inline-flex align-items-center">
+        <span class="material-symbols-outlined fs-18 me-1">download</span> Download Raw File
+      </a>
     </div>
-</section>
+  </div>
 
-<section class="panel">
-    <div class="tab-row" data-tab-group="document-tabs">
-        <button type="button" class="tab-button active" data-tab-target="raw">Raw Document</button>
-        <button type="button" class="tab-button" data-tab-target="summary">Summary</button>
-        <button type="button" class="tab-button" data-tab-target="decisions">Decisions</button>
-        <button type="button" class="tab-button" data-tab-target="actions">Actions</button>
-        <button type="button" class="tab-button" data-tab-target="risks">Risks</button>
-        <button type="button" class="tab-button" data-tab-target="timeline">Timeline</button>
+  <!-- Main Content Cards with Tab Switchers -->
+  <div class="card border-light shadow-sm">
+    <div class="card-header bg-white border-bottom border-light">
+      <ul class="nav nav-tabs card-header-tabs border-bottom-0" data-tab-group="document-tabs">
+        <li class="nav-item">
+          <button type="button" class="nav-link tab-button active" data-tab-target="raw">Raw Content</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link tab-button" data-tab-target="summary">Summary</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link tab-button" data-tab-target="decisions">Decisions</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link tab-button" data-tab-target="actions">Actions</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link tab-button" data-tab-target="risks">Risks</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link tab-button" data-tab-target="timeline">Timeline</button>
+        </li>
+      </ul>
     </div>
+    <div class="card-body">
+      <!-- Raw Text Tab -->
+      <div class="tab-panel active" data-tab-panel="raw">
+        <div class="bg-light p-4 rounded border border-light" style="max-height: 600px; overflow-y: auto;">
+          <pre class="text-dark mb-0" style="white-space: pre-wrap; font-family: monospace; font-size: 14px; line-height: 1.6;">{{ document.raw_text or "Raw text is not available yet." }}</pre>
+        </div>
+      </div>
 
-    <div class="tab-panel active" data-tab-panel="raw">
-        <pre>{{ document.raw_text or "Raw text is not available yet." }}</pre>
-    </div>
+      <!-- Summary Tab -->
+      <div class="tab-panel" data-tab-panel="summary">
+        {% if latest_summary %}
+          <div class="p-3 bg-white border border-light rounded">
+            <h5 class="text-dark fw-bold mb-3 d-flex align-items-center">
+              <span class="material-symbols-outlined text-primary me-2">auto_stories</span>
+              Document Summary
+            </h5>
+            <p class="text-dark fs-15" style="line-height: 1.6; white-space: pre-wrap;">{{ latest_summary.summary_text }}</p>
+          </div>
+        {% else %}
+          <div class="text-center py-5">
+            <span class="material-symbols-outlined text-muted fs-48">pending_actions</span>
+            <p class="text-muted mt-2 mb-0">No summary has been generated for this document yet.</p>
+          </div>
+        {% endif %}
+      </div>
 
-    <div class="tab-panel" data-tab-panel="summary">
-        <pre>{% if latest_summary %}{{ latest_summary.summary_text }}{% else %}No summary available yet.{% endif %}</pre>
-    </div>
-
-    <div class="tab-panel" data-tab-panel="decisions">
+      <!-- Decisions Tab -->
+      <div class="tab-panel" data-tab-panel="decisions">
         {% if document.decisions %}
-            <ul class="data-list">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle border-light">
+              <thead>
+                <tr class="table-light">
+                  <th scope="col" style="width: 25%;">Title</th>
+                  <th scope="col" style="width: 45%;">Description</th>
+                  <th scope="col" style="width: 15%;">Owner</th>
+                  <th scope="col" style="width: 15%;">Status</th>
+                </tr>
+              </thead>
+              <tbody>
                 {% for item in document.decisions %}
-                    <li>
-                        <span>{{ item.title or "Untitled decision" }}</span>
-                        <span>{{ item.status }} | {{ item.owner }} | {{ item.decision_date }}</span>
-                        <p>{{ item.description }}</p>
-                    </li>
+                  <tr>
+                    <td><strong class="text-dark d-flex align-items-center"><span class="material-symbols-outlined text-muted me-2">gavel</span> {{ item.title or "Untitled decision" }}</strong></td>
+                    <td class="text-muted fs-14">{{ item.description }}</td>
+                    <td class="text-muted fs-14">{{ item.owner or "N/A" }}</td>
+                    <td><span class="badge bg-secondary-subtle text-secondary">{{ item.status|title or "N/A" }}</span></td>
+                  </tr>
                 {% endfor %}
-            </ul>
+              </tbody>
+            </table>
+          </div>
         {% else %}
-            <p class="empty-state">No decisions extracted.</p>
+          <div class="text-center py-5">
+            <span class="material-symbols-outlined text-muted fs-48">folder_open</span>
+            <p class="text-muted mt-2 mb-0">No decisions were extracted from this document.</p>
+          </div>
         {% endif %}
-    </div>
+      </div>
 
-    <div class="tab-panel" data-tab-panel="actions">
+      <!-- Actions Tab -->
+      <div class="tab-panel" data-tab-panel="actions">
         {% if document.action_items %}
-            <ul class="data-list">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle border-light">
+              <thead>
+                <tr class="table-light">
+                  <th scope="col" style="width: 50%;">Action Item</th>
+                  <th scope="col" style="width: 20%;">Owner</th>
+                  <th scope="col" style="width: 15%;">Due Date</th>
+                  <th scope="col" style="width: 15%;">Status</th>
+                </tr>
+              </thead>
+              <tbody>
                 {% for item in document.action_items %}
-                    <li>
-                        <span>{{ item.description }}</span>
-                        <span>{{ item.owner }} | {{ item.due_date }} | {{ item.status }}</span>
-                    </li>
+                  <tr>
+                    <td><span class="text-dark fw-semibold d-flex align-items-center"><span class="material-symbols-outlined text-muted me-2">task</span> {{ item.description }}</span></td>
+                    <td class="text-muted fs-14">{{ item.owner or "Unassigned" }}</td>
+                    <td class="text-muted fs-14">{{ item.due_date or "N/A" }}</td>
+                    <td><span class="badge bg-warning text-dark">{{ item.status|title or "Open" }}</span></td>
+                  </tr>
                 {% endfor %}
-            </ul>
+              </tbody>
+            </table>
+          </div>
         {% else %}
-            <p class="empty-state">No action items extracted.</p>
+          <div class="text-center py-5">
+            <span class="material-symbols-outlined text-muted fs-48">folder_open</span>
+            <p class="text-muted mt-2 mb-0">No action items were extracted from this document.</p>
+          </div>
         {% endif %}
-    </div>
+      </div>
 
-    <div class="tab-panel" data-tab-panel="risks">
+      <!-- Risks Tab -->
+      <div class="tab-panel" data-tab-panel="risks">
         {% if document.risks %}
-            <ul class="data-list">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle border-light">
+              <thead>
+                <tr class="table-light">
+                  <th scope="col" style="width: 35%;">Risk Description</th>
+                  <th scope="col" style="width: 20%;">Impact</th>
+                  <th scope="col" style="width: 30%;">Mitigation Strategy</th>
+                  <th scope="col" style="width: 15%;">Owner</th>
+                </tr>
+              </thead>
+              <tbody>
                 {% for item in document.risks %}
-                    <li>
-                        <span>{{ item.severity_emoji }} {{ item.description }}</span>
-                        <span>{{ item.severity|title }} | {{ item.owner }}</span>
-                        <p>Impact: {{ item.impact }}</p>
-                        <p>Mitigation: {{ item.mitigation }}</p>
-                    </li>
+                  <tr>
+                    <td><span class="text-dark fw-semibold d-flex align-items-center"><span class="material-symbols-outlined text-danger me-2">warning</span> {{ item.description }}</span></td>
+                    <td><span class="badge bg-danger-subtle text-danger">{{ item.impact|title }}</span></td>
+                    <td class="text-muted fs-14">{{ item.mitigation or "No mitigation specified." }}</td>
+                    <td class="text-muted fs-14">{{ item.owner or "N/A" }}</td>
+                  </tr>
                 {% endfor %}
-            </ul>
+              </tbody>
+            </table>
+          </div>
         {% else %}
-            <p class="empty-state">No risks extracted.</p>
+          <div class="text-center py-5">
+            <span class="material-symbols-outlined text-muted fs-48">folder_open</span>
+            <p class="text-muted mt-2 mb-0">No risks were extracted from this document.</p>
+          </div>
         {% endif %}
-    </div>
+      </div>
 
-    <div class="tab-panel" data-tab-panel="timeline">
+      <!-- Timeline Tab -->
+      <div class="tab-panel" data-tab-panel="timeline">
         {% if timeline %}
-            <ul class="timeline-list">
-                {% for item in timeline %}
-                    <li>
-                        <strong>{{ item.event_date or "Unknown date" }}</strong>
-                        <span>{{ item.title }}</span>
-                        <p>{{ item.description }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
+          <div class="position-relative ps-3 border-start border-2 border-primary-subtle" style="margin-left: 10px;">
+            {% for item in timeline %}
+              <div class="mb-4 position-relative">
+                <div class="position-absolute bg-primary rounded-circle" style="width: 10px; height: 10px; left: -20px; top: 6px; border: 2px solid white;"></div>
+                <div class="fw-bold text-primary fs-14">{{ item.event_date or "Unknown Date" }}</div>
+                <div class="text-dark fw-semibold mt-1">{{ item.title }}</div>
+                {% if item.description %}
+                  <p class="text-muted fs-13 mb-0" style="line-height: 1.4;">{{ item.description }}</p>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
         {% else %}
-            <p class="empty-state">No timeline events extracted.</p>
+          <div class="text-center py-5">
+            <span class="material-symbols-outlined text-muted fs-48">pending_actions</span>
+            <p class="text-muted mt-2 mb-0">No timeline events extracted from this document.</p>
+          </div>
         {% endif %}
+      </div>
     </div>
-</section>
+  </div>
+</div>
 {% endblock %}

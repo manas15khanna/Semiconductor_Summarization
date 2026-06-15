@@ -1,54 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page_name or "SCL Traceability System" }}</title>
+    <link rel="stylesheet" href="/static/img1.digitallocker.gov.in/nad/v-22/assets/css/fontawesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet">
+    <link href="/static/img1.digitallocker.gov.in/ux4g/UX4G%401.0.1/css/ux4g-min.css" rel="stylesheet">
+    <link href="/static/www.ux4g.gov.in/templates/html-template-5/assets/css/stylesheet.css" rel="stylesheet">
+    <link href="/static/www.ux4g.gov.in/templates/html-template-5/assets/css/accessibility-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/www.ux4g.gov.in/templates/html-template-5/assets/css/owl-carousel.css">
     <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .page-shell { padding: 2rem 0; min-height: 60vh; }
+        .hidden { display: none; }
+    </style>
+    <title>{{ page_name or "SCL Traceability System" }}</title>
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
-    <div class="top-strip">
-        <div class="container top-strip-inner">
-            <span>Government-style UX shell for offline engineering traceability</span>
-            <span>Model: {{ ollama_model }}</span>
-        </div>
-    </div>
-    <header class="site-header">
-        <div class="container brand-row">
-            <div>
-                <div class="eyebrow">Semiconductor Product Development Lifecycle</div>
-                <h1>SCL Traceability System</h1>
-                <p class="subtle">Summaries, decisions, actions, risks, and project timelines on a local-first stack.</p>
+    <header>
+      <div class="header-top px-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-6 col-lg-3 d-flex col-sm-6 col-7 align-items-left">
+              <span class="goi">
+                <a href="https://www.india.gov.in/" target="_blank" class="goi">
+                  <img src="/static/doc.ux4g.gov.in/assets/img/icon/in-flag.png" class="img-fluid" alt="indian flag" loading="lazy"><strong>Government of India</strong>
+                </a>
+              </span>
             </div>
-        </div>
-        <nav class="site-nav">
-            <div class="container nav-row">
-                <a class="{% if request.url.path == '/' %}active{% endif %}" href="/">Dashboard</a>
-                <a class="{% if request.url.path.startswith('/projects') and '/documents/' not in request.url.path %}active{% endif %}" href="/projects">Projects</a>
-                <a class="{% if request.url.path == '/search' %}active{% endif %}" href="/search">Search</a>
+            <div class="col-xl-6 col-lg-9 col-sm-6 col-5 text-end">
+              <a href="#Skip-to-Main-Content" class="pr-5 d-none d-sm-inline" style="color: #fff">
+                Skip to Main Content
+              </a>
+              <span class="partition d-none d-md-inline">|</span>
+              <span class="d-none d-md-inline">
+                <button role="button" id="btn-decrease" class="font01" onclick="decrease()">
+                  -A
+                </button>
+                <button role="button" id="btn-orig" class="font01 active01" onclick="reset()">
+                  A
+                </button>
+
+                <button role="button" id="btn-increase" class="font01" onclick="increase()">
+                  A+
+                </button>
+                <span class="partition">|</span>
+              </span>
+
+              <!-- <span class="light_dark_icon">                       
+                            <input type="checkbox" class="light_mode" id="checkbox">
+                            <label for="checkbox" class="checkbox-label">
+                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-sun"></i>
+                                <span class="ball"></span>
+                            </label>
+                        </span> -->
+
+              <span class="language01">
+                <form id="langForm" method="POST" class="d-flex align-items-center">
+                  <i class="glog-lang">
+                    <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/glob.svg" alt="glob">
+                  </i>
+                  <select name="language" id="changeLang" onchange="OnSelectedIndexChange()">
+                    <option value="" selected="" disable="">Language</option>
+                    <option value="en">English</option>
+                  </select>
+                </form>
+              </span>
+              <span class="d-none d-sm-inline-block">
+                <a class="skip01" id="uw-widget-custom-trigger" contenteditable="false" style="cursor: pointer">
+                  <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/accessible.svg" alt="Accessibility">
+                  <strong>More</strong>
+                </a>
+              </span>
             </div>
-        </nav>
+          </div>
+        </div>
+      </div>
+      <div id="header-sticky" class="header-area header-white px-2 pt-2 pb-2 mt-sm-0">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid pr-0 pl-0">
+              <a class="navbar-brand" href="#" style="flex: 1">
+                <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/logo.svg" alt="logo" loading="lazy">
+                <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/logo-m.png" alt="dummy" style="width: 50%">
+              </a>
+
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0 pr-25">
+  <li class="nav-item"><a class="nav-link {% if page_name == 'Dashboard' %}active{% endif %}" href="/">Dashboard</a></li>
+  <li class="nav-item"><a class="nav-link {% if page_name == 'Projects' %}active{% endif %}" href="/projects">Projects</a></li>
+  <li class="nav-item"><a class="nav-link {% if page_name == 'Search' %}active{% endif %}" href="/search">Search</a></li>
+  <li class="nav-item"><a class="nav-link {% if page_name == 'Decisions' %}active{% endif %}" href="/decisions">Decisions</a></li>
+  <li class="nav-item"><a class="nav-link {% if page_name == 'Risks' %}active{% endif %}" href="/risks">Risks</a></li>
+  <li class="nav-item"><a class="nav-link {% if page_name == 'Actions' %}active{% endif %}" href="/actions">Actions</a></li>
+</ul>
+
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" aria-disabled="true">Dashboards</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Resources
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Help & Support
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <!-- <form class="d-flex" role="search">
+                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form> -->
+                <div class="d-none d-sm-block">
+                  <div class="d-flex align-items-center">
+                    <div class="search pr-30">
+                      <span class="material-symbols-outlined d-flex">
+                        search
+                      </span>
+                    </div>
+                    <button type="button" class="btn btn-primary rounded-3 login-btn">
+                      Login
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
     </header>
-    <main id="main-content" class="container page-shell">
+    
+    <main id="main-content" style="min-height: 60vh;">
         {% block content %}{% endblock %}
     </main>
-    <footer class="site-footer">
-        <div class="container footer-grid">
-            <div>
-                <strong>SCL Traceability System</strong>
-                <p>Offline FastAPI, SQLite, Jinja, vanilla JavaScript, and Ollama processing.</p>
-            </div>
-            <div>
-                <strong>Core Pages</strong>
-                <p><a href="/">Dashboard</a> <a href="/projects">Projects</a> <a href="/search">Search</a></p>
-            </div>
-            <div>
-                <strong>Phase</strong>
-                <p>Phase 1: ingestion, summarization, decisions, actions, risks, timeline, and search.</p>
-            </div>
-        </div>
-    </footer>
+
+    <footer>
+  <div class="container">
+      <div class="footer-row">
+          <div class="col-list">
+            <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/logo-f.png" alt="logo" loading="lazy" class="mb-20">
+            <div class="footer_social">
+                  
+              <a href="" target="_blank" aria-label="visit facebook site" contenteditable="false" style="cursor: pointer;">
+                  <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/fb.svg" alt="social">
+              </a>
+              <a href="" target="_blank" aria-label="visit twitter site" contenteditable="false" style="cursor: pointer;">
+                <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/tw.svg" alt="social">
+              </a>
+              <a href="" target="_blank" aria-label="visit youtube site" contenteditable="false" style="cursor: pointer;">
+                <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/yt.svg" alt="social">
+              </a>
+
+          </div>             
+              
+              <button class=" rounded btn-last-update rounded-pill">Last updated: 02-20-24</button>
+          </div>
+          <div class="col-list">
+              <h3>MSPSDC</h3>
+              <ul>
+                  <li><a href="">About Us</a></li>
+                  <li><a href="">Services</a></li>                    
+                  <li><a href="">Dashboards</a></li>                    
+                  <li><a href="">Resources</a></li>                    
+                                    
+              </ul>                
+          </div>
+          <div class="col-list">
+            <h3>Citizens</h3>
+            <ul>
+                <li><a href="">File First Appeal</a></li>
+                <li><a href="">Appeal to Commission</a></li>                    
+                <li><a href="">Department</a></li>                    
+                <li><a href="">Notify Your Service</a></li>                  
+                                  
+            </ul>                  
+          </div>
+          <div class="col-list">
+            <h3>Important Links</h3>
+            <ul>
+                <li><a href="">Sitemap</a></li>
+                <li><a href="">Right to Information</a></li>                    
+                <li><a href="">Disclaimer</a></li>                    
+                <li><a href="">FAQs</a></li>                   
+                                   
+            </ul>                    
+          </div>
+          <div class="col-list">
+            <h3>Contact Us</h3>
+            <ul>
+                <li>Room 17, Horse Shoe Building, Lachumiere, Shillong, Meghalaya 793001</li>
+                                   
+            </ul>                  
+                              
+                            
+          </div>
+          
+      </div>
+  </div>
+</footer>
 
     <div id="processing-overlay" class="overlay hidden" aria-live="polite">
         <div class="overlay-panel">
@@ -59,6 +235,43 @@
             <div id="overlay-jobs" class="overlay-jobs"></div>
         </div>
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/img1.digitallocker.gov.in/ux4g/UX4G%401.0.0-beta1/js/ux4g.bundle.min.js"></script>
+    <script src="/static/www.ux4g.gov.in/templates/html-template-5/assets/js/google-translate.js"></script>
+    <script src="/static/www.ux4g.gov.in/templates/html-template-5/assets/js/weights.js"></script>
+    <script src="/static/www.ux4g.gov.in/templates/html-template-5/assets/js/owl.carousel.min.js"></script>
+    
+    <!-- Accessibility Controls scripts -->
+    <script>
+      var $affectedElements = $("*");
+      $affectedElements.each(function () {
+        var $this = $(this);
+        $this.data("orig-size", $this.css("font-size"));
+      });
+      $("#btn-increase").click(function () {
+        changeFontSize(1);
+      });
+      $("#btn-decrease").click(function () {
+        changeFontSize(-1);
+      });
+      $("#btn-orig").click(function () {
+        $affectedElements.each(function () {
+          var $this = $(this);
+          $this.css("font-size", $this.data("orig-size"));
+        });
+      });
+      function changeFontSize(direction) {
+        $affectedElements.each(function () {
+          var $this = $(this);
+          var currentSize = parseInt($this.css("font-size"));
+          if (!isNaN(currentSize)) {
+            $this.css("font-size", currentSize + direction);
+          }
+        });
+      }
+    </script>
+    
     <script src="/static/js/app.js"></script>
 </body>
 </html>

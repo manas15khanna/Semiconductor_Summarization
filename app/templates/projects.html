@@ -1,72 +1,171 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero-block">
-    <div>
-        <div class="eyebrow">Projects</div>
-        <h2>Create and manage engineering projects</h2>
-        <p>Use the local repository and dataset context to organize documents and analysis outputs.</p>
-    </div>
-</section>
+<div class="container py-5">
+  <!-- Hero Section -->
+  <div class="bg-white border border-light rounded shadow-sm p-4 mb-4">
+    <span class="rounded-pill px-3 py-1 bg-primary text-white text-uppercase fs-12 fw-bold">Admin Panel</span>
+    <h2 class="text-dark font-weight-bold mt-2">Projects & Datasets</h2>
+    <p class="text-muted mb-0">Organize meeting records, documents, decisions, action items, and risks by creating projects.</p>
+  </div>
 
-<section class="content-grid two-col">
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Create Project</h3>
+  <div class="row g-4 mb-4">
+    <!-- Create Project Form -->
+    <div class="col-lg-7">
+      <div class="card border-light shadow-sm h-100">
+        <div class="card-header bg-white border-bottom border-light py-3">
+          <h4 class="card-title mb-0 text-dark fw-bold">Create New Project</h4>
         </div>
-        <form id="project-form">
-            <label for="name">Project name</label>
-            <input id="name" name="name" required>
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="4"></textarea>
-            <button type="submit">Create project</button>
-        </form>
-    </article>
-
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Dataset Reference</h3>
+        <div class="card-body">
+          <form id="project-form" class="needs-validation">
+            <div class="mb-3">
+              <label for="name" class="form-label text-dark fw-semibold">Project Name</label>
+              <input type="text" id="name" name="name" required class="form-control" placeholder="e.g. Flight Control System Upgrade">
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label text-dark fw-semibold">Description</label>
+              <textarea id="description" name="description" rows="4" class="form-control" placeholder="Brief details about the project scope, goals, and context..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary px-4">Create Project</button>
+          </form>
         </div>
-        <div class="meta-stack">
-            <div><strong>Project:</strong> {{ overview.dataset_summary.project_name }}</div>
-            <div><strong>Repository root:</strong> {{ overview.dataset_summary.repository_root }}</div>
-            <div><strong>Timeline:</strong> {{ overview.dataset_summary.timeline_start }} to {{ overview.dataset_summary.timeline_end }}</div>
+      </div>
+    </div>
+
+    <!-- Dataset Reference -->
+    <div class="col-lg-5">
+      <div class="card border-light shadow-sm h-100">
+        <div class="card-header bg-white border-bottom border-light py-3">
+          <h4 class="card-title mb-0 text-dark fw-bold">Dataset Reference</h4>
         </div>
-    </article>
-</section>
-
-<section class="panel">
-    <div class="panel-header">
-        <h3>Projects</h3>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table align-middle border-light">
+              <tbody>
+                <tr>
+                  <th class="text-muted fw-semibold border-light py-2" style="width: 40%;">Project:</th>
+                  <td class="text-dark fw-bold border-light py-2">{{ overview.dataset_summary.project_name }}</td>
+                </tr>
+                <tr>
+                  <th class="text-muted fw-semibold border-light py-2">Repository Root:</th>
+                  <td class="text-dark border-light py-2"><code class="fs-12">{{ overview.dataset_summary.repository_root }}</code></td>
+                </tr>
+                <tr>
+                  <th class="text-muted fw-semibold border-light py-2">Timeline Range:</th>
+                  <td class="text-dark border-light py-2">{{ overview.dataset_summary.timeline_start or "N/A" }} to {{ overview.dataset_summary.timeline_end or "N/A" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-    {% if overview.projects %}
-        <ul class="data-list">
-            {% for project in overview.projects %}
-                <li>
-                    <span><a href="/projects/{{ project.id }}">{{ project.name }}</a></span>
-                    <span>
-                        <a href="/projects/{{ project.id }}/upload">Upload</a> |
-                        <a href="/projects/{{ project.id }}/timeline">Timeline</a>
-                    </span>
-                    <p>{{ project.description }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p class="empty-state">No projects created yet.</p>
-    {% endif %}
-</section>
+  </div>
 
-<section class="panel">
-    <div class="panel-header">
-        <h3>Reference Timeline from Dataset</h3>
+  <!-- Projects List -->
+  <div class="card border-light shadow-sm mb-4">
+    <div class="card-header bg-white border-bottom border-light py-3">
+      <h4 class="card-title mb-0 text-dark fw-bold">Available Projects</h4>
     </div>
-    <ul class="timeline-list compact">
-        {% for event in overview.reference_timeline %}
-            <li>
-                <strong>{{ event.date }}</strong>
-                <span>{{ event.id }} - {{ event.title }}</span>
-            </li>
-        {% endfor %}
-    </ul>
-</section>
+    <div class="card-body">
+      {% if overview.projects %}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle border-light">
+            <thead>
+              <tr class="table-light">
+                <th scope="col" style="width: 25%;">Project Name</th>
+                <th scope="col" style="width: 45%;">Description</th>
+                <th scope="col" style="width: 30%;" class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for project in overview.projects %}
+                <tr>
+                  <td>
+                    <a href="/projects/{{ project.id }}" class="text-primary fw-bold text-decoration-none d-flex align-items-center">
+                      <span class="material-symbols-outlined me-2 text-muted">folder</span>
+                      {{ project.name }}
+                    </a>
+                  </td>
+                  <td class="text-muted fs-14">{{ project.description or "No description provided." }}</td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm">
+                      <a href="/projects/{{ project.id }}" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                        <span class="material-symbols-outlined fs-16 me-1">visibility</span> Dashboard
+                      </a>
+                      <a href="/projects/{{ project.id }}/upload" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                        <span class="material-symbols-outlined fs-16 me-1">upload_file</span> Documents
+                      </a>
+                      <button onclick="editProject({{ project.id }}, '{{ project.name }}', '{{ project.description }}')" class="btn btn-outline-primary d-inline-flex align-items-center">
+                        <span class="material-symbols-outlined fs-16 me-1">edit</span> Edit
+                      </button>
+                      <button onclick="deleteProject({{ project.id }})" class="btn btn-outline-danger d-inline-flex align-items-center">
+                        <span class="material-symbols-outlined fs-16 me-1">delete</span> Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="text-center py-5">
+          <span class="material-symbols-outlined text-muted fs-48">folder_open</span>
+          <p class="text-muted mt-2">No projects created yet. Use the form above to add a new project.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Reference Timeline from Dataset -->
+  <div class="card border-light shadow-sm">
+    <div class="card-header bg-white border-bottom border-light py-3">
+      <h4 class="card-title mb-0 text-dark fw-bold">Reference Timeline from Dataset</h4>
+    </div>
+    <div class="card-body">
+      {% if overview.reference_timeline %}
+        <div class="position-relative ps-3 border-start border-2 border-primary-subtle" style="margin-left: 10px;">
+          {% for event in overview.reference_timeline %}
+            <div class="mb-3 position-relative">
+              <div class="position-absolute bg-primary rounded-circle" style="width: 10px; height: 10px; left: -20px; top: 6px; border: 2px solid white;"></div>
+              <div class="fw-bold text-primary fs-14">{{ event.date }}</div>
+              <div class="text-dark fw-semibold mt-1">{{ event.id }} - {{ event.title }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted text-center my-3">No reference events found in the dataset.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+async function deleteProject(id) {
+    if(confirm("Are you sure you want to delete this project and all its documents? This cannot be undone.")) {
+        const response = await fetch('/api/projects/' + id, {method: 'DELETE'});
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            alert("Error deleting project.");
+        }
+    }
+}
+async function editProject(id, oldName, oldDesc) {
+    const newName = prompt("Enter new project name:", oldName);
+    if(!newName) return;
+    const newDesc = prompt("Enter new description:", oldDesc);
+    if(newDesc === null) return;
+    const response = await fetch('/api/projects/' + id, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: newName, description: newDesc})
+    });
+    if (response.ok) {
+        window.location.reload();
+    } else {
+        alert("Error updating project.");
+    }
+}
+</script>
 {% endblock %}

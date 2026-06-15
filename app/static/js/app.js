@@ -49,21 +49,59 @@ function initSearch() {
         const data = await response.json();
         const container = document.getElementById("search-results");
         container.innerHTML = "";
-        if (!data.results.length) {
-            container.innerHTML = "<p class='empty-state'>No results found.</p>";
+        if (!data.results || !data.results.length) {
+            container.innerHTML = `
+                <div class="text-center py-5">
+                  <span class="material-symbols-outlined text-muted fs-48">search_off</span>
+                  <p class="text-muted mt-2 mb-0">No matches found for your query.</p>
+                </div>
+            `;
             return;
         }
         data.results.forEach((item) => {
             const row = document.createElement("div");
-            row.className = "search-result";
+            row.className = "card border-light shadow-sm mb-3";
+            
+            let badgeColor = "bg-primary";
+            if (item.result_type === "decision") badgeColor = "bg-success";
+            if (item.result_type === "action") badgeColor = "bg-warning text-dark";
+            if (item.result_type === "risk") badgeColor = "bg-danger";
+            
             row.innerHTML = `
-                <div><strong>${item.result_type}</strong></div>
-                <div>${item.project} | <a href="${item.link}">${item.document}</a></div>
-                <p>${item.snippet}</p>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="badge ${badgeColor} text-uppercase">${item.result_type}</span>
+                    <span class="text-muted fs-12 fw-semibold">${item.project}</span>
+                  </div>
+                  <h5 class="card-title mb-2">
+                    <a href="${item.link}" class="text-dark fw-bold text-decoration-none d-flex align-items-center">
+                      <span class="material-symbols-outlined text-muted me-2">description</span>
+                      ${item.document}
+                    </a>
+                  </h5>
+                  <p class="card-text text-muted fs-14 mb-0" style="line-height: 1.5;">${item.snippet}</p>
+                </div>
             `;
             container.appendChild(row);
         });
     });
+
+    // Auto-execute search if query param is present
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('query');
+    if (queryParam) {
+        const queryInput = document.getElementById("query");
+        if (queryInput) {
+            queryInput.value = queryParam;
+        }
+        const filterParam = urlParams.get('filter_type');
+        if (filterParam) {
+            const radio = searchForm.querySelector(`input[name="filter_type"][value="${filterParam}"]`);
+            if (radio) radio.checked = true;
+        }
+        // Trigger the search submit
+        searchForm.dispatchEvent(new Event('submit'));
+    }
 }
 
 function initUploadPanels() {

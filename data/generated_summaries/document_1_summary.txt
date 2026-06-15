@@ -1,11 +1,27 @@
-**Project Context:** This document summarizes a meeting regarding the ADC Reference Voltage strategy, focusing on optimizing dynamic range and ATE observability for a new product.
+**Project Context:** This document outlines the project's activities, including a review of action items, TMR voter fix status, SAR ENOB fix status, DRC/LVS clean status, verification closure summary, and tapeout readiness checklist review.
 
-**Key Findings:** Maya recommended a buffered 1.0V ADC Reference Voltage architecture initially, simulating promising results but with limited hot-corner headroom. Kenji requested specific trim and telemetry hooks for ATE monitoring. The D-003 decision was made, with a buffer generator implemented to maximize dynamic range.
+**Key Findings:**
 
-**Decisions:** D-003 was revised to use a buffered 1.0V ADC Reference Voltage architecture.  An AI-004 task was initiated to define trim observability for the monitoring path.
+*   The project is currently in the fabrication phase, with engineering lot wafer delivery scheduled for July 21st.
+*   The overall program impact is being assessed based on the engineering lot wafer delivery.
+*   The fabrication phase is underway, with the goal of completing the first silicon wafer.
+*   The next meeting is scheduled for September 25th to review the engineering lot wafer delivery and discuss production lot planning.
 
-**Risks:** A potential risk identified is the ongoing mitigation of ADC Reference Voltage drift due to Maya's concerns.
+**Decisions:**
 
-**Action Items:**  An AI-004 task was assigned to define trim observability.
-
-**Next Steps:**  The next step is to implement the defined trim observability.
+*   **Action Items:**
+    *   AI-024: Complete. Revised TMR voter with input pipeline registers implemented. Formal verification re-run: all 22 properties proven. Physical spacing between TMR input register cells confirmed ≥ 50 µm per Dr. Menon's spacing requirement.
+    *   AI-025: Complete. 10% extended regeneration phase implemented in SAR timing controller. Re-simulation at SS/–40°C/100 krad: ENOB = 14.24 bits, SNR = 87.2 dBFS. Both pass requirements. Nominal power impact: +2 mW. Updated total power: 425 mW.
+    *   AI-026: Complete. All 147 DRC violations resolved. 2 LVS open-net errors resolved (metal fill connectivity issue in digital macro). Full-chip DRC and LVS: **CLEAN** as of 10 July 2025.
+    *   AI-027: Complete. DMC convergence coverage: 12/12 corners at 100% closure. All background calibration scenarios covered.
+    *   AI-028: Tapeout Readiness Checklist (TRC v0.3) distributed prior to this meeting.
+*   **TMR Voter Fix (DEC-014): Confirmation:** Deepak Rao confirmed the revised voter implementation.
+*   **SAR ENOB Fix (DEC-015): Confirmation:** Rajesh Nair presented the re-simulation results.
+*   **DRC/LVS Clean Status:** Rajesh Nair confirmed DRC and LVS are fully clean.
+*   **Verification Closure Summary:** Sunil Verma presented the final verification closure summary.
+*   **Tapeout Readiness Checklist Review:** Anil Kapoor confirmed the TRC as complete.
+*   **Fabrication Kick-Off:** Anil Kapoor confirmed the fab is ready to receive the tapeout package.
+*   **Customer Sign-Off:** Col. Tiwari acknowledged the verification closure and tapeout readiness.
+*   **Minutes prepared by:** Sanjay Bhatt, Project Controller, Anil Kapoor
+*   **Date of issue:** 16 July 2025
+*   **Distribution:** All attendees, PDMS

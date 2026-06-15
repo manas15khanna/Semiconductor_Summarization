@@ -1,52 +1,99 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero-block">
+<div class="container py-5">
+  <!-- Header Card -->
+  <div class="bg-white border border-light rounded shadow-sm p-4 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
     <div>
-        <div class="eyebrow">Upload Documents</div>
-        <h2>{{ project.name if project else "Project" }}</h2>
-        <p>Upload PDF, DOCX, TXT, and MD files. Processing continues in the background after upload completes.</p>
+      <span class="rounded-pill px-3 py-1 bg-primary text-white text-uppercase fs-12 fw-bold">Document Management</span>
+      <h2 class="text-dark font-weight-bold mt-2 mb-1">Upload Documents</h2>
+      <p class="text-muted mb-0">
+        Project: <strong class="text-dark">{{ project.name if project else "Project" }}</strong> | Upload meeting minutes, transcripts, notes or reports.
+      </p>
     </div>
-    <div class="hero-actions">
-        {% if project %}
-            <a class="button-link secondary" href="/projects/{{ project.id }}">Back to project</a>
-        {% endif %}
-    </div>
-</section>
-
-{% if project %}
-<section class="panel upload-panel" data-project-id="{{ project.id }}">
-    <div class="dropzone" data-project-id="{{ project.id }}">
-        <input type="file" class="file-input" multiple accept=".pdf,.docx,.txt,.md">
-        <div class="dropzone-copy">
-            <strong>Drag and drop files here</strong>
-            <span>or click to select files from your local machine</span>
-        </div>
-    </div>
-    <div class="selected-files"></div>
-    <div class="upload-actions">
-        <button type="button" class="upload-trigger">Start upload</button>
-        <span class="status"></span>
-    </div>
-</section>
-{% else %}
-<section class="panel"><p class="empty-state">Project not found.</p></section>
-{% endif %}
-
-<section class="panel">
-    <div class="panel-header">
-        <h3>Recent Jobs</h3>
-    </div>
-    {% if jobs %}
-        <ul class="data-list">
-            {% for job in jobs %}
-                <li>
-                    <span>{{ job.filename }}</span>
-                    <span>{{ job.stage }} | {{ job.progress }}% | {{ job.status }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p class="empty-state">No background jobs yet.</p>
+    {% if project %}
+      <a href="/projects/{{ project.id }}" class="btn btn-outline-secondary d-inline-flex align-items-center">
+        <span class="material-symbols-outlined fs-18 me-1">arrow_back</span> Back to Workspace
+      </a>
     {% endif %}
-</section>
+  </div>
+
+  {% if project %}
+    <!-- Upload Form Card -->
+    <div class="card border-light shadow-sm mb-4">
+      <div class="card-header bg-white border-bottom border-light py-3">
+        <h4 class="card-title mb-0 text-dark fw-bold">Select and Ingest Files</h4>
+      </div>
+      <div class="card-body">
+        <div class="upload-panel" data-project-id="{{ project.id }}">
+          <div class="dropzone p-5 text-center bg-light border border-2 border-dashed border-primary-subtle rounded" data-project-id="{{ project.id }}" style="cursor: pointer;">
+            <input type="file" class="file-input d-none" multiple accept=".pdf,.docx,.txt,.md" id="file-uploader-input">
+            <label for="file-uploader-input" class="w-100 h-100 style-cursor" style="cursor: pointer;">
+              <span class="material-symbols-outlined fs-48 text-primary mb-2">cloud_upload</span>
+              <h5 class="text-dark fw-bold">Drag and drop files here</h5>
+              <span class="text-muted fs-14">or click to select PDF, DOCX, TXT, or MD files from your system</span>
+            </label>
+          </div>
+          <div class="selected-files mt-3"></div>
+          <div class="upload-actions mt-3 d-flex align-items-center">
+            <button type="button" class="btn btn-primary px-4 upload-trigger">Start Ingesting</button>
+            <span class="status ms-3 text-muted"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-danger text-center my-4" role="alert">
+      Project not found. Please select a valid project workspace.
+    </div>
+  {% endif %}
+
+  <!-- Recent Jobs Log -->
+  <div class="card border-light shadow-sm">
+    <div class="card-header bg-white border-bottom border-light py-3">
+      <h4 class="card-title mb-0 text-dark fw-bold">Recent Ingestion Jobs</h4>
+    </div>
+    <div class="card-body">
+      {% if jobs %}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle border-light">
+            <thead>
+              <tr class="table-light">
+                <th scope="col">Filename</th>
+                <th scope="col" style="width: 25%;">Stage</th>
+                <th scope="col" style="width: 20%;">Progress</th>
+                <th scope="col" style="width: 15%;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for job in jobs %}
+                <tr>
+                  <td><strong class="text-dark">{{ job.filename }}</strong></td>
+                  <td class="text-muted fs-14">{{ job.stage }}</td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="progress flex-grow-1 me-2" style="height: 6px; min-width: 100px;">
+                        <div class="progress-bar {% if job.status == 'failed' %}bg-danger{% elif job.status == 'complete' %}bg-success{% else %}bg-primary progress-bar-striped progress-bar-animated{% endif %}" role="progressbar" style="width: {{ job.progress }}%;" aria-valuenow="{{ job.progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <span class="fs-12 text-muted">{{ job.progress }}%</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="badge {% if job.status == 'complete' %}bg-success{% elif job.status == 'failed' %}bg-danger{% elif job.status == 'processing' %}bg-warning text-dark{% else %}bg-secondary{% endif %}">
+                      {{ job.status|title }}
+                    </span>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="text-center py-5">
+          <span class="material-symbols-outlined text-muted fs-48">assignment</span>
+          <p class="text-muted mt-2 mb-0">No background ingestion jobs registered yet.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock %}

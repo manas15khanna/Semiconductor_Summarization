@@ -1,113 +1,261 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero-block">
-    <div>
-        <div class="eyebrow">Dashboard</div>
-        <h2>Program overview</h2>
-        <p>Track documents, decisions, actions, risks, and timeline updates across local engineering projects.</p>
-    </div>
-    <div class="hero-actions">
-        <a class="button-link" href="/projects">Open projects</a>
-    </div>
-</section>
 
-<section class="card-grid five-up">
-    <article class="metric-card"><span>Projects</span><strong>{{ dashboard.counts.projects }}</strong></article>
-    <article class="metric-card"><span>Documents</span><strong>{{ dashboard.counts.documents }}</strong></article>
-    <article class="metric-card"><span>Decisions</span><strong>{{ dashboard.counts.decisions }}</strong></article>
-    <article class="metric-card"><span>Open Actions</span><strong>{{ dashboard.counts.open_actions }}</strong></article>
-    <article class="metric-card"><span>Risks</span><strong>{{ dashboard.counts.risks }}</strong></article>
-</section>
-
-<section class="content-grid two-col">
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Recent Uploads</h3>
+<!-- Hero Banner Section -->
+<section class="banner">
+  <div class="banner_inner">
+    <div class="banner_content mx-auto">
+      <div class="banner_logo d-flex flex-column align-items-center text-center">
+        <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/Meg-State-New-Emblem.png" alt="logo" loading="lazy" height="110" width="110" class="mb-3">
+        <h3 class="text-white">SCL Traceability System</h3>
+        <p class="text-white-50">AI-Powered Document Analysis, Traceability, and Search</p>
+      </div>
+      <div class="banner_search">
+        <form action="/search" method="get" class="banner_search_input rounded-pill d-flex align-items-center px-3">
+          <img src="/static/www.ux4g.gov.in/templates/html-template-5/assets/images/search-2.svg" alt="icon" loading="lazy" width="24" height="24" class="me-2">
+          <input type="text" name="query" placeholder="Search project documents, decisions, actions, or risks..." required class="form-control border-0 bg-transparent text-dark" style="box-shadow: none;">
+          <input type="submit" class="btn btn-warning rounded-pill px-4 text-dark fw-bold" value="Search">
+        </form>
+        <div class="banner-chip d-flex align-items-center justify-content-center flex-wrap mt-3">
+          <a href="/search?query=design" class="rounded-pill mx-1 my-1 px-3 py-1 bg-white text-dark text-decoration-none d-flex align-items-center btn-sm"><span class="material-symbols-outlined me-1">trending_up</span> Design</a>
+          <a href="/search?query=testing" class="rounded-pill mx-1 my-1 px-3 py-1 bg-white text-dark text-decoration-none d-flex align-items-center btn-sm"><span class="material-symbols-outlined me-1">trending_up</span> Testing</a>
+          <a href="/search?query=milestone" class="rounded-pill mx-1 my-1 px-3 py-1 bg-white text-dark text-decoration-none d-flex align-items-center btn-sm"><span class="material-symbols-outlined me-1">trending_up</span> Milestone</a>
+          <a href="/search?query=risk" class="rounded-pill mx-1 my-1 px-3 py-1 bg-white text-dark text-decoration-none d-flex align-items-center btn-sm"><span class="material-symbols-outlined me-1">trending_up</span> Risk</a>
         </div>
-        {% if dashboard.recent_uploads %}
-            <ul class="data-list">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Overview Metrics Section -->
+<section id="Skip-to-Main-Content" class="explore py-5 bg-light">
+  <div class="container position-relative">
+    <div class="explore_inner position-relative">
+      <div class="explore_head text-center mb-4">
+        <span class="rounded-pill px-3 py-1 bg-primary text-white text-uppercase fs-12 fw-bold">Overview</span>
+        <h3 class="mt-2 text-dark font-weight-bold">Program Metrics</h3>
+      </div>
+      <div class="services_chip d-flex flex-wrap align-items-center justify-content-center gap-3">
+        <a href="/projects" class="d-flex align-items-center text-decoration-none p-3 shadow-sm bg-white rounded border border-light" style="min-width: 220px; transition: transform 0.2s;">
+          <i class="icon_1 rounded-circle d-flex align-items-center justify-content-center bg-primary-subtle p-2 me-3" style="width: 45px; height: 45px;"><span class="material-symbols-outlined text-primary">folder</span></i>
+          <div>
+            <strong class="d-block text-dark fs-18">{{ dashboard.counts.projects }}</strong>
+            <span class="text-muted fs-14">Projects</span>
+          </div>
+          <span class="material-symbols-outlined ms-auto text-muted">chevron_right</span>
+        </a>
+        <a href="/projects" class="d-flex align-items-center text-decoration-none p-3 shadow-sm bg-white rounded border border-light" style="min-width: 220px; transition: transform 0.2s;">
+          <i class="icon_2 rounded-circle d-flex align-items-center justify-content-center bg-success-subtle p-2 me-3" style="width: 45px; height: 45px;"><span class="material-symbols-outlined text-success">description</span></i>
+          <div>
+            <strong class="d-block text-dark fs-18">{{ dashboard.counts.documents }}</strong>
+            <span class="text-muted fs-14">Documents</span>
+          </div>
+          <span class="material-symbols-outlined ms-auto text-muted">chevron_right</span>
+        </a>
+        <a href="/decisions" class="d-flex align-items-center text-decoration-none p-3 shadow-sm bg-white rounded border border-light" style="min-width: 220px; transition: transform 0.2s;">
+          <i class="icon_3 rounded-circle d-flex align-items-center justify-content-center bg-info-subtle p-2 me-3" style="width: 45px; height: 45px;"><span class="material-symbols-outlined text-info">gavel</span></i>
+          <div>
+            <strong class="d-block text-dark fs-18">{{ dashboard.counts.decisions }}</strong>
+            <span class="text-muted fs-14">Decisions</span>
+          </div>
+          <span class="material-symbols-outlined ms-auto text-muted">chevron_right</span>
+        </a>
+        <a href="/actions" class="d-flex align-items-center text-decoration-none p-3 shadow-sm bg-white rounded border border-light" style="min-width: 220px; transition: transform 0.2s;">
+          <i class="icon_4 rounded-circle d-flex align-items-center justify-content-center bg-warning-subtle p-2 me-3" style="width: 45px; height: 45px;"><span class="material-symbols-outlined text-warning">task</span></i>
+          <div>
+            <strong class="d-block text-dark fs-18">{{ dashboard.counts.open_actions }}</strong>
+            <span class="text-muted fs-14">Open Actions</span>
+          </div>
+          <span class="material-symbols-outlined ms-auto text-muted">chevron_right</span>
+        </a>
+        <a href="/risks" class="d-flex align-items-center text-decoration-none p-3 shadow-sm bg-white rounded border border-light" style="min-width: 220px; transition: transform 0.2s;">
+          <i class="icon_5 rounded-circle d-flex align-items-center justify-content-center bg-danger-subtle p-2 me-3" style="width: 45px; height: 45px;"><span class="material-symbols-outlined text-danger">warning</span></i>
+          <div>
+            <strong class="d-block text-dark fs-18">{{ dashboard.counts.risks }}</strong>
+            <span class="text-muted fs-14">Risks</span>
+          </div>
+          <span class="material-symbols-outlined ms-auto text-muted">chevron_right</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dashboard Insights -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Recent Uploads Panel -->
+      <div class="col-lg-6">
+        <div class="card border-light shadow-sm h-100">
+          <div class="card-header bg-white border-bottom border-light py-3 d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0 text-dark fw-bold">Recent Uploads</h4>
+            <span class="badge bg-primary rounded-pill">Latest</span>
+          </div>
+          <div class="card-body">
+            {% if dashboard.recent_uploads %}
+              <div class="list-group list-group-flush">
                 {% for document in dashboard.recent_uploads %}
-                    <li>
-                        <a href="/documents/{{ document.id }}">{{ document.filename }}</a>
-                        <span>{{ document.file_type|upper }} | {{ document.processing_status }}</span>
-                    </li>
+                  <a href="/documents/{{ document.id }}" class="list-group-item list-group-item-action d-flex align-items-center py-3 border-light">
+                    <span class="material-symbols-outlined text-muted me-3">description</span>
+                    <div class="flex-grow-1">
+                      <div class="text-dark fw-bold text-truncate" style="max-width: 320px;">{{ document.filename }}</div>
+                      <small class="text-muted">{{ document.file_type|upper }} | Status: <span class="badge {% if document.processing_status == 'processed' %}bg-success{% elif document.processing_status == 'failed' %}bg-danger{% else %}bg-warning text-dark{% endif %}">{{ document.processing_status }}</span></small>
+                    </div>
+                    <span class="material-symbols-outlined text-muted">chevron_right</span>
+                  </a>
                 {% endfor %}
-            </ul>
-        {% else %}
-            <p class="empty-state">No uploads yet.</p>
-        {% endif %}
-    </article>
-
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Recent Project Activity</h3>
+              </div>
+            {% else %}
+              <div class="text-center py-5">
+                <span class="material-symbols-outlined text-muted fs-48">folder_open</span>
+                <p class="text-muted mt-2">No documents uploaded yet.</p>
+              </div>
+            {% endif %}
+          </div>
         </div>
-        {% if dashboard.recent_activity %}
-            <ul class="timeline-list compact">
+      </div>
+
+      <!-- Recent Project Activity -->
+      <div class="col-lg-6">
+        <div class="card border-light shadow-sm h-100">
+          <div class="card-header bg-white border-bottom border-light py-3 d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0 text-dark fw-bold">Recent Project Activity</h4>
+            <span class="badge bg-secondary rounded-pill">Timeline</span>
+          </div>
+          <div class="card-body">
+            {% if dashboard.recent_activity %}
+              <div class="position-relative ps-3 border-start border-2 border-primary-subtle" style="margin-left: 10px;">
                 {% for event in dashboard.recent_activity %}
-                    <li>
-                        <strong>{{ event.event_date or event.date }}</strong>
-                        <span>{{ event.title }}</span>
-                    </li>
+                  <div class="mb-4 position-relative">
+                    <div class="position-absolute bg-primary rounded-circle" style="width: 12px; height: 12px; left: -20px; top: 6px; border: 2px solid white;"></div>
+                    <div class="fw-bold text-primary fs-14">{{ event.event_date or event.date }}</div>
+                    <div class="text-dark fw-semibold mt-1">{{ event.title }}</div>
+                    {% if event.description %}
+                      <p class="text-muted fs-13 mb-0" style="line-height: 1.4;">{{ event.description }}</p>
+                    {% endif %}
+                  </div>
                 {% endfor %}
-            </ul>
-        {% else %}
-            <p class="empty-state">No activity yet.</p>
-        {% endif %}
-    </article>
+              </div>
+            {% else %}
+              <div class="text-center py-5">
+                <span class="material-symbols-outlined text-muted fs-48">pending_actions</span>
+                <p class="text-muted mt-2">No project activity recorded yet.</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="content-grid two-col">
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Most Recent Generated Summary</h3>
+<!-- Generated Summary Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-light shadow-sm">
+          <div class="card-header bg-white border-bottom border-light py-3 d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0 text-dark fw-bold">Most Recent AI Generated Summary</h4>
+            <span class="badge bg-info text-dark rounded-pill">Gemma 3 AI</span>
+          </div>
+          <div class="card-body">
+            {% if dashboard.recent_summary %}
+              <div class="p-3 bg-white rounded border border-light shadow-inner">
+                <pre class="mb-0 text-dark" style="white-space: pre-wrap; font-family: inherit; font-size: 15px; line-height: 1.6;">{{ dashboard.recent_summary.summary_text if dashboard.recent_summary.summary_text is defined else dashboard.recent_summary }}</pre>
+              </div>
+            {% else %}
+              <div class="text-center py-5">
+                <span class="material-symbols-outlined text-muted fs-48">auto_stories</span>
+                <p class="text-muted mt-2 mb-0">No summary has been generated yet. Upload meeting files to process them.</p>
+              </div>
+            {% endif %}
+          </div>
         </div>
-        <pre>{% if dashboard.recent_summary %}{{ dashboard.recent_summary.summary_text if dashboard.recent_summary.summary_text is defined else dashboard.recent_summary }}{% else %}No summary generated yet.{% endif %}</pre>
-    </article>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Processing Jobs</h3>
-        </div>
-        {% if dashboard.jobs %}
-            <ul class="data-list">
+<!-- Processing Jobs and Dataset Snapshot -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Processing Jobs -->
+      <div class="col-lg-6">
+        <div class="card border-light shadow-sm h-100">
+          <div class="card-header bg-white border-bottom border-light py-3 d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0 text-dark fw-bold">Processing Jobs</h4>
+            <span class="badge bg-warning text-dark rounded-pill">Active</span>
+          </div>
+          <div class="card-body">
+            {% if dashboard.jobs %}
+              <div class="list-group list-group-flush">
                 {% for job in dashboard.jobs %}
-                    <li>
-                        <span>{{ job.filename }}</span>
-                        <span>{{ job.stage }} | {{ job.progress }}%</span>
-                    </li>
+                  <div class="list-group-item py-3 border-light">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <strong class="text-dark">{{ job.filename }}</strong>
+                      <span class="badge bg-light text-dark">{{ job.stage }}</span>
+                    </div>
+                    <div class="progress" style="height: 8px;">
+                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: {{ job.progress }}%;" aria-valuenow="{{ job.progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1 fs-12 text-muted">
+                      <span>Progress</span>
+                      <span>{{ job.progress }}%</span>
+                    </div>
+                  </div>
                 {% endfor %}
-            </ul>
-        {% else %}
-            <p class="empty-state">No jobs yet.</p>
-        {% endif %}
-    </article>
+              </div>
+            {% else %}
+              <div class="text-center py-5">
+                <span class="material-symbols-outlined text-muted fs-48">check_circle</span>
+                <p class="text-muted mt-2">All tasks completed. No active jobs.</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Dataset Snapshot -->
+      <div class="col-lg-6">
+        <div class="card border-light shadow-sm h-100">
+          <div class="card-header bg-white border-bottom border-light py-3">
+            <h4 class="card-title mb-0 text-dark fw-bold">Dataset Snapshot</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle border-light">
+                <tbody>
+                  <tr>
+                    <th class="text-muted fw-semibold border-light py-3" style="width: 35%;">Primary Program:</th>
+                    <td class="text-dark fw-bold border-light py-3">{{ dashboard.dataset_summary.project_name or "Default Project" }}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-muted fw-semibold border-light py-3">Timeline Coverage:</th>
+                    <td class="text-dark border-light py-3">{{ dashboard.dataset_summary.timeline_start or "N/A" }} to {{ dashboard.dataset_summary.timeline_end or "N/A" }}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-muted fw-semibold border-light py-3">Identified Search Terms:</th>
+                    <td class="border-light py-3">
+                      {% if dashboard.dataset_summary.repeated_search_terms %}
+                        {% for term in dashboard.dataset_summary.repeated_search_terms %}
+                          <span class="badge bg-secondary-subtle text-secondary me-1 mb-1">{{ term }}</span>
+                        {% endfor %}
+                      {% else %}
+                        <span class="text-muted fs-14">None identified yet</span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="content-grid two-col">
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Risk Register</h3>
-        </div>
-        <ul class="data-list">
-            {% for risk in dashboard.risk_register %}
-                <li>
-                    <span>{{ risk.severity_emoji }} {{ risk.title }}</span>
-                    <span>{{ risk.severity|title }} | {{ risk.status }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-    </article>
-
-    <article class="panel">
-        <div class="panel-header">
-            <h3>Dataset Snapshot</h3>
-        </div>
-        <div class="meta-stack">
-            <div><strong>Program:</strong> {{ dashboard.dataset_summary.project_name }}</div>
-            <div><strong>Timeline:</strong> {{ dashboard.dataset_summary.timeline_start }} to {{ dashboard.dataset_summary.timeline_end }}</div>
-            <div><strong>Search terms:</strong> {{ dashboard.dataset_summary.repeated_search_terms|join(", ") }}</div>
-        </div>
-    </article>
-</section>
 {% endblock %}

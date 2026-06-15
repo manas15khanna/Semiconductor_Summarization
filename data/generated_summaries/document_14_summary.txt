@@ -1,13 +1,1 @@
-Here’s a concise summary of the document:
-
-**Project Context:** A decision was made to reduce scan compression ratio to enhance diagnostic visibility during at-speed testing.
-
-**Key Findings:** Pilot lot data lacked sufficient isolation of digital control faults.
-
-**Decisions:**  The high-compression test plan was replaced with a new plan utilizing sufficient data.
-
-**Risks:** Increased pattern count, improved diagnosis and failure triage.
-
-**Action Items:** Update production test documentation.
-
-**Next Steps:** Continue monitoring and validating the new diagnostic visibility.
+This document outlines the final production readiness board meeting held on June 25, 2026. The board reviewed RPT-010, the latest action tracker, and the final reliability qualification evidence. The board approved the pilot production release conditions, with ongoing monitoring of R-003. The board also issued AI-022 with a final reliability qualification sign-off package. The board's decisions were made based on the reviewed documents and the identified risks and action items.

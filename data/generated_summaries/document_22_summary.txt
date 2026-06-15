@@ -1,0 +1,10 @@
+**Meeting Summary:**
+
+This meeting focused on evaluating the lithography alignment exposure of the layout and lithography alignment sensor array.
+
+**Key Findings:**
+
+*   The array edge condition caused tension between matching and density requirements.
+*   The alignment sensitivity was high near the capacitor array edge, potentially necessitating dedicated overlay monitors.
+*   The board agreed on the need for a dedicated overlay monitor for Lithography Alignment sensitivity, suggesting the use of radiation hardening and packaging revision.
+*   The board's decision to not make new formal decisions was made, prioritizing the material that would become D-005.

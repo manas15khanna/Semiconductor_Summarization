@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5">
+  <!-- Header Card -->
+  <div class="bg-white border border-light rounded shadow-sm p-4 mb-4">
+    <span class="rounded-pill px-3 py-1 bg-primary text-white text-uppercase fs-12 fw-bold">Traceability</span>
+    <h2 class="text-dark font-weight-bold mt-2 mb-1">Decision Register</h2>
+    <p class="text-muted mb-0">Review key design and management decisions extracted from project meetings and documents.</p>
+  </div>
+
+  <!-- Decisions Table Card -->
+  <div class="card border-light shadow-sm">
+    <div class="card-body">
+      {% if decisions %}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle border-light">
+            <thead>
+              <tr class="table-light">
+                <th scope="col" style="width: 25%;">Title</th>
+                <th scope="col" style="width: 35%;">Description</th>
+                <th scope="col" style="width: 15%;">Owner</th>
+                <th scope="col" style="width: 10%;">Status</th>
+                <th scope="col" style="width: 15%;">Date</th>
+                <th scope="col" style="width: 15%;">Project</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for decision in decisions %}
+                <tr>
+                  <td>
+                    {% if decision.document_id %}
+                      <a href="/documents/{{ decision.document_id }}" class="text-dark fw-bold text-decoration-none d-flex align-items-center">
+                        <span class="material-symbols-outlined text-muted me-2">gavel</span>
+                        {{ decision.title }}
+                      </a>
+                    {% else %}
+                      <span class="text-dark fw-bold d-flex align-items-center">
+                        <span class="material-symbols-outlined text-muted me-2">gavel</span>
+                        {{ decision.title }}
+                      </span>
+                    {% endif %}
+                  </td>
+                  <td class="text-muted fs-14">{{ decision.description }}</td>
+                  <td class="text-muted fs-14">{{ decision.owner or "N/A" }}</td>
+                  <td>
+                    <span class="badge {% if decision.status == 'approved' or decision.status == 'resolved' or decision.status == 'done' %}bg-success{% else %}bg-secondary{% endif %}">
+                      {{ decision.status|title or "N/A" }}
+                    </span>
+                  </td>
+                  <td class="text-muted fs-14">{{ decision.decision_date or "N/A" }}</td>
+                  <td>
+                    {% if decision.project %}
+                      <a href="/projects/{{ decision.project_id }}" class="text-primary fw-semibold text-decoration-none">
+                        {{ decision.project.name }}
+                      </a>
+                    {% else %}
+                      <span class="text-muted">N/A</span>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="text-center py-5">
+          <span class="material-symbols-outlined text-muted fs-48">folder_open</span>
+          <p class="text-muted mt-2 mb-0">No decisions have been logged yet.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

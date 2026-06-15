@@ -1,27 +1,34 @@
-Okay, here's a concise summary of the document, structured as requested:
+This document summarizes the meeting held on June 17, 2025, to review the status of the verification and tapeout readiness of the DEC-014 and DEC-015 TMR voter implementations.
 
-**Project Context**
+**Key Findings:**
 
-This document outlines the decision-making process for selecting a converter architecture within the Architecture Selection Board meeting. The core focus is on the segmented capacitor DAC architecture, chosen as D-002.
+*   **TPMR Voter Implementation:** The DEC-014 and DEC-015 TMR voter implementations were successfully implemented and re-verified.
+*   **Verification Closure:** All 22 properties proven in the verification system were successfully closed.
+*   **Tapeout Readiness:** The tapeout readiness checklist was completed, and all remaining open items were identified and resolved.
+*   **DRDO's Role:** Dr. Sharma is responsible for the implementation and re-verification of the DEC-014 and DEC-015 TMR voter implementations.
+*   **CAP Failure:** One of the two failing TMR voter implementations (DEC-014) was identified as a blocking issue, which was addressed by the DEC-014 implementation.
 
-**Key Findings**
+**Risks:**
 
-*   **Architecture Selection:** The board approved the segmented capacitor DAC architecture (D-002) with a bootstrapped switch, prioritizing linearity and Radiation Hardening margin.
-*   **Technical Concerns:** ADC Reference Voltage drift and Lithography Alignment remain open technical challenges for Maya Chen, requiring mitigation.
-*   **Action Items:** AI-003 is assigned to run a capacitor DAC mismatch sweep to address this issue.
+*   **Tapeout Schedule Slip:** The DEC-014 implementation was delayed by two weeks due to a potential issue with the input pipeline register and the comparator regeneration path transistors.
+*   **Gate-Level Simulation:** The DRC/LVS simulation was delayed due to the extended runtime of the DCF run.
+*   **ENOB Failure:** The ENOB failure was identified at the worst-case radiation corner, which is a critical area for the solution.
+*   **TMR Simultaneous Dual-Bit Upset:** The TMR simultaneous dual-bit upset vulnerability was identified, which is a significant issue.
 
-**Decisions**
+**Action Items:**
 
-*   **Architectural Choice:** D-002 – Segmented Capacitor DAC with bootstrapped switch.
-*   **Risk Assessment:**  Significant risks identified relate to ADC Reference Voltage drift and Lithography Alignment.
-*   **Action Items:**  (AI-003) – Capacitor DAC mismatch sweep.
+*   **DEC-014 Implementation:** The DEC-014 implementation was revised to include an input pipeline register with physical cell spacing per Dr. Menon's recommendation. This is a blocking issue.
+*   **DEC-015 Implementation:** The DEC-015 implementation was re-verified and re-run with the new input pipeline register.
+*   **DRDO's Role:** Dr. Sharma is responsible for the implementation and re-verification of the DEC-014 and DEC-015 TMR voter implementations.
+*   **CAP Failure:** One of the two failing TMR implementations (DEC-014) was identified as a blocking issue. The DEC-014 implementation was addressed by the DEC-014 implementation.
+*   **Tapeout Readiness:** The tapeout readiness checklist was completed and all remaining open items were resolved.
+*   **DRDO's Role:** Dr. Sharma is responsible for the implementation and re-verification of the DEC-014 and DEC-015 TMR voter implementations.
 
-**Risks & Mitigation**
+**Next Meeting Objectives:**
 
-*   **Risk 1 (Maya Chen):** ADC Reference Voltage drift – Mitigated and severity high.
-*   **Risk 2 (Luis Ortega):** Lithography Alignment – Mitigated and severity high.
-
-**Next Steps**
-
-*   **Ongoing:** Monitor and address the risks identified (ADC Reference Voltage Drift & Lithography Alignment).
-*   **Task:** Implement Capacitor DAC Mismatch Sweep (AI-003)
+*   Confirm the DEC-014 and DEC-015 TMR voter implementations are successfully implemented and re-verified.
+*   Confirm the DRC/LVS clean.
+*   Confirm the 100% DMC coverage closure.
+*   Present the complete tapeout readiness checklist.
+*   Approve or defer the tapeout.
+*   Review the remaining open items.

@@ -1,5 +1,8 @@
 from pathlib import Path
 import re
+import queue
+import threading
+import logging
 
 from fastapi import HTTPException, UploadFile
 from sqlalchemy import func, or_
@@ -13,10 +16,87 @@ from app.services.job_service import JobService
 from app.utils.dataset_utils import get_dataset_metadata, infer_risk_severity, severity_emoji
 from app.utils.file_utils import detect_file_type, generate_content_hash, sanitize_filename, unique_output_path
 
+logger = logging.getLogger(__name__)
+
+_job_queue = queue.Queue()
+_worker_started = False
+_worker_lock = threading.Lock()
+
+def _worker_loop():
+    while True:
+        try:
+            doc_id, job_id, project_service_instance = _job_queue.get()
+            project_service_instance.process_document_job(doc_id, job_id)
+        except Exception as e:
+            logger.exception("Error in background worker processing document %s", doc_id)
+        finally:
+            _job_queue.task_done()
+
 
 class ProjectService:
     def __init__(self):
         self.job_service = JobService()
+
+    def sync_meetings_folder(self, db: Session) -> None:
+        from app.config import UPLOADS_DIR, DATASET_DIR
+        from app.utils.file_utils import generate_content_hash, detect_file_type
+        import threading
+        import shutil
+        
+        UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+        
+        # Pre-populate uploads directory from dataset/meetings if it's empty
+        if not any(UPLOADS_DIR.glob("*")):
+            dataset_meetings = DATASET_DIR / "meetings"
+            if dataset_meetings.exists():
+                for f in dataset_meetings.glob("*"):
+                    if f.is_file():
+                        shutil.copy(f, UPLOADS_DIR / f.name)
+        
+        project = db.query(Project).first()
+        if not project:
+            project = self.create_project(db, "Default Project", "Automatically created project for meeting files.")
+            
+        db_docs = db.query(Document).filter(Document.storage_path != "").all()
+        db_doc_paths = {Path(d.storage_path).resolve(): d for d in db_docs}
+        disk_paths = {p.resolve() for p in UPLOADS_DIR.glob("*") if p.is_file()}
+        
+        for disk_path in disk_paths:
+            if disk_path not in db_doc_paths:
+                file_bytes = disk_path.read_bytes()
+                content_hash = generate_content_hash(file_bytes)
+                try:
+                    file_type = detect_file_type(disk_path.name)
+                except ValueError:
+                    file_type = "txt"
+                
+                document = Document(
+                    project_id=project.id,
+                    filename=disk_path.name,
+                    file_type=file_type,
+                    content_hash=content_hash,
+                    raw_text="",
+                    storage_path=str(disk_path),
+                    processing_status="queued",
+                )
+                db.add(document)
+                db.commit()
+                db.refresh(document)
+                
+                job = self.job_service.create_job(db, project.id, document.id, document.filename)
+                
+                # Enqueue the job for sequential background processing
+                with _worker_lock:
+                    global _worker_started
+                    if not _worker_started:
+                        threading.Thread(target=_worker_loop, daemon=True).start()
+                        _worker_started = True
+                _job_queue.put((document.id, job.id, self))
+                
+        for db_path, doc in db_doc_paths.items():
+            if db_path.parent == UPLOADS_DIR.resolve() and db_path not in disk_paths:
+                db.delete(doc)
+        db.commit()
 
     def create_project(self, db: Session, name: str, description: str) -> Project:
         existing = db.query(Project).filter(func.lower(Project.name) == name.lower()).first()
@@ -28,8 +108,45 @@ class ProjectService:
         db.commit()
         db.refresh(project)
 
+        from app.config import PROJECTS_DIR
         (PROJECTS_DIR / str(project.id)).mkdir(parents=True, exist_ok=True)
         return project
+
+    def edit_project(self, db: Session, project_id: int, name: str, description: str) -> Project:
+        project = db.query(Project).filter(Project.id == project_id).first()
+        if not project:
+            raise HTTPException(status_code=404, detail="Project not found.")
+        existing = db.query(Project).filter(func.lower(Project.name) == name.lower(), Project.id != project_id).first()
+        if existing:
+            raise HTTPException(status_code=400, detail="Project name already exists.")
+            
+        project.name = name.strip()
+        project.description = description.strip()
+        db.commit()
+        db.refresh(project)
+        return project
+
+    def delete_project(self, db: Session, project_id: int) -> None:
+        project = db.query(Project).filter(Project.id == project_id).first()
+        if not project:
+            raise HTTPException(status_code=404, detail="Project not found.")
+        for document in project.documents:
+            self.delete_document(db, document.id)
+        db.delete(project)
+        db.commit()
+
+    def move_document(self, db: Session, document_id: int, target_project_id: int) -> Document:
+        document = db.query(Document).filter(Document.id == document_id).first()
+        if not document:
+            raise HTTPException(status_code=404, detail="Document not found.")
+        target_project = db.query(Project).filter(Project.id == target_project_id).first()
+        if not target_project:
+            raise HTTPException(status_code=404, detail="Target project not found.")
+            
+        document.project_id = target_project_id
+        db.commit()
+        db.refresh(document)
+        return document
 
     def upload_document(self, db: Session, project_id: int, upload: UploadFile) -> dict:
         project = db.query(Project).filter(Project.id == project_id).first()
@@ -49,9 +166,8 @@ class ProjectService:
             return {"document": existing, "skipped": True}
 
         filename = sanitize_filename(upload.filename or "document")
-        project_upload_dir = UPLOADS_DIR / str(project_id)
-        project_upload_dir.mkdir(parents=True, exist_ok=True)
-        output_path = unique_output_path(project_upload_dir, filename)
+        UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+        output_path = unique_output_path(UPLOADS_DIR, filename)
         output_path.write_bytes(file_bytes)
 
         document = Document(
@@ -92,6 +208,92 @@ class ProjectService:
             self.job_service.update_job(db, job_id, status="failed", stage="Failed", progress=100, error_message=str(exc))
         finally:
             db.close()
+
+    def _clear_extractions(self, db: Session, document: Document):
+        db.query(Summary).filter(Summary.document_id == document.id).delete()
+        db.query(Decision).filter(Decision.document_id == document.id).delete()
+        db.query(ActionItem).filter(ActionItem.document_id == document.id).delete()
+        db.query(Risk).filter(Risk.document_id == document.id).delete()
+        db.query(TimelineEvent).filter(
+            TimelineEvent.project_id == document.project_id,
+            TimelineEvent.source_document == document.filename
+        ).delete()
+        db.commit()
+
+    def delete_document(self, db: Session, document_id: int) -> None:
+        document = db.query(Document).filter(Document.id == document_id).first()
+        if not document:
+            raise HTTPException(status_code=404, detail="Document not found.")
+        self._clear_extractions(db, document)
+        if document.storage_path:
+            path = Path(document.storage_path)
+            if path.exists():
+                path.unlink()
+        db.delete(document)
+        db.commit()
+
+    def edit_document(self, db: Session, document_id: int, new_filename: str, new_content: str) -> dict:
+        document = db.query(Document).filter(Document.id == document_id).first()
+        if not document:
+            raise HTTPException(status_code=404, detail="Document not found.")
+        if document.file_type not in ["txt", "md", ""]:
+            raise HTTPException(status_code=400, detail="Only text-based files can be edited.")
+        
+        self._clear_extractions(db, document)
+        old_path = Path(document.storage_path) if document.storage_path else None
+        
+        from app.config import UPLOADS_DIR
+        new_path = UPLOADS_DIR / new_filename
+        if old_path and new_path != old_path and new_path.exists():
+            raise HTTPException(status_code=400, detail="A file with this name already exists.")
+            
+        new_path.write_text(new_content, encoding="utf-8")
+        if old_path and new_path != old_path and old_path.exists():
+            old_path.unlink()
+            
+        document.filename = new_filename
+        document.storage_path = str(new_path)
+        document.processing_status = "queued"
+        document.raw_text = ""
+        db.add(document)
+        db.commit()
+        
+        job = self.job_service.create_job(db, document.project_id, document.id, document.filename)
+        return {"document": document, "job": job}
+
+    def replace_document(self, db: Session, document_id: int, upload: UploadFile) -> dict:
+        document = db.query(Document).filter(Document.id == document_id).first()
+        if not document:
+            raise HTTPException(status_code=404, detail="Document not found.")
+            
+        self._clear_extractions(db, document)
+        if document.storage_path:
+            old_path = Path(document.storage_path)
+            if old_path.exists():
+                old_path.unlink()
+                
+        file_bytes = upload.file.read()
+        from app.utils.file_utils import detect_file_type, generate_content_hash, sanitize_filename
+        file_type = detect_file_type(upload.filename or "")
+        content_hash = generate_content_hash(file_bytes)
+        filename = sanitize_filename(upload.filename or "document")
+        
+        from app.config import UPLOADS_DIR
+        UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+        new_path = UPLOADS_DIR / filename
+        new_path.write_bytes(file_bytes)
+        
+        document.filename = filename
+        document.file_type = file_type
+        document.content_hash = content_hash
+        document.storage_path = str(new_path)
+        document.processing_status = "queued"
+        document.raw_text = ""
+        db.add(document)
+        db.commit()
+        
+        job = self.job_service.create_job(db, document.project_id, document.id, document.filename)
+        return {"document": document, "job": job}
 
     def get_project_dashboard(self, db: Session, project_id: int) -> dict:
         project = db.query(Project).filter(Project.id == project_id).first()
@@ -328,6 +530,22 @@ class ProjectService:
                         snippet,
                         query,
                         f"/documents/{risk.document_id}",
+                    )
+                )
+
+        if normalized_filter in {"all", "timeline"}:
+            for event in db.query(TimelineEvent).filter(
+                or_(TimelineEvent.title.ilike(term), TimelineEvent.description.ilike(term))
+            ).all():
+                snippet = " | ".join([event.title, event.description])
+                results.append(
+                    self._result_item(
+                        "Timeline Event",
+                        project_map.get(event.project_id, ""),
+                        event.source_document,
+                        snippet,
+                        query,
+                        f"/projects/{event.project_id}/timeline",
                     )
                 )
 
