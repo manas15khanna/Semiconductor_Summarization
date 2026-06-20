@@ -445,7 +445,7 @@ class ProjectService:
             .all()
         )
 
-    def search(self, db: Session, query: str, filter_type: str = "all") -> list[dict]:
+    def search(self, db: Session, query: str, filter_type: str = "all", project_id: int | None = None) -> list[dict]:
         term = f"%{query.strip()}%"
         if not query.strip():
             return []
@@ -457,7 +457,10 @@ class ProjectService:
         normalized_filter = filter_type.lower()
 
         if normalized_filter in {"all", "documents"}:
-            for document in db.query(Document).filter(Document.raw_text.ilike(term)).all():
+            doc_query = db.query(Document).filter(Document.raw_text.ilike(term))
+            if project_id is not None:
+                doc_query = doc_query.filter(Document.project_id == project_id)
+            for document in doc_query.all():
                 results.append(
                     self._result_item(
                         "Document",
@@ -469,7 +472,10 @@ class ProjectService:
                     )
                 )
 
-            for summary in db.query(Summary).filter(Summary.summary_text.ilike(term)).all():
+            sum_query = db.query(Summary).filter(Summary.summary_text.ilike(term))
+            if project_id is not None:
+                sum_query = sum_query.filter(Summary.project_id == project_id)
+            for summary in sum_query.all():
                 document = document_map.get(summary.document_id)
                 results.append(
                     self._result_item(
@@ -483,9 +489,12 @@ class ProjectService:
                 )
 
         if normalized_filter in {"all", "decisions"}:
-            for decision in db.query(Decision).filter(
+            dec_query = db.query(Decision).filter(
                 or_(Decision.title.ilike(term), Decision.description.ilike(term), Decision.owner.ilike(term))
-            ).all():
+            )
+            if project_id is not None:
+                dec_query = dec_query.filter(Decision.project_id == project_id)
+            for decision in dec_query.all():
                 document = document_map.get(decision.document_id)
                 snippet = " | ".join([decision.title, decision.description, decision.owner])
                 results.append(
@@ -500,9 +509,12 @@ class ProjectService:
                 )
 
         if normalized_filter in {"all", "actions"}:
-            for action in db.query(ActionItem).filter(
+            act_query = db.query(ActionItem).filter(
                 or_(ActionItem.description.ilike(term), ActionItem.owner.ilike(term), ActionItem.status.ilike(term))
-            ).all():
+            )
+            if project_id is not None:
+                act_query = act_query.filter(ActionItem.project_id == project_id)
+            for action in act_query.all():
                 document = document_map.get(action.document_id)
                 snippet = " | ".join([action.description, action.owner, action.status])
                 results.append(
@@ -517,9 +529,12 @@ class ProjectService:
                 )
 
         if normalized_filter in {"all", "risks"}:
-            for risk in db.query(Risk).filter(
+            risk_query = db.query(Risk).filter(
                 or_(Risk.description.ilike(term), Risk.impact.ilike(term), Risk.mitigation.ilike(term), Risk.owner.ilike(term))
-            ).all():
+            )
+            if project_id is not None:
+                risk_query = risk_query.filter(Risk.project_id == project_id)
+            for risk in risk_query.all():
                 document = document_map.get(risk.document_id)
                 snippet = " | ".join([risk.description, risk.impact, risk.mitigation, risk.owner])
                 results.append(
@@ -534,9 +549,12 @@ class ProjectService:
                 )
 
         if normalized_filter in {"all", "timeline"}:
-            for event in db.query(TimelineEvent).filter(
+            time_query = db.query(TimelineEvent).filter(
                 or_(TimelineEvent.title.ilike(term), TimelineEvent.description.ilike(term))
-            ).all():
+            )
+            if project_id is not None:
+                time_query = time_query.filter(TimelineEvent.project_id == project_id)
+            for event in time_query.all():
                 snippet = " | ".join([event.title, event.description])
                 results.append(
                     self._result_item(

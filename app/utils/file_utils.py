@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 
 
-SUPPORTED_EXTENSIONS = {".txt", ".md", ".pdf", ".docx"}
+SUPPORTED_EXTENSIONS = {".txt", ".md", ".pdf", ".docx", ".xlsx", ".xls", ".png", ".jpg", ".jpeg"}
 
 
 def sanitize_filename(filename: str) -> str:

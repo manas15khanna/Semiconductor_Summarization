@@ -20,27 +20,39 @@
           </div>
         </div>
         <div class="col-12">
-          <div class="d-flex align-items-center flex-wrap gap-3 mt-2">
-            <span class="text-muted fw-semibold fs-14">Filter by Type:</span>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="filter_type" id="filter-all" value="all" checked>
-              <label class="form-check-label text-dark fs-14" for="filter-all">All Results</label>
+          <div class="d-flex align-items-center flex-wrap gap-4 mt-2">
+            <div class="d-flex align-items-center flex-wrap gap-2">
+              <span class="text-muted fw-semibold fs-14 me-2">Filter by Type:</span>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filter_type" id="filter-all" value="all" checked>
+                <label class="form-check-label text-dark fs-14" for="filter-all">All Results</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filter_type" id="filter-docs" value="documents">
+                <label class="form-check-label text-dark fs-14" for="filter-docs">Documents</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filter_type" id="filter-decisions" value="decisions">
+                <label class="form-check-label text-dark fs-14" for="filter-decisions">Decisions</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filter_type" id="filter-actions" value="actions">
+                <label class="form-check-label text-dark fs-14" for="filter-actions">Actions</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filter_type" id="filter-risks" value="risks">
+                <label class="form-check-label text-dark fs-14" for="filter-risks">Risks</label>
+              </div>
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="filter_type" id="filter-docs" value="documents">
-              <label class="form-check-label text-dark fs-14" for="filter-docs">Documents</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="filter_type" id="filter-decisions" value="decisions">
-              <label class="form-check-label text-dark fs-14" for="filter-decisions">Decisions</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="filter_type" id="filter-actions" value="actions">
-              <label class="form-check-label text-dark fs-14" for="filter-actions">Actions</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="filter_type" id="filter-risks" value="risks">
-              <label class="form-check-label text-dark fs-14" for="filter-risks">Risks</label>
+            
+            <div class="d-flex align-items-center gap-2">
+              <span class="text-muted fw-semibold fs-14">Project Scope:</span>
+              <select name="project_id" id="project_id" class="form-select form-select-sm border border-light shadow-sm bg-white text-dark rounded-pill px-3" style="width: auto; min-width: 180px;">
+                <option value="">All Projects</option>
+                {% for p in projects %}
+                  <option value="{{ p.id }}">{{ p.name }}</option>
+                {% endfor %}
+              </select>
             </div>
           </div>
         </div>

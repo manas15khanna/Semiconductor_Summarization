@@ -80,10 +80,11 @@ def document_view(document_id: int, request: Request, db: Session = Depends(get_
 
 
 @router.get("/search", response_class=HTMLResponse)
-def search_page(request: Request):
+def search_page(request: Request, db: Session = Depends(get_db)):
+    projects = db.query(Project).all()
     return templates.TemplateResponse(
         "search.html",
-        {"request": request, "results": [], "query": "", "filter_type": "all", "page_name": "Search"},
+        {"request": request, "projects": projects, "results": [], "query": "", "filter_type": "all", "page_name": "Search"},
     )
 
 

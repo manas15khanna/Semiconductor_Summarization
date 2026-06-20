@@ -58,6 +58,40 @@ function initSearch() {
             `;
             return;
         }
+
+        // Extract unique matching files linked to the keyword
+        const uniqueDocs = [];
+        const docNames = new Set();
+        data.results.forEach(item => {
+            if (item.document && !docNames.has(item.document)) {
+                docNames.add(item.document);
+                uniqueDocs.push({
+                    name: item.document,
+                    link: item.link
+                });
+            }
+        });
+
+        if (uniqueDocs.length > 0) {
+            const filesHeader = document.createElement("div");
+            filesHeader.className = "mb-4 p-3 bg-light rounded border border-light";
+            filesHeader.innerHTML = `
+                <h6 class="text-dark fw-bold mb-2 d-flex align-items-center">
+                    <span class="material-symbols-outlined text-primary me-2">link</span>
+                    Files matching / linked to keyword:
+                </h6>
+                <div class="d-flex flex-wrap gap-2">
+                    ${uniqueDocs.map(doc => `
+                        <a href="${doc.link}" class="btn btn-sm btn-outline-primary rounded-pill d-inline-flex align-items-center px-3 py-1">
+                            <span class="material-symbols-outlined fs-16 me-1">description</span>
+                            ${doc.name}
+                        </a>
+                    `).join("")}
+                </div>
+            `;
+            container.appendChild(filesHeader);
+        }
+
         data.results.forEach((item) => {
             const row = document.createElement("div");
             row.className = "card border-light shadow-sm mb-3";
@@ -99,6 +133,11 @@ function initSearch() {
             const radio = searchForm.querySelector(`input[name="filter_type"][value="${filterParam}"]`);
             if (radio) radio.checked = true;
         }
+        const projectParam = urlParams.get('project_id');
+        if (projectParam) {
+            const select = searchForm.querySelector(`select[name="project_id"]`);
+            if (select) select.value = projectParam;
+        }
         // Trigger the search submit
         searchForm.dispatchEvent(new Event('submit'));
     }
@@ -136,7 +175,7 @@ function initUploadPanels() {
         };
 
         const setFiles = (files) => {
-            selectedFiles = Array.from(files).filter((file) => /\.(pdf|docx|txt|md)$/i.test(file.name));
+            selectedFiles = Array.from(files).filter((file) => /\.(pdf|docx|txt|md|xlsx|xls|png|jpg|jpeg)$/i.test(file.name));
             renderFiles();
         };
 

@@ -64,6 +64,52 @@
             </h5>
             <p class="text-dark fs-15" style="line-height: 1.6; white-space: pre-wrap;">{{ latest_summary.summary_text }}</p>
           </div>
+
+          <!-- Translation Section -->
+          <div class="mt-4 p-3 bg-light rounded border border-light">
+            <h5 class="text-dark fw-bold mb-3 d-flex align-items-center">
+              <span class="material-symbols-outlined text-warning me-2">translate</span>
+              Translate Summary (IndicTrans2)
+            </h5>
+            <div class="row g-2 align-items-center mb-3">
+              <div class="col-auto">
+                <select id="target-language" class="form-select border border-light shadow-sm bg-white text-dark rounded-pill px-3" style="min-width: 200px;">
+                  <option value="hi">Hindi (हिन्दी)</option>
+                  <option value="bn">Bengali (বাংলা)</option>
+                  <option value="mr">Marathi (मराठी)</option>
+                  <option value="ta">Tamil (தமிழ்)</option>
+                  <option value="te">Telugu (తెలుగు)</option>
+                  <option value="gu">Gujarati (ગુજરાતી)</option>
+                  <option value="kn">Kannada (ಕನ್ನಡ)</option>
+                  <option value="or">Odia (ଓଡ଼ିଆ)</option>
+                  <option value="ml">Malayalam (മലയാളം)</option>
+                  <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+                  <option value="ur">Urdu (اردو)</option>
+                  <option value="as">Assamese (অસમୀয়া)</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <button type="button" class="btn btn-warning rounded-pill px-4 text-dark fw-bold" onclick="translateSummary({{ document.id }})">
+                  Translate
+                </button>
+              </div>
+              <div class="col-auto">
+                <div id="translation-spinner" class="spinner-border text-primary d-none" role="status" style="width: 1.5rem; height: 1.5rem;">
+                  <span class="visually-hidden">Translating...</span>
+                </div>
+              </div>
+            </div>
+            <div id="translation-result-container" class="d-none mt-3 p-3 bg-white border border-light rounded">
+              <h6 class="text-dark fw-bold mb-2 d-flex align-items-center">
+                <span class="material-symbols-outlined text-success me-2">check_circle</span>
+                Translated Summary (<span id="translated-lang-name"></span>)
+              </h6>
+              <p id="translation-text" class="text-dark fs-15 mb-0" style="line-height: 1.6; white-space: pre-wrap;"></p>
+            </div>
+            <div id="translation-error" class="d-none alert alert-danger mt-3 mb-0" role="alert">
+              Translation failed. Please try again.
+            </div>
+          </div>
         {% else %}
           <div class="text-center py-5">
             <span class="material-symbols-outlined text-muted fs-48">pending_actions</span>
@@ -196,4 +242,41 @@
     </div>
   </div>
 </div>
+
+<script>
+async function translateSummary(documentId) {
+    const langSelect = document.getElementById("target-language");
+    const lang = langSelect.value;
+    const langName = langSelect.options[langSelect.selectedIndex].text;
+    
+    const spinner = document.getElementById("translation-spinner");
+    const resultContainer = document.getElementById("translation-result-container");
+    const textElem = document.getElementById("translation-text");
+    const errorElem = document.getElementById("translation-error");
+    
+    spinner.classList.remove("d-none");
+    resultContainer.classList.add("d-none");
+    errorElem.classList.add("d-none");
+    
+    try {
+        const response = await fetch(`/api/documents/${documentId}/translate?lang=${lang}`);
+        if (!response.ok) {
+            throw new Error("Failed to translate");
+        }
+        const data = await response.json();
+        if (data.translated_text) {
+            document.getElementById("translated-lang-name").textContent = langName;
+            textElem.textContent = data.translated_text;
+            resultContainer.classList.remove("d-none");
+        } else {
+            throw new Error("Empty translation text");
+        }
+    } catch (e) {
+        console.error(e);
+        errorElem.classList.remove("d-none");
+    } finally {
+        spinner.classList.add("d-none");
+    }
+}
+</script>
 {% endblock %}

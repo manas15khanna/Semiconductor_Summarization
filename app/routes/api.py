@@ -8,6 +8,7 @@ from app.database.session import get_db
 from app.models import Decision, Document, Job, Project
 from app.services.job_service import JobService
 from app.services.project_service import ProjectService
+from app.services.translation_service import TranslationService
 
 
 router = APIRouter()
@@ -233,8 +234,14 @@ def get_decisions(project_id: int | None = None, db: Session = Depends(get_db)):
 
 
 @router.get("/search")
-def search(query: str, filter_type: str = "all", db: Session = Depends(get_db)):
-    return {"results": project_service.search(db, query, filter_type=filter_type)}
+def search(query: str, filter_type: str = "all", project_id: str | None = None, db: Session = Depends(get_db)):
+    pid = None
+    if project_id and project_id.strip():
+        try:
+            pid = int(project_id)
+        except ValueError:
+            pass
+    return {"results": project_service.search(db, query, filter_type=filter_type, project_id=pid)}
 
 
 @router.get("/jobs/{job_id}")
@@ -251,3 +258,20 @@ def get_job(job_id: str, db: Session = Depends(get_db)):
         "document_id": job.document_id,
         "error_message": job.error_message,
     }
+
+
+translation_service = TranslationService()
+
+
+@router.get("/documents/{document_id}/translate")
+def translate_document(document_id: int, lang: str, db: Session = Depends(get_db)):
+    document = project_service.get_document_details(db, document_id)
+    latest_summary = None
+    if document.summaries:
+        latest_summary = sorted(document.summaries, key=lambda item: item.created_at, reverse=True)[0]
+    
+    if not latest_summary or not latest_summary.summary_text.strip():
+        raise HTTPException(status_code=400, detail="No summary text available to translate.")
+        
+    translated_text = translation_service.translate(latest_summary.summary_text, lang)
+    return {"translated_text": translated_text}
