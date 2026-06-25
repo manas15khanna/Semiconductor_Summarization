@@ -34,12 +34,30 @@ class TranslationService:
         try:
             import torch
             from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
-            logger.info("Attempting to load IndicTrans2 model 'ai4bharat/indictrans2-en-indic-dist-200m'...")
+            import os
+            from pathlib import Path
             
-            # Use small distilled model to run fast on CPU/GPU
-            model_name = "ai4bharat/indictrans2-en-indic-dist-200m"
-            self.tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True)
+            # Check for local path via environment variable or workspace folder
+            model_name = os.getenv("INDICTRANS_MODEL_PATH", "")
+            if not model_name:
+                default_local = Path(__file__).resolve().parent.parent.parent / "models" / "indictrans2-en-indic-dist-200m"
+                if default_local.exists():
+                    model_name = str(default_local)
+                    
+            if model_name:
+                logger.info("Attempting to load IndicTrans2 from local path: %s", model_name)
+                self.tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, local_files_only=True)
+                self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, local_files_only=True)
+            else:
+                model_name = "ai4bharat/indictrans2-en-indic-dist-200m"
+                try:
+                    logger.info("Attempting to load IndicTrans2 from HuggingFace local cache...")
+                    self.tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, local_files_only=True)
+                    self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True, local_files_only=True)
+                except Exception:
+                    logger.info("Model not found in local cache. Attempting online download of '%s'...", model_name)
+                    self.tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+                    self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name, trust_remote_code=True)
             
             if torch.cuda.is_available():
                 self.model = self.model.cuda()

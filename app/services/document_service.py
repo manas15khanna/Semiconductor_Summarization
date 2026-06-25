@@ -28,27 +28,38 @@ def _extract_pdf_text(file_bytes: bytes) -> str:
     parts: list[str] = []
     try:
         with pdfplumber.open(BytesIO(file_bytes)) as pdf:
-            for page in pdf.pages:
-                txt = page.extract_text()
-                if txt:
+            for idx, page in enumerate(pdf.pages):
+                page_num = idx + 1
+                txt = (page.extract_text() or "").strip()
+                # Check if this page contains meaningful text or is scanned
+                if len(txt) > 10:
+                    logger.info("Page %d has text content. Extracting as-is.", page_num)
                     parts.append(txt)
+                else:
+                    logger.info("Page %d has insufficient text (%d chars). Falling back to OCR...", page_num, len(txt))
+                    try:
+                        images = convert_from_bytes(file_bytes, first_page=page_num, last_page=page_num)
+                        if images:
+                            page_text = pytesseract.image_to_string(images[0]).strip()
+                            parts.append(page_text)
+                        else:
+                            parts.append(txt)
+                    except Exception as ocr_err:
+                        logger.error("OCR failed for page %d: %s", page_num, ocr_err)
+                        parts.append(txt)
     except Exception as e:
-        logger.warning("Standard PDF extraction failed: %s. Falling back to OCR.", e)
-    
-    extracted_text = "\n".join(parts).strip()
-    if not extracted_text:
-        logger.info("No text extracted via pdfplumber. Running OCR via pytesseract...")
+        logger.warning("PDF parsing failed: %s. Attempting full OCR fallback.", e)
+        # Full fallback if the entire pdf structure is corrupt or cannot be opened by pdfplumber
         try:
             images = convert_from_bytes(file_bytes)
             for i, image in enumerate(images):
                 logger.info("OCR-ing page %d...", i + 1)
                 page_text = pytesseract.image_to_string(image)
                 parts.append(page_text)
-            extracted_text = "\n".join(parts).strip()
-        except Exception as e:
-            logger.error("OCR extraction failed: %s", e)
-    
-    return extracted_text
+        except Exception as e_full:
+            logger.error("Full OCR fallback failed: %s", e_full)
+            
+    return "\n".join(parts).strip()
 
 
 def _extract_docx_text(file_bytes: bytes) -> str:
