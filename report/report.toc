@@ -1,0 +1,62 @@
+\contentsline {section}{Certificate}{i}{Doc-Start}%
+\contentsline {section}{Declaration}{ii}{section*.1}%
+\contentsline {section}{Acknowledgement}{iii}{section*.2}%
+\contentsline {section}{Abstract}{iv}{section*.3}%
+\contentsline {section}{Table of Contents}{vi}{section*.4}%
+\contentsline {section}{List of Figures}{vii}{section*.5}%
+\contentsline {section}{List of Tables}{vii}{section*.6}%
+\contentsline {section}{\numberline {1}Company Profile}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}About SCL Mohali}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Relevance to This Internship}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Operational Context}{1}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Work Undertaken}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Department / Team Allocation}{1}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Role Performed}{1}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Tools and Technologies Used}{2}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Skills Acquired}{2}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Project Title and Domain}{3}{section.3}%
+\contentsline {section}{\numberline {4}Problem Statement}{3}{section.4}%
+\contentsline {section}{\numberline {5}Project Objectives}{3}{section.5}%
+\contentsline {section}{\numberline {6}Corpus Studied}{3}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Nature of the Source Material}{3}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Program Narrative Observed}{4}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Implemented System Overview}{4}{section.7}%
+\contentsline {subsection}{\numberline {7.1}High-Level Architecture}{4}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Main Application Boot Flow}{5}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Configuration and Storage}{5}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Settings Observed in Code}{5}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Important Configuration Mismatch}{5}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Database Design}{5}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Purpose of Each Table}{6}{subsection.9.1}%
+\contentsline {section}{\numberline {10}Document Processing Pipeline}{6}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Implemented Extraction Logic}{6}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Actual Processing Flow}{6}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Job Progress Stages}{7}{subsection.10.3}%
+\contentsline {section}{\numberline {11}Ollama Integration}{7}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Implemented Service Behavior}{7}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Prompting Approach}{7}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Fallback Logic}{8}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Background Processing and Synchronization}{8}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Two Mechanisms Present in Code}{8}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Job Tracking}{8}{subsection.12.2}%
+\contentsline {section}{\numberline {13}User Interface Implemented}{8}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Pages Present in the Repository}{8}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Frontend Characteristics}{9}{subsection.13.2}%
+\contentsline {section}{\numberline {14}Search and Traceability Features}{9}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Search Scope}{9}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Available Filters}{10}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}Highlighting}{10}{subsection.14.3}%
+\contentsline {section}{\numberline {15}Additional Implemented Capabilities}{10}{section.15}%
+\contentsline {section}{\numberline {16}What the Current Codebase Does Not Fully Solve}{10}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Dependency Drift}{11}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Documentation Mismatch}{11}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}Storage Path Design}{11}{subsection.16.3}%
+\contentsline {subsection}{\numberline {16.4}Search Simplicity}{11}{subsection.16.4}%
+\contentsline {subsection}{\numberline {16.5}Migration Simplicity}{11}{subsection.16.5}%
+\contentsline {subsection}{\numberline {16.6}No Authentication Layer}{11}{subsection.16.6}%
+\contentsline {section}{\numberline {17}Learning Outcomes}{12}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Technical Learning}{12}{subsection.17.1}%
+\contentsline {subsection}{\numberline {17.2}Domain Learning}{12}{subsection.17.2}%
+\contentsline {subsection}{\numberline {17.3}Professional Learning}{12}{subsection.17.3}%
+\contentsline {section}{\numberline {18}Conclusion}{13}{section.18}%
+\contentsline {section}{References}{13}{section*.7}%
